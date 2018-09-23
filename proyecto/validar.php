@@ -57,7 +57,7 @@
 		echo "<script>location.href='index.php'</script>";	// se limpia las cajas y se dirige de nuevo al index
 
 	}
-
+		// sionweb2018
 
 	$sql3=mysql_query("SELECT * FROM usuarios WHERE email='$username'");// consulta de mysql guiada a la tabla login con el email
 	if($f3=mysql_fetch_array($sql3)){// condicional de la variable f buscando un array dentro de la base de datos
