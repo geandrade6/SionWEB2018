@@ -3,6 +3,8 @@ class GestionUsuarios extends CActiveRecord{
 	//	class LoginForm extends CFormModel
  // creamos las variables de tipo publico o privado 
   private $connection;
+  public $getEstado;
+  public $getTipoparqueo;
 
   
   public function __construct(){
@@ -52,6 +54,24 @@ class GestionUsuarios extends CActiveRecord{
  
      return $this->getGestionusuarios;// devuelve el valor de la funcion get de el modelo
   } 
+
+  public function getEstado(){ // funcion para el combo box
+    $consultaRol="SELECT id, nombre_rol FROM roles ordeR by id asc";
+
+     $this->getEstado=Yii::app()->db->createCommand($consultaRol)->queryAll();// consulta base de datos 
+        
+       
+       return $this->getEstado;// devuelve el valor de la funcion get 
+  }
+
+   public function getTipoparqueo(){ // funcion para el combo box
+    $consultatipoparqueo="SELECT id, tipo FROM tipos ordeR by id asc";
+
+     $this->getTipoparqueo=Yii::app()->db->createCommand($consultatipoparqueo)->queryAll();// consulta base de datos 
+        
+       
+       return $this->getTipoparqueo;// devuelve el valor de la funcion get 
+  }
  
         //enviar informacion 
   public function setGestionusuarios(/*$titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado*/){

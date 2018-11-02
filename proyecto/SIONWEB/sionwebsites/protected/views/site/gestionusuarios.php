@@ -35,22 +35,19 @@
 				<?php
 					echo $form->textField($modelocrearusuario,'cedula',array('class'=>'form-control ','placeholder'=>"Digita Cedula")); //
 				?>
-				<br>
+				
 				<h4>Nombre</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'nombre',array('class'=>'form-control ','placeholder'=>"Digita Nombre")); //
 				?>
-				<br>
 				<h4>Apellido</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'apellido',array('class'=>'form-control ','placeholder'=>"Digita el apellido")); //
 				?>
-				<br>
 				<h4>Telefono</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'telefono',array('class'=>'form-control ','placeholder'=>"Digita el telefono")); //
 				?>
-				<br>
 				<h4>Celular</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'celular',array('class'=>'form-control ','placeholder'=>"Digita el celular")); //
@@ -63,9 +60,39 @@
 				<?php
 					echo $form->textField($modelocrearusuario,'contrasena',array('class'=>'form-control ','placeholder'=>"Digita la Contraseña")); //
 				?>
-				
+				<h4>Etsado usuario - ACTIVO o INACTIVO</h4>
+				<?php
+					echo $form->textField($modelocrearusuario,'estado_usuario',array('class'=>'form-control ','placeholder'=>"Digita Estado (ACTIVO O INACTIVO)")); //
+				?>
+				<h4>Observaciones</h4>
+				<?php
+					echo $form->textarea($modelocrearusuario,'estado_usuario',array('class'=>'form-control ','placeholder'=>"Digita mensaje")); //
+				?>
+				<h4>Roles</h4>
+				<?php 
+				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'id',//squi va el id de la tabla
+       				 CHtml::listData($consultaRol, 'id', 'nombre_rol')//aqui va el id y de seguido lo que se va a mostrar.
+        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
+				?>
+				<h4>Tipo de parqueadero</h4>
+				<?php 
+				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'id',//squi va el id de la tabla
+       				 CHtml::listData($consultatipoparqueo, 'id', 'tipo')//aqui va el id y de seguido lo que se va a mostrar.
+        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
+				?>
+				<h4>Fecha Registro</h4>
+				<?php
+					$fecha = date('Y-m-d');
+					echo $form->textField($modelocrearusuario,'fecha',array('value'=>$fecha, 'disabled'=>'disabled'));
+				?>
+				<h4>Activacion User</h4>
+				<?php
+					echo $form->textField($modelocrearusuario,'activar_user',array('value'=>0, 'disabled'=>'disabled')); //
+				?>
 				<br>
+
 				 <?php  //esto es un boton en PHP
+
                     echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
                            
                  ?>
@@ -74,7 +101,7 @@
 					 $this->endWidget();				
 				?>
 			<!--Fin del Widget-->
-			<h1>Eventos destacados</h1>
+			
 			</div>
 
 			<div class="col-lg-12">
