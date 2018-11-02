@@ -5,6 +5,21 @@ class GestionUsuarios extends CActiveRecord{
   private $connection;
   public $getEstado;
   public $getTipoparqueo;
+  public $getGestionusuarios;
+
+  public $cedulausuarios;
+  public $nombreusuarios;
+  public $apellidousuarios;
+  public $telefonousuarios;
+  public $celularusuarios;
+  public $correousuarios;
+  public $contrasenausuarios;
+  public $estadousuarios;
+  public $observacionesusuarios;
+  public $rolesusuarios;
+  public $tiposvehiculosuser;
+  public $fecharegistrouser;
+  public $activaruser;
 
   
   public function __construct(){
@@ -32,7 +47,45 @@ class GestionUsuarios extends CActiveRecord{
   //Reglas de validación
   public function rules(){
     return array(
-            
+              array('cedula', 
+                  'required', 
+                  "message"=>"El campo Cedula es obligatorio"),
+                array('nombre', 
+                  'required', 
+                  "message"=>"El campo nombre es obligatorio"),
+                 array('apellido', 
+                  'required', 
+                  "message"=>"El campo apellido es obligatorio"),
+                  array('telefono', 
+                  'safe', 
+                  "message"=>"El campo telefono es obligatorio"),
+                   array('celular', 
+                  'required', 
+                  "message"=>"El campo celular es obligatorio"),
+                    array('correo', 
+                  'required', 
+                  "message"=>"El campo correo es obligatorio"),
+                     array('contrasena', 
+                  'required', 
+                  "message"=>"El campo contrasena es obligatorio"),
+                      array('estado_usuario', 
+                  'required', 
+                  "message"=>"El campo estado es obligatorio"),
+                       array('observaciones', 
+                  'safe', 
+                  "message"=>"El campo estado es obligatorio"),
+                        array('roles_id', 
+                  'required', 
+                  "message"=>"El campo roles es obligatorio"),
+                         array('tipos_id', 
+                  'required', 
+                  "message"=>"El campo tipo es obligatorio"),
+                          array('fecha_registro', 
+                  'required', 
+                  "message"=>"El campo Fecha es obligatorio"),
+                           array('activar_user', 
+                  'required', 
+                  "message"=>"El campo Activar es obligatorio"),
       
         );
       
@@ -74,26 +127,30 @@ class GestionUsuarios extends CActiveRecord{
   }
  
         //enviar informacion 
-  public function setGestionusuarios(/*$titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado*/){
+  public function setGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser){
       
 
-      /*  if ($titulo!='' && $mensaje!='' && $subtitulo!='' && $submensaje!='') {
+        if ($cedulausuarios !='' && $nombreusuarios !='' && $apellidousuarios !='' && $celularusuarios !='' && $correousuarios !='' && $contrasenausuarios !='' && $estadousuarios !='' && $rolesusuarios !='' && $tiposvehiculosuser !='' && $fecharegistrouser!='' && $activaruser !='')  {
            
-           Yii::app()->db->createCommand()->insert('eventos', [
+           Yii::app()->db->createCommand()->insert('usuarios', [
             
-            'titulo'=>$titulo,
-            'mensaje'=>$mensaje,
-            'subtitulo'=>$subtitulo,
-            'submensaje'=>$submensaje,
-            'imagenes'=>$imagenes,
-            'estado'=>$estado,
+          'cedula'=>$cedulausuarios,
+          'nombre'=> $nombreusuarios,
+          'apellido'=>$apellidousuarios,
+          'telefono'=> $telefonousuarios,
+          'celular'=> $celularusuarios,
+          'correo'=> $correousuarios,
+          'contrasena'=> $contrasenausuarios,
+          'estado_usuario'=> $estadousuarios,
+          'observaciones'=> $observacionesusuarios,
+          'roles_id'=> $rolesusuarios,
+          'tipos_id'=>  $tiposvehiculosuser,
+          'fecha_registro'=>  $fecharegistrouser,
+          'activar_user'=> $activaruser,
 
             ]);
          
-        }else {
-
-              echo "<script>alert('no tiene datos');</script>";
-        }*/
+        }
         }  
   
 }
