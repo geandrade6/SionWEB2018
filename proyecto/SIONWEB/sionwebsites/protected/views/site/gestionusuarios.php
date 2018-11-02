@@ -31,31 +31,38 @@
 				  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
 				  echo $form->errorSummary($modelocrearusuario); // se llama la variablre
 				?>	
-				<h4>Título del Evento</h4>
+				<h4>Cedula</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'cedula',array('class'=>'form-control ','placeholder'=>"Digita Cedula")); //
 				?>
 				<br>
-				<h4>Mensaje principal del Evento</h4>
+				<h4>Nombre</h4>
 				<?php
-					echo $form->textarea($modelocrearusuario,'nombre',array('class'=>'form-control ','placeholder'=>"Digita Nombre")); //
+					echo $form->textField($modelocrearusuario,'nombre',array('class'=>'form-control ','placeholder'=>"Digita Nombre")); //
 				?>
 				<br>
-				<h4>Sub-Título del Evento</h4>
+				<h4>Apellido</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'apellido',array('class'=>'form-control ','placeholder'=>"Digita el apellido")); //
 				?>
 				<br>
-				<h4>Sub-Mensaje del Evento</h4>
+				<h4>Telefono</h4>
 				<?php
-					echo $form->textarea($modelocrearusuario,'telefono',array('class'=>'form-control ','placeholder'=>"Digita el telefono")); //
+					echo $form->textField($modelocrearusuario,'telefono',array('class'=>'form-control ','placeholder'=>"Digita el telefono")); //
 				?>
 				<br>
-				<h4>Subir Imagen</h4>
+				<h4>Celular</h4>
 				<?php
-					echo $form->textarea($modelocrearusuario,'celular',array('class'=>'form-control ','placeholder'=>"Digita el celular")); //
+					echo $form->textField($modelocrearusuario,'celular',array('class'=>'form-control ','placeholder'=>"Digita el celular")); //
 				?>
-					
+				<h4>Correo</h4>
+				<?php
+					echo $form->textField($modelocrearusuario,'correo',array('class'=>'form-control ','placeholder'=>"Digita el Correo")); //
+				?>	
+				<h4>Conraseña</h4>
+				<?php
+					echo $form->textField($modelocrearusuario,'contrasena',array('class'=>'form-control ','placeholder'=>"Digita la Contraseña")); //
+				?>
 				
 				<br>
 				 <?php  //esto es un boton en PHP
