@@ -56,7 +56,7 @@ class Eventos extends CActiveRecord{
   
   public function getEventos(){ 
     	
-      $consultaeventos ="SELECT * FROM eventos WHERE  estado = 0";
+      $consultaeventos ="SELECT * FROM eventos WHERE  idestadoeventos = 1";
 
 
       $this->getEventos=Yii::app()->db->createCommand($consultaeventos)->queryAll();// consulta base de datos Mysql            
@@ -65,7 +65,7 @@ class Eventos extends CActiveRecord{
   } 
    public function getEventosDos(){ 
       
-      $consultaeventosDos ="SELECT * FROM eventos WHERE  estado = 1";
+      $consultaeventosDos ="SELECT * FROM eventos WHERE  idestadoeventos = 2";
       
 
       $this->getEventosDos=Yii::app()->db->createCommand($consultaeventosDos)->queryAll();// consulta base de datos Mysql            
