@@ -14,8 +14,14 @@ return array(
 
 	// autoloading model and component classes
 	'import'=>array(
-		'application.models.*',
+			'application.models.*',
 		'application.components.*',
+        'application.extensions.coco.*',
+        'application.extensions.notify.*',
+        'application.vendor.excel.Classes.*',
+        'ext.yii-bootstrap-calendar.*',
+        'ext.yii-mail.YiiMailMessage',
+        'ext.yii-elfinder.*',
 	),
 
 	'defaultController'=>'site', // definimos el sitio
@@ -26,10 +32,10 @@ return array(
                 'class' => 'ext.yii-mail.YiiMail',
                 'transportType'=>'smtp',
                 'transportOptions'=>array(
-                        'host'=>'wnks.wnkserver1.com',
-                        'username'=>'administrador@sionwebsites.com',
-                        'password'=>'Directv..02',
-                        'port'=>'25',                       
+                'host'=>'wnks.wnkserver1.com',
+                'username'=>'administrador@sionwebsites.com',
+                'password'=>'Directv..02',
+                'port'=>'25',                       
                 ),
                 'viewPath' => 'application.views.mail',             
         ),

@@ -61,8 +61,10 @@
 					echo $form->PasswordField($modelocrearusuario,'contrasena',array('password ','class'=>'form-control ','placeholder'=>"Digita la Contraseña")); //
 				?>
 				<h4>Etsado usuario - ACTIVO o INACTIVO</h4>
-				<?php
-					echo $form->textField($modelocrearusuario,'estado_usuario',array('class'=>'form-control ','placeholder'=>"Digita Estado (ACTIVO O INACTIVO)")); //
+				<?php 
+				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'estado_usuario',//squi va el id de la tabla
+       				 CHtml::listData($consultaEstadoUser, 'activar_user', 'estado_user')//aqui va el id y de seguido lo que se va a mostrar.
+        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
 				?>
 				<h4>Observaciones</h4>
 				<?php
@@ -86,8 +88,10 @@
 					echo $form->textField($modelocrearusuario,'fecha_registro',array('value'=>$fecha,'readonly'=>'readonly'));
 				?>
 				<h4>Activacion User</h4>
-				<?php
-					echo $form->numberField($modelocrearusuario,'activar_user',array('class'=>'form-control ','value'=>0)); //
+				<?php 
+				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'activar_user',//squi va el id de la tabla
+       				 CHtml::listData($consultaEstadoUser, 'activar_user', 'estado_user')//aqui va el id y de seguido lo que se va a mostrar.
+        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
 				?>
 				<br>
 

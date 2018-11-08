@@ -38,14 +38,14 @@
 								<ul >
 								<?php $this->widget('zii.widgets.CMenu',array(
 								'items'=>array(
-								array('label'=>'Home', 'url'=>array('post/index')),
-								array('label'=>'About', 'url'=>array('site/page', 'view'=>'about')),
-								array('label'=>'Contact', 'url'=>array('site/contact')),
+								
+								array('label'=>'Acerca', 'url'=>array('site/page', 'view'=>'about')),
+								array('label'=>'Contactenos', 'url'=>array('site/contact')),
 								array('label'=>'Eventos', 'url'=>array('site/eventos')),
 								array('label'=>'Nuevo Evento', 'url'=>array('site/insertareventos')),
 								array('label'=>'Gestión Usuarios', 'url'=>array('site/gestionusuarios')),
-								array('label'=>'Login', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest),
-								array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+								array('label'=>'Inicio Sesion', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest),
+								array('label'=>'Salir ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 								),
 								)); ?>
 								</ul>

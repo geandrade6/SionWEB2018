@@ -272,13 +272,15 @@ class SiteController extends Controller
     	 $consultaRol = $modelocrearusuario->getEstado();//get para el combo box id_rol
     	 $consultatipoparqueo = $modelocrearusuario->getTipoparqueo();//get para el combo box id_tipoparqueo
     	 $consultagestionuser = $modelocrearusuario->getGestionusuarios();
+    	 $consultaEstadoUser = $modelocrearusuario->getEstadoUser();
 
 		 $this->render('gestionusuarios', array(//se renderiza la pagina
           
 		 	'modelocrearusuario'=>$modelocrearusuario,
 		 	'consultaRol'=>$consultaRol, //consulta de combox
 		 	'consultatipoparqueo'=>$consultatipoparqueo, //consulta de combox
-		 	'consultagestionuser'=>$consultagestionuser
+		 	'consultagestionuser'=>$consultagestionuser,
+		 	'consultaEstadoUser'=>$consultaEstadoUser
 
             )
             ); // variable de asignacion modelo

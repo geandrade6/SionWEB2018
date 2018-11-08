@@ -6,6 +6,7 @@ class GestionUsuarios extends CActiveRecord{
   public $getEstado;
   public $getTipoparqueo;
   public $getGestionusuarios;
+  public $getEstadoUser;
 
   public $cedulausuarios;
   public $nombreusuarios;
@@ -117,6 +118,15 @@ class GestionUsuarios extends CActiveRecord{
        return $this->getEstado;// devuelve el valor de la funcion get 
   }
 
+   public function getEstadoUser(){ // funcion para el combo box
+    $consultaEstadoUser="SELECT activar_user, estado_user FROM estado_usuarios ordeR by activar_user asc";
+
+     $this->getEstadoUser=Yii::app()->db->createCommand($consultaEstadoUser)->queryAll();// consulta base de datos 
+        
+       
+       return $this->getEstadoUser;// devuelve el valor de la funcion get 
+  }
+
    public function getTipoparqueo(){ // funcion para el combo box
     $consultatipoparqueo="SELECT id, tipo FROM tipos ordeR by id asc";
 
@@ -131,7 +141,10 @@ class GestionUsuarios extends CActiveRecord{
       
 
         if ($cedulausuarios !='' && $nombreusuarios !='' && $apellidousuarios !='' && $celularusuarios !='' && $correousuarios !='' && $contrasenausuarios !='' && $estadousuarios !='' && $rolesusuarios !='' && $tiposvehiculosuser !='' && $fecharegistrouser!='' && $activaruser !='')  {
-           
+
+          if ($estadousuarios == $activaruser) {
+            # code...
+          
            Yii::app()->db->createCommand()->insert('usuarios', [
             
           'cedula'=>$cedulausuarios,
@@ -149,6 +162,9 @@ class GestionUsuarios extends CActiveRecord{
           'activar_user'=> $activaruser,
 
             ]);
+
+           } else{ echo '<Script> alert("digite el mismo tipo de activacion");</Script>';}
+           
          
         }
         }  
