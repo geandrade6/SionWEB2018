@@ -262,8 +262,11 @@ class SiteController extends Controller
 			$tiposvehiculosuser=$modelocrearusuario->tipos_id;
 			$fecharegistrouser=$modelocrearusuario->fecha_registro;
 			$activaruser=$modelocrearusuario->activar_user;
+
            
            $setuser=$modelocrearusuario->setGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
+          
+
             $modelocrearusuario->unsetAttributes();// limpia los campos
             
         }   
