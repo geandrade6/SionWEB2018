@@ -291,15 +291,15 @@ class SiteController extends Controller
 
 	}
 	public function actionConsultaClientes ($consultaclientes,$opcion,$nombre,$apellido,$telefono,$celular,$correo,$cedula){ // setraen los datos desde el ajax correspondientes a cada variable
-	$tablas=''; //inicializamos la variable en blanco
-     $sql='';
-     if($opcion==1){
-     if(isset($_GET['consultaclientes']))
+	$tablas=''; //creamos variable de retorno de informacion
+     $sql=''; // creamos variable de consulta
+     if($opcion==1){ // en el ajax se creo una variable de opcines la cual se extrae en este punto
+     if(isset($_GET['consultaclientes'])) //si la variable consulta clientes contiene informacion
         {
-        $sq= $_GET['consultaclientes'];
+        $sq= $_GET['consultaclientes'];//asignamos la informacion recogida de la variable de busqueda
         $sql = "SELECT U.nombre,U.apellido,U.telefono,U.celular,U.correo,R.nombre_rol FROM usuarios U  
       	inner join roles R on R.id = U.roles_id WHERE roles_id  in ('4','5','6','3','2' ) AND u.cedula='".$sq."'";
-
+      	//cnosulta de busqueda
         }
 
         
@@ -335,7 +335,7 @@ class SiteController extends Controller
         ], 'cedula = :up', [':up' => $cedula]);
         $tabla='Registro Modificado';
         alert('los datos Fueron Modificado Exitosamente');
-
+       
     }
                   
  $this->render('consultaclientes', 
