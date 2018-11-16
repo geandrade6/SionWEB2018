@@ -216,6 +216,53 @@
                         $("#eliminados").css("display", "none");
                        }
         });
+          if ('#cedula'!='') {
+			          function Modificar_registros(consultaclientes,opcion,nombre,apellido,telefono,celular,correo,cedula) // obsterner registro del parametro que es la nueva vista php intermediaria
+			          {
+			            $.ajax({ // inicio de ajax 
+			              url : 'consultaclientes', // ubicacion de la tabla intermediaria
+			              type : 'get', // se utilizara el tipo get para traer datos
+			              data : { consultaclientes: consultaclientes,opcion:opcion,nombre:nombre,apellido:apellido,telefono:telefono,celular:celular,correo:correo,cedula:cedula },//creamos las variables para enviar.
+			              success:function(resultado){ // dentro del succes creamos un funcion para el accionar de la variable resultado
+			              	if (opcion==1) {	// en la parte superior creamos una variable para tener diferentes puntos de vista
+			              	 $("#verregistros").html(resultado); //enviamos la informacion a el id del div o la caja que tengamos
+			              	 	$('#modifcar').click(function(){ //enviamos la funcion de un click e el boton
+			              	 		var nombre,apellido,telefono,celular,correo,cedula; // delcaramos las variables a utilizar
+			              	 		nombre=$('#nombre').val() // el campo del input se evalua y lo que tenga se asigna a la variable
+			              	 		apellido=$('#apellido').val()
+			              	 		telefono=$('#telefono').val()
+			              	 		celular=$('#celular').val()
+			              	 		correo=$('#correo').val()
+									cedula=$('#cedula').val() // nuestro campo cedula es la caja de buscar la podemos llamar igual
+
+			              	 		Modificar_registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombre,apellido,telefono,celular,correo,cedula);
+			              	 	})
+			              	 } else if (opcion==2) {
+			              	 	alert("los datos Fueron Modificado Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
+			              	 	document.location.href='gestionusuarios';//refrescamos la pagina actual o redirigimos al terminar
+			              	 }
+			              } 
+			              })
+							//.done(function(){ 
+							//})
+			          }
+			          $(document).on('keypress', '#cedula', function(eventoboton) //se utiliza el campo de la busuqeda con el tipo key ose enter para accionar el campo y asinarlo al evento eventoboton.
+			          {
+			            if(eventoboton.charCode == 13){//cuando se teclee enter lo cual es de valor 13
+			            var valorBusquedas=$(this).val(); //se evalua el valor 
+			            if (valorBusquedas!="") 
+			            {
+			              Modificar_registros(valorBusquedas,1,'','','','','','');
+			                          
+			            }
+			            else
+			              {
+			                Modificar_registros('',0,'','','','','','');
+			              }
+			              }
+			          }); 
+				}
+
          $(".eliminar").click(function(evento){
                       var valor = $(this).val();
                       if(valor == 'eliminar'){
@@ -225,62 +272,8 @@
                        }
         });
          
+         
 </script> 
-<script>
-	 if ('#cedula'!='') {
-          function obtener_registros(consultaclientes,opcion,nombre,apellido,telefono,celular,correo,cedula) // obsterner registro del parametro que es la nueva vista php intermediaria
-          {
-            $.ajax({ // inicio de ajax 
-              url : 'consultaclientes', // ubicacion de la tabla intermediaria
-              type : 'get', // se utilizara el tipo get para traer datos
-              data : { consultaclientes: consultaclientes,opcion:opcion,nombre:nombre,apellido:apellido,telefono:telefono,celular:celular,correo:correo,cedula:cedula },//creamos las variables para enviar.
-              success:function(resultado){ // dentro del succes creamos un funcion para el accionar de la variable resultado
-              	if (opcion==1) {	// en la parte superior creamos una variable para tener diferentes puntos de vista
-              	 $("#verregistros").html(resultado); //enviamos la informacion a el id del div o la caja que tengamos
-              	 	$('#modifcar').click(function(){ //enviamos la funcion de un click e el boton
-              	 		var nombre,apellido,telefono,celular,correo,cedula; // delcaramos las variables a utilizar
-              	 		nombre=$('#nombre').val() // el campo del input se evalua y lo que tenga se asigna a la variable
-              	 		apellido=$('#apellido').val()
-              	 		telefono=$('#telefono').val()
-              	 		celular=$('#celular').val()
-              	 		correo=$('#correo').val()
-						cedula=$('#cedula').val() // nuestro campo cedula es la caja de buscar la podemos llamar igual
-
-              	 		obtener_registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombre,apellido,telefono,celular,correo,cedula);
-              	 	})
-              	 } else if (opcion==2) {
-
-              	 	alert("los datos Fueron Modificado Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
-              	 	document.location.href='gestionusuarios';
-
-              	 }
-              } // se indica la variable y la tabla que se consulta
-              })
-
-            .done(function(){ // extracion de los resultado para enviar al html que tiene el id verregistros con la variable resultado
-             
-            })
-          }
-
-          $(document).on('keypress', '#cedula', function(k) //se utiliza el campo de la busuqeda con el tipo key ose enter para accionar el campo.
-          {
-            if(k.charCode == 13){
-            var valorBusquedas=$(this).val();
-            if (valorBusquedas!="")
-            {
-              obtener_registros(valorBusquedas,1,'','','','','','');
-                          
-            }
-            else
-              {
-                obtener_registros('',0,'','','','','','');
-                
-              }
-              }
-          }); 
-	}
-
+<script> //ajax de formulario Modificar
 	
-
-
 </script>

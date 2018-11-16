@@ -1,7 +1,6 @@
 <?php
 
-class SiteController extends Controller
-{
+class SiteController extends Controller{
 	public $layout='column1';
  	public $defaultAction = 'Site';
 	/**
@@ -162,9 +161,9 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
-//_________________________________a partir de aqui empezamos nuestras acciones _______________________________________
+	//_________________________________a partir de aqui empezamos nuestras acciones _______________________________________
 
-//seccion eventos
+	//seccion eventos
 	public function actionEventos ()
 	{
 			$modelEventos = new Eventos();    
@@ -178,7 +177,7 @@ class SiteController extends Controller
             )
             ); // variable de asignacion modelo
 	}
-//seccion insertareventos
+	//seccion insertareventos
 	public function actionInsertareventos ()
 	{
 			$modelEventos = new Eventos();    
@@ -202,15 +201,9 @@ class SiteController extends Controller
             $submensaje=$modelEventos->submensaje;
           	$imagenes=$modelEventos->imagenes;
             $estado=$modelEventos->estado;
-           
-
-             
-  
-
-
+        
            $tmpo=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
             $modelEventos->unsetAttributes();// limpia los campos
-            
         }   
     }
      		$consultaeventos = $modelEventos->getEventos();//llamdado de las consulta y los datos en get
@@ -224,7 +217,6 @@ class SiteController extends Controller
 	}
 	public function actionGestionusuarios ()
 	{		
-
 		$modelocrearusuario = new GestionUsuarios();
 		$cedulausuarios='';
 		$nombreusuarios='';
@@ -240,12 +232,7 @@ class SiteController extends Controller
 		$$apellidousuarios='';
 		$fecharegistrouser='';
 		$activaruser='';
-
-
-
-
-		 if(isset($_POST['GestionUsuarios'])){ // Modelo Eventos
-
+	 if(isset($_POST['GestionUsuarios'])){ // Modelo Eventos
             $modelocrearusuario->attributes=$_POST['GestionUsuarios'];
         if( $modelocrearusuario->validate()){ // valida el modelo y sus atributos
         	//atributos del modelo
@@ -262,33 +249,22 @@ class SiteController extends Controller
 			$tiposvehiculosuser=$modelocrearusuario->tipos_id;
 			$fecharegistrouser=$modelocrearusuario->fecha_registro;
 			$activaruser=$modelocrearusuario->activar_user;
-
-           
-           $setuser=$modelocrearusuario->setGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
-          
-
+         	$setuser=$modelocrearusuario->setGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
             $modelocrearusuario->unsetAttributes();// limpia los campos
-            
         }   
     }
-
     	 $consultaRol = $modelocrearusuario->getEstado();//get para el combo box id_rol
     	 $consultatipoparqueo = $modelocrearusuario->getTipoparqueo();//get para el combo box id_tipoparqueo
     	 $consultagestionuser = $modelocrearusuario->getGestionusuarios();
     	 $consultaEstadoUser = $modelocrearusuario->getEstadoUser();
-
 		 $this->render('gestionusuarios', array(//se renderiza la pagina
-          
 		 	'modelocrearusuario'=>$modelocrearusuario,
 		 	'consultaRol'=>$consultaRol, //consulta de combox
 		 	'consultatipoparqueo'=>$consultatipoparqueo, //consulta de combox
 		 	'consultagestionuser'=>$consultagestionuser,
 		 	'consultaEstadoUser'=>$consultaEstadoUser
-
             )
             ); // variable de asignacion modelo
-
-
 	}
 	public function actionConsultaClientes ($consultaclientes,$opcion,$nombre,$apellido,$telefono,$celular,$correo,$cedula){ // setraen los datos desde el ajax correspondientes a cada variable
 	$tablas=''; //creamos variable de retorno de informacion
@@ -301,8 +277,6 @@ class SiteController extends Controller
       	inner join roles R on R.id = U.roles_id WHERE roles_id  in ('4','5','6','3','2' ) AND u.cedula='".$sq."'";
       	//cnosulta de busqueda
         }
-
-        
         $data=Yii::app()->db->createCommand($sql)->queryAll(); //conectamos a la DB asignandola a la variable data
          foreach($data as $value=>$dt){ // creamos una for indicando que la data va a tener una alias para mostrar datos a la variable dt
          }
@@ -322,9 +296,7 @@ class SiteController extends Controller
         <label>Clíck para Modificar</label><br>
         <input class="form-control" type="button" id="modifcar" value="Modifcar" style="width:50%;">
        	';
-
-    }elseif($opcion==2){//condicion de la variable opcion en estado 2 del ajax
-
+    	}elseif($opcion==2){//condicion de la variable opcion en estado 2 del ajax
     	Yii::app()->db->createCommand()->update('usuarios',[ //hacemos conexion con la DB en modo update
         'nombre' => $nombre, //asignamos un valor a cada variable que proviene del ajax
         'apellido' => $apellido, //""
@@ -333,19 +305,14 @@ class SiteController extends Controller
         'correo' => $correo,//""
         
         ], 'cedula = :up', [':up' => $cedula]); // indicamos que lo que se va a buscar esta en la variable cedula o primery key
-        
-
 	    }
-                  
- $this->render('consultaclientes', //renderizamos todo en la pagina consultaclientes
+ 		$this->render('consultaclientes', //renderizamos todo en la pagina consultaclientes
                array(
                    'respuesta'=>$tablas, // asignamos ese render de tablas a respuesta
                 ));
-        }  
-  
-    
-
-
+        }
+        
+   
 }
 // secion _____________
 
