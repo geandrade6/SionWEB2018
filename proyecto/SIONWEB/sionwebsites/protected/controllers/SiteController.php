@@ -293,7 +293,7 @@ class SiteController extends Controller
 	public function actionConsultaClientes ($consultaclientes,$opcion,$nombre,$apellido,$telefono,$celular,$correo,$cedula){ // setraen los datos desde el ajax correspondientes a cada variable
 	$tablas=''; //creamos variable de retorno de informacion
      $sql=''; // creamos variable de consulta
-     if($opcion==1){ // en el ajax se creo una variable de opcines la cual se extrae en este punto
+     if($opcion==1){ // en el ajax se creo una variable de opcines la cual se extrae en este punto correspondiente a la caja buscar
      if(isset($_GET['consultaclientes'])) //si la variable consulta clientes contiene informacion
         {
         $sq= $_GET['consultaclientes'];//asignamos la informacion recogida de la variable de busqueda
@@ -303,10 +303,10 @@ class SiteController extends Controller
         }
 
         
-        $data=Yii::app()->db->createCommand($sql)->queryAll(); 
-         foreach($data as $value=>$dt){
+        $data=Yii::app()->db->createCommand($sql)->queryAll(); //conectamos a la DB asignandola a la variable data
+         foreach($data as $value=>$dt){ // creamos una for indicando que la data va a tener una alias para mostrar datos a la variable dt
          }
-
+         //llenamos la variable tablas con un formulario para la midifcacion en este foreach traemos lo que tenemos en la consulta y a cada dt le asignamos un campo de la DB
         $tablas.=' 
         <div class="form-group">
         <label>nombre</label>
@@ -323,24 +323,23 @@ class SiteController extends Controller
         <input class="form-control" type="button" id="modifcar" value="Modifcar" style="width:50%;">
        	';
 
-    }elseif($opcion==2){
+    }elseif($opcion==2){//condicion de la variable opcion en estado 2 del ajax
 
-    	Yii::app()->db->createCommand()->update('usuarios',[
-        'nombre' => $nombre,
-        'apellido' => $apellido,
-        'telefono' => $telefono,
-        'celular' => $celular,
-        'correo' => $correo,
+    	Yii::app()->db->createCommand()->update('usuarios',[ //hacemos conexion con la DB en modo update
+        'nombre' => $nombre, //asignamos un valor a cada variable que proviene del ajax
+        'apellido' => $apellido, //""
+        'telefono' => $telefono,//""
+        'celular' => $celular,//""
+        'correo' => $correo,//""
         
-        ], 'cedula = :up', [':up' => $cedula]);
-        $tabla='Registro Modificado';
-        alert('los datos Fueron Modificado Exitosamente');
-       
-    }
+        ], 'cedula = :up', [':up' => $cedula]); // indicamos que lo que se va a buscar esta en la variable cedula o primery key
+        
+
+	    }
                   
- $this->render('consultaclientes', 
+ $this->render('consultaclientes', //renderizamos todo en la pagina consultaclientes
                array(
-                   'respuesta'=>$tablas,
+                   'respuesta'=>$tablas, // asignamos ese render de tablas a respuesta
                 ));
         }  
   
@@ -350,3 +349,7 @@ class SiteController extends Controller
 }
 // secion _____________
 
+//como llamar un procedimiento almacenado
+//$connection = Yii::$app->db; //conectamos
+//$command = $connection->createCommand('sp_annualupdate');//llamamos
+//$command->execute();//ejecutamos

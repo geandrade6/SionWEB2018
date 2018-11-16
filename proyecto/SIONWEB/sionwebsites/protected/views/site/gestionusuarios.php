@@ -121,7 +121,7 @@
 			        <div class="col-lg-12">
 			            <div class="col-lg-6">
 			                <label>Buscar Cliente por Identificación (Acción modificar ).</label>
-			                <input type="text" name="entradas" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasa" style="width: 100%; float: left;"/>  
+			                <input type="text" name="entradas" placeholder="Digita y Enter al terminar" class="form-control" id="cedula" style="width: 100%; float: left;"/>  
 	 		            </div>
 					            <br>
 				        <div class="col-lg-12">
@@ -227,7 +227,7 @@
          
 </script> 
 <script>
-	 if ('#busquedasa'!='') {
+	 if ('#cedula'!='') {
           function obtener_registros(consultaclientes,opcion,nombre,apellido,telefono,celular,correo,cedula) // obsterner registro del parametro que es la nueva vista php intermediaria
           {
             $.ajax({ // inicio de ajax 
@@ -236,21 +236,23 @@
               data : { consultaclientes: consultaclientes,opcion:opcion,nombre:nombre,apellido:apellido,telefono:telefono,celular:celular,correo:correo,cedula:cedula },//creamos las variables para enviar.
               success:function(resultado){ // dentro del succes creamos un funcion para el accionar de la variable resultado
               	if (opcion==1) {	// en la parte superior creamos una variable para tener diferentes puntos de vista
-              	 $("#verregistros").html(resultado);
-              	 	$('#modifcar').click(function(){
-              	 		var nombre,apellido,telefono,celular,correo,cedula;
-              	 		nombre=$('#nombre').val()
+              	 $("#verregistros").html(resultado); //enviamos la informacion a el id del div o la caja que tengamos
+              	 	$('#modifcar').click(function(){ //enviamos la funcion de un click e el boton
+              	 		var nombre,apellido,telefono,celular,correo,cedula; // delcaramos las variables a utilizar
+              	 		nombre=$('#nombre').val() // el campo del input se evalua y lo que tenga se asigna a la variable
               	 		apellido=$('#apellido').val()
               	 		telefono=$('#telefono').val()
               	 		celular=$('#celular').val()
               	 		correo=$('#correo').val()
-						cedula=$('#busquedasa').val()
+						cedula=$('#cedula').val() // nuestro campo cedula es la caja de buscar la podemos llamar igual
 
               	 		obtener_registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombre,apellido,telefono,celular,correo,cedula);
               	 	})
               	 } else if (opcion==2) {
 
-              	 	alert('modificados los datos');
+              	 	alert("los datos Fueron Modificado Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
+              	 	document.location.href='gestionusuarios';
+
               	 }
               } // se indica la variable y la tabla que se consulta
               })
@@ -260,7 +262,7 @@
             })
           }
 
-          $(document).on('keypress', '#busquedasa', function(k) //se utiliza el campo de la busuqeda con el tipo key ose enter para accionar el campo.
+          $(document).on('keypress', '#cedula', function(k) //se utiliza el campo de la busuqeda con el tipo key ose enter para accionar el campo.
           {
             if(k.charCode == 13){
             var valorBusquedas=$(this).val();
