@@ -168,36 +168,6 @@ class GestionUsuarios extends CActiveRecord{
          
         }
         }  
-  public function getUpdateGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser){
-      
-
-        if ($cedulausuarios !='' && $nombreusuarios !='' && $apellidousuarios !='' && $celularusuarios !='' && $correousuarios !='' && $contrasenausuarios !='' && $estadousuarios !='' && $rolesusuarios !='' && $tiposvehiculosuser !='' && $fecharegistrouser!='' && $activaruser !='')  {
-
-          if ($estadousuarios == $activaruser) {
-            # code...
-          
-           Yii::app()->db->createCommand()->update('usuarios', [
-            
-          
-          'nombre'=> $nombreusuarios,
-          'apellido'=>$apellidousuarios,
-          'telefono'=> $telefonousuarios,
-          'celular'=> $celularusuarios,
-          'correo'=> $correousuarios,
-          'contrasena'=> $contrasenausuarios,
-          'estado_usuario'=> $estadousuarios,
-          'observaciones'=> $observacionesusuarios,
-          'roles_id'=> $rolesusuarios,
-          'tipos_id'=>  $tiposvehiculosuser,
-          'fecha_registro'=>  $fecharegistrouser,
-          'activar_user'=> $activaruser,
-
-            ], 'cedula = :up', [':up' => $cedulausuarios]);
-
-           } else{ echo '<Script> alert("digite el mismo tipo de activacion");</Script>';}
-           
-         
-        }
-        } 
+ 
   
 }

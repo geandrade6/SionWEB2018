@@ -290,6 +290,61 @@ class SiteController extends Controller
 
 
 	}
+	public function actionConsultaClientes ($consultaclientes,$opcion,$nombre,$apellido,$telefono,$celular,$correo,$cedula){ // setraen los datos desde el ajax correspondientes a cada variable
+	$tablas=''; //inicializamos la variable en blanco
+     $sql='';
+     if($opcion==1){
+     if(isset($_GET['consultaclientes']))
+        {
+        $sq= $_GET['consultaclientes'];
+        $sql = "SELECT U.nombre,U.apellido,U.telefono,U.celular,U.correo,R.nombre_rol FROM usuarios U  
+      	inner join roles R on R.id = U.roles_id WHERE roles_id  in ('4','5','6','3','2' ) AND u.cedula='".$sq."'";
+
+        }
+
+        
+        $data=Yii::app()->db->createCommand($sql)->queryAll(); 
+         foreach($data as $value=>$dt){
+         }
+
+        $tablas.=' 
+        <div class="form-group">
+        <label>nombre</label>
+        <input type="text" class="form-control fecha" id="nombre" placeholder="Inicio" value="'.$dt["nombre"].'">
+        <label>Apellido</label>
+        <input type="text" class="form-control fecha" id="apellido" placeholder="Nombre" value="'.$dt["apellido"].'">
+        <label>Telefono</label>
+        <input type="text" class="form-control fecha1" id="telefono" placeholder="Quien Recibe" value="'.$dt["telefono"].'">
+        <label>Celular</label>
+        <input type="text" class="form-control fecha" id="celular" placeholder="Factura" value="'.$dt["celular"].'">
+        <label>Correo</label>
+        <input type="text" class="form-control fecha" id="correo" placeholder="Referencia" value="'.$dt["correo"].'">
+        <label>Clíck para Modificar</label><br>
+        <input class="form-control" type="button" id="modifcar" value="Modifcar" style="width:50%;">
+       	';
+
+    }elseif($opcion==2){
+
+    	Yii::app()->db->createCommand()->update('usuarios',[
+        'nombre' => $nombre,
+        'apellido' => $apellido,
+        'telefono' => $telefono,
+        'celular' => $celular,
+        'correo' => $correo,
+        
+        ], 'cedula = :up', [':up' => $cedula]);
+        $tabla='Registro Modificado';
+        alert('los datos Fueron Modificado Exitosamente');
+
+    }
+                  
+ $this->render('consultaclientes', 
+               array(
+                   'respuesta'=>$tablas,
+                ));
+        }  
+  
+    
 
 
 }

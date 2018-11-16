@@ -22,7 +22,6 @@
 			<input type="submit" name="acciones" value="insertar" class="insertar" id="insertar">
 			<input type="submit" name="acciones" value="modificar" class="modificar" id="modificar">
 			<input type="submit" name="acciones" value="eliminar" class="eliminar" id="eliminar">
-			<input type="submit" name="acciones" value="buscar" class="buscar" id="buscar">
 
 			<div class="main" >
 
@@ -116,102 +115,52 @@
 				?>
 			<!--Fin del Widget-->
 				</div>
-
-				<div id="modificados" style="display: none;">
-				<h1>Modificar Usuarios</h1>
-				<!-- Inicio de Formulario con Wigdet-->
-				<?php
-				  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
-				  echo $form->errorSummary($modelocrearusuario); // se llama la variablre
-				?>	
-				<h4>Cedula</h4>
-				<?php
-					echo $form->textField($modelocrearusuario,'cedula',array('class'=>'form-control ','placeholder'=>"Digita Cedula")); //
-				?>
-				
-				<h4>Nombre</h4>
-				<?php
-					echo $form->textField($modelocrearusuario,'nombre',array('class'=>'form-control ','placeholder'=>"Digita Nombre")); //
-				?>
-				<h4>Apellido</h4>
-				<?php
-					echo $form->textField($modelocrearusuario,'apellido',array('class'=>'form-control ','placeholder'=>"Digita el apellido")); //
-				?>
-				<h4>Telefono</h4>
-				<?php
-					echo $form->textField($modelocrearusuario,'telefono',array('class'=>'form-control ','placeholder'=>"Digita el telefono")); //
-				?>
-				<h4>Celular</h4>
-				<?php
-					echo $form->textField($modelocrearusuario,'celular',array('class'=>'form-control ','placeholder'=>"Digita el celular")); //
-				?>
-				<h4>Correo</h4>
-				<?php
-					echo $form->textField($modelocrearusuario,'correo',array('class'=>'form-control ','type'=>'mail','placeholder'=>"Digita el Correo")); //
-				?>	
-				<h4>Conraseña</h4>
-				<?php
-					echo $form->PasswordField($modelocrearusuario,'contrasena',array('password ','class'=>'form-control ','placeholder'=>"Digita la Contraseña")); //
-				?>
-				<h4>Estado usuario</h4>
-				<?php 
-				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'estado_usuario',//squi va el id de la tabla
-       				 CHtml::listData($consultaEstadoUser, 'activar_user', 'estado_user')//aqui va el id y de seguido lo que se va a mostrar.
-        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
-				?>
-				<h4>Observaciones</h4>
-				<?php
-					echo $form->textarea($modelocrearusuario,'observaciones',array('class'=>'form-control ','placeholder'=>"Digita mensaje")); //
-				?>
-				<h4>Roles</h4>
-				<?php 
-				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'roles_id',//squi va el id de la tabla
-       				 CHtml::listData($consultaRol, 'id', 'nombre_rol')//aqui va el id y de seguido lo que se va a mostrar.
-        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
-				?>
-				<h4>Tipo de parqueadero</h4>
-				<?php 
-				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'tipos_id',//squi va el id de la tabla
-       				 CHtml::listData($consultatipoparqueo, 'id', 'tipo')//aqui va el id y de seguido lo que se va a mostrar.
-        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
-				?>
-				<h4>Fecha Registro</h4>
-				<?php
-					$fecha = date('Y-m-d');
-					echo $form->textField($modelocrearusuario,'fecha_registro',array('value'=>$fecha,'readonly'=>'readonly'));
-				?>
-				<h4>Activacion User</h4>
-				<?php 
-				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'activar_user',//squi va el id de la tabla
-       				 CHtml::listData($consultaEstadoUser, 'activar_user', 'estado_user')//aqui va el id y de seguido lo que se va a mostrar.
-        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
-				?>
 				<br>
 
-				 <?php  //esto es un boton en PHP
-
-                    echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
-                           
-                 ?>
-
-				<?php	
-					 $this->endWidget();				
-				?>
-			<!--Fin del Widget-->
-				</div>		
+				<div id="modificados" style="display: none;">
+			        <div class="col-lg-12">
+			            <div class="col-lg-6">
+			                <label>Buscar Cliente por Identificación (Acción modificar ).</label>
+			                <input type="text" name="entradas" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasa" style="width: 100%; float: left;"/>  
+	 		            </div>
+					            <br>
+				        <div class="col-lg-12">
+					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
+					        	<br>
+					    		<div class="registros" id="verregistros" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
+					    		</div>
+					        </fieldset>
+				        </div>
+			        </div>
+				</div>
+				<div id="eliminados" style="display: none;">
+			        <div class="col-lg-12">
+			            <div class="col-lg-6">
+			                <label>Buscar Cliente por Identificación (Acción Eliminar).</label>
+			                <input type="text" name="entradas" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasados" style="width: 100%; float: left;"/>  
+	 		            </div>
+					            <br>
+				        <div class="col-lg-12">
+					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
+					        	<br>
+					    		<div class="registros" id="verregistrosdos" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
+					    		</div>
+					        </fieldset>
+				        </div>
+			        </div>
+				</div>			
 			</div>
-
+			<h2>Listado General de Usuarios Residentes y Visitantes</h2> 
       		<div class="col-lg-9 table-responsive " id="div2" style="overflow: scroll; width: 100%; height: 50vh;"><!--se nombra la clase columna long tipo 9 bootrap tabla reponsive o adaptable con id2 para el llamdo en el script de ocultar secciones de pagina-->
+
                     <table class='table table-hover'>
                     <thead>
                     <tr>
-                    
                     <th class=columna>Nombre</th>
                     <th class=columna>Apellido</th>
                     <th class=columna>Telefono</th>
                     <th class=columna>Celular</th>
                     <th class=columna>Correo</th>
-                    
                     </tr>
                    	</thead>
                    	<tbody>
@@ -250,12 +199,13 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/skel.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/util.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/main.js"></script>
-<script>
-          $(".insertar").click(function(evento){
+<script>//este script es para ocultar campos por medio de botones
+         $(".insertar").click(function(evento){
                       var valor = $(this).val();
                       if(valor == 'insertar'){
                         $("#insertados").css("display", "block");
                         $("#modificados").css("display", "none");
+                        $("#eliminados").css("display", "none");
                        }
         });
          $(".modificar").click(function(evento){
@@ -263,6 +213,7 @@
                       if(valor == 'modificar'){
                         $("#insertados").css("display", "none");
                         $("#modificados").css("display", "block");
+                        $("#eliminados").css("display", "none");
                        }
         });
          $(".eliminar").click(function(evento){
@@ -270,13 +221,64 @@
                       if(valor == 'eliminar'){
                         $("#insertados").css("display", "none");
                         $("#modificados").css("display", "none");
+                        $("#eliminados").css("display", "block");
                        }
         });
-          $(".buscar").click(function(evento){
-                      var valor = $(this).val();
-                      if(valor == 'buscar'){
-                        $("#insertados").css("display", "none");
-                        $("#modificados").css("display", "none");
-                       }
-        });
+         
 </script> 
+<script>
+	 if ('#busquedasa'!='') {
+          function obtener_registros(consultaclientes,opcion,nombre,apellido,telefono,celular,correo,cedula) // obsterner registro del parametro que es la nueva vista php intermediaria
+          {
+            $.ajax({ // inicio de ajax 
+              url : 'consultaclientes', // ubicacion de la tabla intermediaria
+              type : 'get', // se utilizara el tipo get para traer datos
+              data : { consultaclientes: consultaclientes,opcion:opcion,nombre:nombre,apellido:apellido,telefono:telefono,celular:celular,correo:correo,cedula:cedula },//creamos las variables para enviar.
+              success:function(resultado){ // dentro del succes creamos un funcion para el accionar de la variable resultado
+              	if (opcion==1) {	// en la parte superior creamos una variable para tener diferentes puntos de vista
+              	 $("#verregistros").html(resultado);
+              	 	$('#modifcar').click(function(){
+              	 		var nombre,apellido,telefono,celular,correo,cedula;
+              	 		nombre=$('#nombre').val()
+              	 		apellido=$('#apellido').val()
+              	 		telefono=$('#telefono').val()
+              	 		celular=$('#celular').val()
+              	 		correo=$('#correo').val()
+						cedula=$('#busquedasa').val()
+
+              	 		obtener_registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombre,apellido,telefono,celular,correo,cedula);
+              	 	})
+              	 } else if (opcion==2) {
+
+              	 	alert('modificados los datos');
+              	 }
+              } // se indica la variable y la tabla que se consulta
+              })
+
+            .done(function(){ // extracion de los resultado para enviar al html que tiene el id verregistros con la variable resultado
+             
+            })
+          }
+
+          $(document).on('keypress', '#busquedasa', function(k) //se utiliza el campo de la busuqeda con el tipo key ose enter para accionar el campo.
+          {
+            if(k.charCode == 13){
+            var valorBusquedas=$(this).val();
+            if (valorBusquedas!="")
+            {
+              obtener_registros(valorBusquedas,1,'','','','','','');
+                          
+            }
+            else
+              {
+                obtener_registros('',0,'','','','','','');
+                
+              }
+              }
+          }); 
+	}
+
+	
+
+
+</script>
