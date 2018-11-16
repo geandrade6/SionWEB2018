@@ -311,6 +311,52 @@ class SiteController extends Controller{
                    'respuesta'=>$tablas, // asignamos ese render de tablas a respuesta
                 ));
         }
+
+    public function actionConsultaClientesDos ($consultaclientesDos,$opciones,$nombres,$apellidos,$telefonos,$celulares,$correos,$cedulas){ // setraen los datos desde el ajax correspondientes a cada variable
+	$tablas=''; //creamos variable de retorno de informacion
+     $sql=''; // creamos variable de consulta
+     if($opciones==1){ // en el ajax se creo una variable de opcines la cual se extrae en este punto correspondiente a la caja buscar
+     if(isset($_GET['consultaclientesDos'])) //si la variable consulta clientes contiene informacion
+        {
+        $sq= $_GET['consultaclientesDos'];//asignamos la informacion recogida de la variable de busqueda
+        $sql = "SELECT U.nombre,U.apellido,U.telefono,U.celular,U.correo,R.nombre_rol FROM usuarios U  
+      	inner join roles R on R.id = U.roles_id WHERE roles_id  in ('4','5','6','3','2' ) AND u.cedula='".$sq."'";
+      	//cnosulta de busqueda
+        }
+        $data=Yii::app()->db->createCommand($sql)->queryAll(); //conectamos a la DB asignandola a la variable data
+         foreach($data as $value=>$dt){ // creamos una for indicando que la data va a tener una alias para mostrar datos a la variable dt
+         }
+         //llenamos la variable tablas con un formulario para la midifcacion en este foreach traemos lo que tenemos en la consulta y a cada dt le asignamos un campo de la DB
+        $tablas.=' 
+        <div class="form-group">
+        <label>nombre</label>
+        <input type="text" class="form-control fecha" id="nombres" placeholder="Inicio" value="'.$dt["nombre"].'">
+        <label>Apellido</label>
+        <input type="text" class="form-control fecha" id="apellidos" placeholder="Nombre" value="'.$dt["apellido"].'">
+        <label>Telefono</label>
+        <input type="text" class="form-control fecha1" id="telefonos" placeholder="Quien Recibe" value="'.$dt["telefono"].'">
+        <label>Celular</label>	
+        <input type="text" class="form-control fecha" id="celulares" placeholder="Factura" value="'.$dt["celular"].'">
+        <label>Correo</label>
+        <input type="text" class="form-control fecha" id="correos" placeholder="Referencia" value="'.$dt["correo"].'">
+        <label>Clíck para Modificar</label><br>
+        <input class="form-control" type="button" id="eliminar" value="Eliminar" style="width:50%;">
+       	';
+    	}elseif($opciones==2){//condicion de la variable opcion en estado 2 del ajax
+    	Yii::app()->db->createCommand()->update('usuarios',[ //hacemos conexion con la DB en modo update
+        'nombre' => $nombres, //asignamos un valor a cada variable que proviene del ajax
+        'apellido' => $apellidos, //""
+        'telefono' => $telefonos,//""
+        'celular' => $celulares,//""
+        'correo' => $correos,//""
+        
+        ], 'cedula = :up', [':up' => $cedulas]); // indicamos que lo que se va a buscar esta en la variable cedula o primery key
+	    }
+ 		$this->render('consultaclientesDos', //renderizamos todo en la pagina consultaclientes
+               array(
+                   'respuestaDos'=>$tablas, // asignamos ese render de tablas a respuesta
+                ));
+        }
         
    
 }

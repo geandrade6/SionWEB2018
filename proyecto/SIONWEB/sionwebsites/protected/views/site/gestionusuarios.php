@@ -137,7 +137,7 @@
 			        <div class="col-lg-12">
 			            <div class="col-lg-6">
 			                <label>Buscar Cliente por Identificación (Acción Eliminar).</label>
-			                <input type="text" name="entradas" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasados" style="width: 100%; float: left;"/>  
+			                <input type="text" name="entradas" placeholder="Digita y Enter al terminar" class="form-control" id="cedulas" style="width: 100%; float: left;"/>  
 	 		            </div>
 					            <br>
 				        <div class="col-lg-12">
@@ -272,6 +272,52 @@
                        }
         });
          
+          if ('#cedulas'!='') {
+          function Eliminar_Registros(consultaclientesDos,opciones,nombres,apellidos,telefonos,celulares,correos,cedulas) // obsterner registro del parametro que es la nueva vista php intermediaria
+				{
+			    	$.ajax({ // inicio de ajax 
+			        	url : 'consultaclientesDos', // ubicacion de la tabla intermediaria
+			            type : 'get', // se utilizara el tipo get para traer datos
+			            data : { consultaclientesDos: consultaclientesDos,opciones:opciones,nombres:nombres,apellidos:apellidos,telefonos:telefonos,celulares:celulares,correos:correos,cedulas:cedulas },//creamos las variables para enviar.
+			            success:function(resultadoA){ // dentro del succes creamos un funcion para el accionar de la variable resultado
+			            if (opciones==1) {	// en la parte superior creamos una variable para tener diferentes puntos de vista
+			            $("#verregistrosDos").html(resultadoA); //enviamos la informacion a el id del div o la caja que tengamos
+			            $('#eliminar').click(function(){ //enviamos la funcion de un click e el boton
+			            	var nombres,apellidos,telefonos,celulares,correos,cedulas; // delcaramos las variables a utilizar
+			              	nombres=$('#nombres').val() // el campo del input se evalua y lo que tenga se asigna a la variable
+			              	apellidos=$('#apellidos').val()
+			              	telefonos=$('#telefonos').val()
+			              	celulares=$('#celulares').val()
+			              	correos=$('#correos').val()
+							cedulas=$('#cedulas').val() // nuestro campo cedula es la caja de buscar la podemos llamar igual
+	              	 		Eliminar_Registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombres,apellidos,telefonos,celulares,correos,cedulas);
+		              	 	})
+		              	 } else if (opciones==2) {
+		              	 	alert("los datos Fueron Modificado Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
+		              	 	document.location.href='gestionusuarios';//refrescamos la pagina actual o redirigimos al terminar
+		              	 }
+		              } 
+	              })
+					//.done(function(){ 
+					//})
+	          }
+          $(document).on('keypress', '#cedulas', function(eventoboton) //se utiliza el campo de la busuqeda con el tipo key ose enter para accionar el campo y asinarlo al evento eventoboton.
+			          {
+			            if(eventoboton.charCode == 13){//cuando se teclee enter lo cual es de valor 13
+			            var valorBusquedas=$(this).val(); //se evalua el valor 
+			            if (valorBusquedas!="") 
+			            {
+			              Eliminar_Registros(valorBusquedas,1,'','','','','','');
+			                          
+			            }
+			            else
+			              {
+			                Eliminar_Registros('',0,'','','','','','');
+			              }
+			              }
+			          }); 
+				}
+
          
 </script> 
 <script> //ajax de formulario Modificar
