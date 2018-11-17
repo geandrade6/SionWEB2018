@@ -19,9 +19,9 @@
 			
 
 		<section>
-			<input type="submit" name="acciones" value="insertar" class="insertar" id="insertar">
-			<input type="submit" name="acciones" value="modificar" class="modificar" id="modificar">
-			<input type="submit" name="acciones" value="eliminar" class="eliminar" id="eliminar">
+			<input type="submit" name="acciones" value="Insertar" class="insertados" >
+			<input type="submit" name="acciones" value="Modificar" class="modificados" >
+			<input type="submit" name="acciones" value="Eliminar" class="eliminados" >
 
 			<div class="main" >
 
@@ -33,7 +33,7 @@
 				);
 
 					?>
-				<div id="insertados" style="display: block;">
+				<div id="insertado" style="display: block;">
 				<h1>Insertar Usuarios</h1>
 				<!-- Inicio de Formulario con Wigdet-->
 				<?php
@@ -117,7 +117,7 @@
 				</div>
 				<br>
 
-				<div id="modificados" style="display: none;">
+				<div id="modificado" style="display: none;">
 			        <div class="col-lg-12">
 			            <div class="col-lg-6">
 			                <label>Buscar Cliente por Identificación (Acción modificar ).</label>
@@ -133,17 +133,17 @@
 				        </div>
 			        </div>
 				</div>
-				<div id="eliminados" style="display: none;">
+				<div id="eliminado" style="display: none;">
 			        <div class="col-lg-12">
 			            <div class="col-lg-6">
 			                <label>Buscar Cliente por Identificación (Acción Eliminar).</label>
-			                <input type="text" name="entradas" placeholder="Digita y Enter al terminar" class="form-control" id="cedulas" style="width: 100%; float: left;"/>  
+			                <input type="text" name="entradas" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasa" style="width: 100%; float: left;"/>  
 	 		            </div>
 					            <br>
 				        <div class="col-lg-12">
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
-					    		<div class="registros" id="verregistrosdos" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
+					    		<div class="registros" id="ElimargistrosDos" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
 					    		</div>
 					        </fieldset>
 				        </div>
@@ -200,29 +200,37 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/util.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/main.js"></script>
 <script>//este script es para ocultar campos por medio de botones
-         $(".insertar").click(function(evento){
+         $(".insertados").click(function(evento){
                       var valor = $(this).val();
-                      if(valor == 'insertar'){
-                        $("#insertados").css("display", "block");
-                        $("#modificados").css("display", "none");
-                        $("#eliminados").css("display", "none");
+                      if(valor == 'Insertar'){
+                        $("#insertado").css("display", "block");
+                        $("#modificado").css("display", "none");
+                        $("#eliminado").css("display", "none");
                        }
         });
-         $(".modificar").click(function(evento){
+         $(".modificados").click(function(evento){
                       var valor = $(this).val();
-                      if(valor == 'modificar'){
-                        $("#insertados").css("display", "none");
-                        $("#modificados").css("display", "block");
-                        $("#eliminados").css("display", "none");
+                      if(valor == 'Modificar'){
+                        $("#insertado").css("display", "none");
+                        $("#modificado").css("display", "block");
+                        $("#eliminado").css("display", "none");
                        }
         });
-          if ('#cedula'!='') {
-			          function Modificar_registros(consultaclientes,opcion,nombre,apellido,telefono,celular,correo,cedula) // obsterner registro del parametro que es la nueva vista php intermediaria
+         $(".eliminados").click(function(evento){
+                      var valor = $(this).val();
+                      if(valor == 'Eliminar'){
+                        $("#insertado").css("display", "none");
+                        $("#modificado").css("display", "none");
+                        $("#eliminado").css("display", "block");
+                       }
+        });
+          if ('#cedula'/*id de la caja busquedas*/!='') {
+			          function Modificar_registros(consultaclientes/*variable de la accion*/,opcion,nombre,apellido,telefono,celular,correo,cedula) // obsterner registro del parametro que es la nueva vista php intermediaria
 			          {
 			            $.ajax({ // inicio de ajax 
-			              url : 'consultaclientes', // ubicacion de la tabla intermediaria
+			              url : 'consultaclientes',// se acciona la ubicacion del archivo PHP de consultaclientes
 			              type : 'get', // se utilizara el tipo get para traer datos
-			              data : { consultaclientes: consultaclientes,opcion:opcion,nombre:nombre,apellido:apellido,telefono:telefono,celular:celular,correo:correo,cedula:cedula },//creamos las variables para enviar.
+			              data : { consultaclientes: consultaclientes/*variable de la accion*/,opcion:opcion,nombre:nombre,apellido:apellido,telefono:telefono,celular:celular,correo:correo,cedula:cedula },//creamos las variables para enviar.
 			              success:function(resultado){ // dentro del succes creamos un funcion para el accionar de la variable resultado
 			              	if (opcion==1) {	// en la parte superior creamos una variable para tener diferentes puntos de vista
 			              	 $("#verregistros").html(resultado); //enviamos la informacion a el id del div o la caja que tengamos
@@ -262,64 +270,53 @@
 			              }
 			          }); 
 				}
+</script> 
 
-         $(".eliminar").click(function(evento){
-                      var valor = $(this).val();
-                      if(valor == 'eliminar'){
-                        $("#insertados").css("display", "none");
-                        $("#modificados").css("display", "none");
-                        $("#eliminados").css("display", "block");
-                       }
-        });
-         
-          if ('#cedulas'!='') {
-          function Eliminar_Registros(consultaclientesDos,opciones,nombres,apellidos,telefonos,celulares,correos,cedulas) // obsterner registro del parametro que es la nueva vista php intermediaria
-				{
-			    	$.ajax({ // inicio de ajax 
-			        	url : 'consultaclientesDos', // ubicacion de la tabla intermediaria
-			            type : 'get', // se utilizara el tipo get para traer datos
-			            data : { consultaclientesDos: consultaclientesDos,opciones:opciones,nombres:nombres,apellidos:apellidos,telefonos:telefonos,celulares:celulares,correos:correos,cedulas:cedulas },//creamos las variables para enviar.
-			            success:function(resultadoA){ // dentro del succes creamos un funcion para el accionar de la variable resultado
-			            if (opciones==1) {	// en la parte superior creamos una variable para tener diferentes puntos de vista
-			            $("#verregistrosDos").html(resultadoA); //enviamos la informacion a el id del div o la caja que tengamos
-			            $('#eliminar').click(function(){ //enviamos la funcion de un click e el boton
-			            	var nombres,apellidos,telefonos,celulares,correos,cedulas; // delcaramos las variables a utilizar
-			              	nombres=$('#nombres').val() // el campo del input se evalua y lo que tenga se asigna a la variable
-			              	apellidos=$('#apellidos').val()
-			              	telefonos=$('#telefonos').val()
-			              	celulares=$('#celulares').val()
-			              	correos=$('#correos').val()
-							cedulas=$('#cedulas').val() // nuestro campo cedula es la caja de buscar la podemos llamar igual
-	              	 		Eliminar_Registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombres,apellidos,telefonos,celulares,correos,cedulas);
-		              	 	})
-		              	 } else if (opciones==2) {
-		              	 	alert("los datos Fueron Modificado Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
-		              	 	document.location.href='gestionusuarios';//refrescamos la pagina actual o redirigimos al terminar
-		              	 }
-		              } 
-	              })
-					//.done(function(){ 
-					//})
-	          }
-          $(document).on('keypress', '#cedulas', function(eventoboton) //se utiliza el campo de la busuqeda con el tipo key ose enter para accionar el campo y asinarlo al evento eventoboton.
+<script>
+if ('#busquedasa'/*id de la caja busquedas*/!='') {
+			          function eliminar_Registros(eliminaruser/*variable de la accion*/,opcionDos,nombre,apellido,telefono,celular,correo,busquedasa) // obsterner registro del parametro que es la nueva vista php intermediaria
 			          {
-			            if(eventoboton.charCode == 13){//cuando se teclee enter lo cual es de valor 13
-			            var valorBusquedas=$(this).val(); //se evalua el valor 
-			            if (valorBusquedas!="") 
+			            $.ajax({ // inicio de ajax 
+			              url : 'consultaclientesDos',// se acciona la ubicacion del archivo PHP de consultaclientes
+			              type : 'get', // se utilizara el tipo get para traer datos
+			              data : { eliminaruser: eliminaruser/*variable de la accion*/,opcionDos:opcionDos,nombre:nombre,apellido:apellido,telefono:telefono,celular:celular,correo:correo,busquedasa:busquedasa },//creamos las variables para enviar.
+			              success:function(resultadosA){ // dentro del succes creamos un funcion para el accionar de la variable resultado
+			              	if (opcionDos==1) {	// en la parte superior creamos una variable para tener diferentes puntos de vista
+			              	 $("#ElimargistrosDos").html(resultadosA); //enviamos la informacion a el id del div o la caja que tengamos
+			              	 	$('#eliminar').click(function(){ //enviamos la funcion de un click e el boton
+			              	 		var nombre,apellido,telefono,celular,correo,busquedasa; // delcaramos las variables a utilizar
+			              	 		nombre=$('#nombre').val() // el campo del input se evalua y lo que tenga se asigna a la variable
+			              	 		apellido=$('#apellido').val()
+			              	 		telefono=$('#telefono').val()
+			              	 		celular=$('#celular').val()
+			              	 		correo=$('#correo').val()
+									busquedasa=$('#busquedasa').val() // nuestro campo cedula es la caja de buscar la podemos llamar igual
+
+			              	 		eliminar_Registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombre,apellido,telefono,celular,correo,busquedasa);
+			              	 	})
+			              	 } else if (opcionDos==2) {
+			              	 	alert("los datos Fueron Eliminado Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
+			              	 	document.location.href='gestionusuarios';//refrescamos la pagina actual o redirigimos al terminar
+			              	 }
+			              } 
+			              })
+							//.done(function(){ 
+							//})
+			          }
+			          $(document).on('keypress', '#busquedasa', function(keys) //se utiliza el campo de la busuqeda con el tipo key ose enter para accionar el campo y asinarlo al evento eventoboton.
+			          {
+			            if(keys.charCode == 13){//cuando se teclee enter lo cual es de valor 13
+			            var valorBusquedasDos=$(this).val(); //se evalua el valor 
+			            if (valorBusquedasDos!="") 
 			            {
-			              Eliminar_Registros(valorBusquedas,1,'','','','','','');
+			              eliminar_Registros(valorBusquedasDos,1,'','','','','','');
 			                          
 			            }
 			            else
 			              {
-			                Eliminar_Registros('',0,'','','','','','');
+			                eliminar_Registros('',0,'','','','','','');
 			              }
 			              }
 			          }); 
 				}
-
-         
 </script> 
-<script> //ajax de formulario Modificar
-	
-</script>
