@@ -50,9 +50,8 @@ return array(
 		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-
+			'class'=>'CDbConnection',
 			'connectionString' => 'mysql:host=localhost;dbname=camegovp_sionweb2',
-			 'class'=>'CDbConnection',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',

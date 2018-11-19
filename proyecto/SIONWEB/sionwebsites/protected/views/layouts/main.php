@@ -39,13 +39,15 @@
 								<?php $this->widget('zii.widgets.CMenu',array(
 								'items'=>array(
 								
-								array('label'=>'Acerca', 'url'=>array('site/page', 'view'=>'about')),
-								array('label'=>'Contactenos', 'url'=>array('site/contact')),
+								array('label'=>'Inicio Sesion', 'url'=>array('site/login'), 'visible'=>Yii::app()->user
+									->isGuest),
+								array('label'=>'salir('.Yii::app()->user->name.')', 'url'=>array('site/logout')),
 								array('label'=>'Eventos', 'url'=>array('site/eventos')),
 								array('label'=>'Nuevo Evento', 'url'=>array('site/insertareventos')),
 								array('label'=>'Gestión Usuarios', 'url'=>array('site/gestionusuarios')),
-								array('label'=>'Inicio Sesion', 'url'=>array('site/login'), 'visible'=>Yii::app()->user->isGuest),
-								array('label'=>'Salir ('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+								array('label'=>'Contactenos', 'url'=>array('site/contact')),
+								array('label'=>'Acerca', 'url'=>array('site/page', 'view'=>'about')),
+								
 								),
 								)); ?>
 								</ul>

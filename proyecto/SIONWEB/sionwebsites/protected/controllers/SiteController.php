@@ -13,32 +13,30 @@ class SiteController extends Controller{
             'accessControl', // perform access control for CRUD operations
         );
     }
-    /*
+    
    public function accessRules() {
         return array(
            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index','login','logout','informes','informemasivo_f','informepop','consultafotos','consultanovedades','consultaplanillas','consultamaterial','consultavideos'),
-                 /*,'descargararchivo','ordenes_ciudades','generarpdfcotizacion','generarpdffacturacion','cotizaciones','insertados_view','insertados_one','delinsertados_one','delinsertados'*/
-           /*     'users' => array('*'),
+                'actions' => array('index','login','logout'),'users' => array('*'),
             ),
              array('allow', // allow authenticated user to perform 'create' action
-                /*'actions' => array('index','procesomasivo','procesopop','inicios','procesosorden','solicitudes_sistemas','formularios_inicial','visorinicios','ordenesdeserviciodetalles'),*/
-         /*       'users' => array('@'),
+               'actions' => array('index'),
+                'users' => array('@'),
             ),
-           /* array('allow', // allow only the owner to perform 'view' 'update' 'delete' actions
+            array('allow', // allow only the owner to perform 'view' 'update' 'delete' actions
                 'actions' => array('view', 'update', 'delete'),
                 'expression' => array('ExampleController','allowOnlyOwner')
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete'),
                 'users' => array('admin', 'foo', 'bar'),
-            ),*/
-         /*   array('deny', // deny all users
+            ),
+            array('deny', // deny all users
                 'users' => array('*'),
                 
             ), 
         );
-    }*/
+    }
     
 	public function actions()
 	{
@@ -242,7 +240,7 @@ class SiteController extends Controller{
 			$telefonousuarios=$modelocrearusuario->telefono;
 			$celularusuarios=$modelocrearusuario->celular;
 			$correousuarios=$modelocrearusuario->correo;
-			$contrasenausuarios=$modelocrearusuario->contrasena;
+			$contrasenausuarios=$modelocrearusuario->password;
 			$estadousuarios=$modelocrearusuario->estado_usuario;
 			$observacionesusuarios=$modelocrearusuario->observaciones;
 			$rolesusuarios=$modelocrearusuario->roles_id;

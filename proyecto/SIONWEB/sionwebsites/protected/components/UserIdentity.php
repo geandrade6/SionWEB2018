@@ -15,18 +15,19 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$user=User::model()->find('LOWER(username)=?',array(strtolower($this->username)));
-		if($user===null)
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		else if(!$user->validatePassword($this->password))
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
-		{
-			$this->_id=$user->id;
-			$this->username=$user->username;
-			$this->errorCode=self::ERROR_NONE;
-		}
-		return $this->errorCode==self::ERROR_NONE;
+		
+		$conexion=yii::app()->db;
+		$consultadeconexion = "SELECT username,password FROM usuarios WHERE username ='".$this->username."' AND password ='".$this->password."' AND activar_user = 1";
+
+		$resultadoconecion= $conexion->createCommand($consultadeconexion)->query();
+
+		$resultadoconecion->bindColumn(1,$this->username);
+		$resultadoconecion->bindColumn(2,$this->password);
+		while ($resultadoconecion ->read()!==false) {
+			$this->errorCode = self::ERROR_NONE;
+			return !$this->errorCode;
+					}
+
 	}
 
 	/**

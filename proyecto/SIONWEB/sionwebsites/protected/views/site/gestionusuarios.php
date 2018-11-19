@@ -67,7 +67,7 @@
 				?>	
 				<h4>Conraseña</h4>
 				<?php
-					echo $form->PasswordField($modelocrearusuario,'contrasena',array('password ','class'=>'form-control ','placeholder'=>"Digita la Contraseña")); //
+					echo $form->PasswordField($modelocrearusuario,'password',array('password ','class'=>'form-control ','placeholder'=>"Digita la Contraseña")); //
 				?>
 				<h4>Estado usuario</h4>
 				<?php 
