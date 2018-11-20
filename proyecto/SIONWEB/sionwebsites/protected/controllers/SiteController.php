@@ -17,7 +17,7 @@ class SiteController extends Controller{
    public function accessRules() {
         return array(
            array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index','login','logout'),'users' => array('*'),
+                'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','contact','about'),'users' => array('*'),
             ),
              array('allow', // allow authenticated user to perform 'create' action
                'actions' => array('index'),
@@ -191,6 +191,7 @@ class SiteController extends Controller{
     if(isset($_POST['Eventos'])){ // Modelo Eventos
 
             $modelEventos->attributes=$_POST['Eventos'];
+
         if( $modelEventos->validate()){ // valida el modelo y sus atributos
         	//atributos del modelo
         	$titulo=$modelEventos->titulo; 
@@ -199,6 +200,7 @@ class SiteController extends Controller{
             $submensaje=$modelEventos->submensaje;
           	$imagenes=$modelEventos->imagenes;
             $estado=$modelEventos->estado;
+            //$filenamesource=yii::getpathOfAlias($alias);
         
            $tmpo=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
             $modelEventos->unsetAttributes();// limpia los campos

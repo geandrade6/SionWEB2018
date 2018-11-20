@@ -41,7 +41,7 @@ class Eventos extends CActiveRecord{
     return array(
             array('titulo,mensaje,subtitulo,submensaje,estado','safe'),
              
-            array('imagenes','file','types'=>'jpg, jpeg, png, gif'),
+           array('imagen', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'), 
             
       
         );

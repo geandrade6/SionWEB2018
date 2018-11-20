@@ -30,6 +30,7 @@
 				 <?php
 				  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
 				  echo $form->errorSummary($modelEventos); // se llama la variablre
+				  
 				?>	
 				<h4>Título del Evento</h4>
 				<?php
