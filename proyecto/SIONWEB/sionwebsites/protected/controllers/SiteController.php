@@ -24,7 +24,7 @@ class SiteController extends Controller{
                 'users' => array('@'),
             ),
             array('allow', // allow only the owner to perform 'view' 'update' 'delete' actions
-                'actions' => array('view', 'update', 'delete'),
+                'actions' => array('view','insert','update','delete'),
                 'expression' => array('ExampleController','allowOnlyOwner')
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -168,7 +168,9 @@ class SiteController extends Controller{
 		
      		$consultaeventos = $modelEventos->getEventos(); // SE LLAMA LA ACCION PARA 
      		$consultaeventosDos = $modelEventos->getEventosDos(); // SE LLAMA LA ACCION PARA 
+     		$consultaesteventos = $modelEventos->getEventosEstado();
             $this->render('eventos', array(//se renderiza la pagina
+            "consultaesteventos"=>$consultaesteventos,
             "consultaeventos"=>$consultaeventos, // se renderiza la consula
             "consultaeventosDos"=>$consultaeventosDos, // se renderiza la consula
             "modelEventos"=>$modelEventos // se renderiza el modelo
@@ -189,9 +191,7 @@ class SiteController extends Controller{
         
        // aqui en adelante sale el error 500 de property not defined
     if(isset($_POST['Eventos'])){ // Modelo Eventos
-
             $modelEventos->attributes=$_POST['Eventos'];
-
         if( $modelEventos->validate()){ // valida el modelo y sus atributos
         	//atributos del modelo
         	$titulo=$modelEventos->titulo; 
@@ -199,18 +199,21 @@ class SiteController extends Controller{
             $subtitulo=$modelEventos->subtitulo; 
             $submensaje=$modelEventos->submensaje;
           	$imagenes=$modelEventos->imagenes;
-            $estado=$modelEventos->estado;
+            $estado=$modelEventos->idestadoeventos;
             //$filenamesource=yii::getpathOfAlias($alias);
-        
            $tmpo=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
             $modelEventos->unsetAttributes();// limpia los campos
         }   
     }
+     		
      		$consultaeventos = $modelEventos->getEventos();//llamdado de las consulta y los datos en get
      		$consultaeventosDos = $modelEventos->getEventosDos();
+     		$consultaesteventos = $modelEventos->getEventosEstado();
             $this->render('insertareventos', array(//se renderiza la pagina
+            
             "consultaeventos"=>$consultaeventos, // se renderiza la consula
             "consultaeventosDos"=>$consultaeventosDos, // se renderiza la consula
+           	"consultaesteventos"=>$consultaesteventos,
             "modelEventos"=>$modelEventos // se renderiza el modelo
             )
             ); // variable de asignacion modelo

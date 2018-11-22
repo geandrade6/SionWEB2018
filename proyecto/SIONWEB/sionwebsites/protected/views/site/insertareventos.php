@@ -1,6 +1,4 @@
-
-
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="language" content="es" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!-- blueprint CSS framework -->
@@ -22,16 +20,15 @@
 				$this->pageTitle=Yii::app()->name . ' - Nuevos Eventos';
 				$this->breadcrumbs=array(
 					'Insertar Nuevo Envento',
-					
 				);
 				?>
-			<h1>Insertar Eventos</h1>
-			<!-- Inicio de Formulario con Wigdet-->
+				<h1>Insertar Eventos</h1>
+				<!-- Inicio de Formulario con Wigdet-->
+
 				 <?php
 				  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
 				  echo $form->errorSummary($modelEventos); // se llama la variablre
-				  
-				?>	
+					?>	
 				<h4>Título del Evento</h4>
 				<?php
 					echo $form->textField($modelEventos,'titulo',array('class'=>'form-control ','placeholder'=>"Digita Título")); //
@@ -54,16 +51,19 @@
 				<br>
 				<h4>Subir Imagen</h4>
 				
-					
-				<br>
-				<h4>Sub-Título del Evento</h4>
 				<?php
-					echo $form->textField($modelEventos,'estado',array('class'=>'form-control ','value'=>"",'style'=>'display:;')); //
+					echo $form->textField($modelEventos,'imagenes',array('class'=>'form-control')); //
+				?>
+				<br>
+				<h4>Estado Eventos</h4>
+				<?php
+					echo $form->dropDownList/*SELECT EN PHP*/($modelEventos,'idestadoeventos',//squi va el id de la tabla
+       				 CHtml::listData($consultaesteventos, 'idestadoeventos', 'nombre_estado_eventos')//aqui va el id y de seguido lo que se va a mostrar.
+        			,array('class'=>'form-control columnas','style'=>'width:100%;')); 
 				?>
 				<br>
 				 <?php  //esto es un boton en PHP
                     echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
-                           
                  ?>
 
 				<?php	
