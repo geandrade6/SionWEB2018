@@ -192,6 +192,7 @@ class SiteController extends Controller{
        // aqui en adelante sale el error 500 de property not defined
     if(isset($_POST['Eventos'])){ // Modelo Eventos
             $modelEventos->attributes=$_POST['Eventos'];
+           // $modelEventos->imagenes=CUploadedFile::getInstance($modelEventos,'imagenes');
         if( $modelEventos->validate()){ // valida el modelo y sus atributos
         	//atributos del modelo
         	$titulo=$modelEventos->titulo; 
@@ -200,17 +201,17 @@ class SiteController extends Controller{
             $submensaje=$modelEventos->submensaje;
           	$imagenes=$modelEventos->imagenes;
             $estado=$modelEventos->idestadoeventos;
-            //$filenamesource=yii::getpathOfAlias($alias);
+            
            $tmpo=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
             $modelEventos->unsetAttributes();// limpia los campos
         }   
     }
-     		
-     		$consultaeventos = $modelEventos->getEventos();//llamdado de las consulta y los datos en get
+
+
+       		$consultaeventos = $modelEventos->getEventos();//llamdado de las consulta y los datos en get
      		$consultaeventosDos = $modelEventos->getEventosDos();
      		$consultaesteventos = $modelEventos->getEventosEstado();
             $this->render('insertareventos', array(//se renderiza la pagina
-            
             "consultaeventos"=>$consultaeventos, // se renderiza la consula
             "consultaeventosDos"=>$consultaeventosDos, // se renderiza la consula
            	"consultaesteventos"=>$consultaesteventos,

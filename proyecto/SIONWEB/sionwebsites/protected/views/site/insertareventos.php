@@ -26,7 +26,8 @@
 				<!-- Inicio de Formulario con Wigdet-->
 
 				 <?php
-				  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
+				  $form=$this->beginWidget('CActiveForm',array('htmlOptions'=>array('enctype'=>'multipart/form-data'),
+					)); //activacion del comando para el form
 				  echo $form->errorSummary($modelEventos); // se llama la variablre
 					?>	
 				<h4>Título del Evento</h4>
@@ -53,6 +54,7 @@
 				
 				<?php
 					echo $form->textField($modelEventos,'imagenes',array('class'=>'form-control')); //
+					//echo CHtml::activeFileField($modelEventos,'imagenes');
 				?>
 				<br>
 				<h4>Estado Eventos</h4>
