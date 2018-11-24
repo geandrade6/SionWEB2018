@@ -16,7 +16,7 @@ class SiteController extends Controller{
     
    public function accessRules() {
         return array(
-        /*  array('allow', // allow all users to perform 'index' and 'view' actions
+         array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','informes','contact','about'),'users' => array('*'),
             ),
              array('allow', // allow authenticated user to perform 'create' action
@@ -34,7 +34,7 @@ class SiteController extends Controller{
             array('deny', // deny all users
                 'users' => array('*'),
                 
-            ), */
+            ), 
         );
     }
     
