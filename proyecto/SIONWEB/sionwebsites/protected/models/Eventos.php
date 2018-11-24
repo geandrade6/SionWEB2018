@@ -1,7 +1,7 @@
 <?php
 class Eventos extends CActiveRecord{
   //  class LoginForm extends CFormModel
- // creamos las variables de tipo publico o privado 
+ // creamos las variables de tipo publico o privado importante la de coneccion
   private $connection;
   //getters
   public $getEventos;
@@ -47,7 +47,8 @@ class Eventos extends CActiveRecord{
             array('subtitulo','required',"message"=>"El campo Sub-Título es obligatorio"),
             array('submensaje','required',"message"=>"El campo Sub-Mensaje es obligatorio"),
             array('idestadoeventos','required',"message"=>"El campo Estado es obligatorio"),
-            //array('imagenes', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'), 
+            array('imagenes', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'), 
+            
         );
       
   }

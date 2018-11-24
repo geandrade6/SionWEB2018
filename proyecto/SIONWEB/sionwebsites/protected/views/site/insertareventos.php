@@ -51,11 +51,12 @@
 				?>
 				<br>
 				<h4>Subir Imagen</h4>
-				
-				<?php
+        		<?php echo CHtml::activeFileField($modelEventos,'imagenes'); //reclectamos la imagen?>  
+        		<?php echo $form->error($modelEventos,'imagenes');//error de si no  es imagen ?>
+				<!--?php
 					echo $form->textField($modelEventos,'imagenes',array('class'=>'form-control')); //
 					//echo CHtml::activeFileField($modelEventos,'imagenes');
-				?>
+				?-->
 				<br>
 				<h4>Estado Eventos</h4>
 				<?php

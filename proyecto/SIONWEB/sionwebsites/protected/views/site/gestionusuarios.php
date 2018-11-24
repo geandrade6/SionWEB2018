@@ -200,6 +200,7 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/util.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/main.js"></script>
 <script>//este script es para ocultar campos por medio de botones
+//______________________________________________________________________________________________________//botones ocult
          $(".insertados").click(function(evento){
                       var valor = $(this).val();
                       if(valor == 'Insertar'){
@@ -224,6 +225,7 @@
                         $("#eliminado").css("display", "block");
                        }
         });
+//______________________________________________________________________________________________________//busqueda updat
           if ('#cedula'/*id de la caja busquedas*/!='') {
 			          function Modificar_registros(consultaclientes/*variable de la accion*/,opcion,nombre,apellido,telefono,celular,correo,cedula) // obsterner registro del parametro que es la nueva vista php intermediaria
 			          {
@@ -244,13 +246,13 @@
 									cedula=$('#cedula').val() // nuestro campo cedula es la caja de buscar la podemos llamar igual
 
 			              	 		Modificar_registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombre,apellido,telefono,celular,correo,cedula);
-			              	 	})
-			              	 } else if (opcion==2) {
-			              	 	alert("los datos Fueron Modificado Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
+			              	 		})
+			              	 	} else if (opcion==2) {
+			              	 	alert("los datos Fueron Modificados Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
 			              	 	document.location.href='gestionusuarios';//refrescamos la pagina actual o redirigimos al terminar
-			              	 }
-			              } 
-			              })
+			              		}
+			            	} 
+			            })
 							//.done(function(){ 
 							//})
 			          }
@@ -270,9 +272,7 @@
 			              }
 			          }); 
 				}
-</script> 
-
-<script>
+//______________________________________________________________________________________________________//busqueda delet
 if ('#busquedasa'/*id de la caja busquedas*/!='') {
 			          function eliminar_Registros(eliminaruser/*variable de la accion*/,opcionDos,nombre,apellido,telefono,celular,correo,busquedasa) // obsterner registro del parametro que es la nueva vista php intermediaria
 			          {
@@ -293,13 +293,13 @@ if ('#busquedasa'/*id de la caja busquedas*/!='') {
 									busquedasa=$('#busquedasa').val() // nuestro campo cedula es la caja de buscar la podemos llamar igual
 
 			              	 		eliminar_Registros(0/*variable ValorBusquedas en cero*/,2/*Variable Opcion*/,nombre,apellido,telefono,celular,correo,busquedasa);
-			              	 	})
-			              	 } else if (opcionDos==2) {
-			              	 	alert("los datos Fueron Eliminado Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
+			              	 		})
+			              	 	} else if (opcionDos==2) {
+			              	 	alert("los datos Fueron Eliminados Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
 			              	 	document.location.href='gestionusuarios';//refrescamos la pagina actual o redirigimos al terminar
-			              	 }
-			              } 
-			              })
+			              	 	}
+			             	} 
+			           	})
 							//.done(function(){ 
 							//})
 			          }

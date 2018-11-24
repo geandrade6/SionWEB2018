@@ -46,6 +46,7 @@
 								array('label'=>'Eventos', 'url'=>array('site/eventos')),
 								array('label'=>'Nuevo Evento', 'url'=>array('site/insertareventos')),
 								array('label'=>'Gestión Usuarios', 'url'=>array('site/gestionusuarios')),
+								array('label'=>'Reportes', 'url'=>array('site/informes')),
 								array('label'=>'Contáctenos', 'url'=>array('site/contact')),
 								array('label'=>'Acerca', 'url'=>array('site/page', 'view'=>'about')),
 								

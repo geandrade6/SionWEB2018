@@ -16,8 +16,8 @@ class SiteController extends Controller{
     
    public function accessRules() {
         return array(
-           array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','contact','about'),'users' => array('*'),
+        /*  array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','informes','contact','about'),'users' => array('*'),
             ),
              array('allow', // allow authenticated user to perform 'create' action
                'actions' => array('index'),
@@ -34,7 +34,7 @@ class SiteController extends Controller{
             array('deny', // deny all users
                 'users' => array('*'),
                 
-            ), 
+            ), */
         );
     }
     
@@ -187,27 +187,30 @@ class SiteController extends Controller{
 		    $submensaje='';
 		   	$imagenes='';
 		    $estado='';
+		    
 			
         
        // aqui en adelante sale el error 500 de property not defined
     if(isset($_POST['Eventos'])){ // Modelo Eventos
             $modelEventos->attributes=$_POST['Eventos'];
-           // $modelEventos->imagenes=CUploadedFile::getInstance($modelEventos,'imagenes');
+            
         if( $modelEventos->validate()){ // valida el modelo y sus atributos
         	//atributos del modelo
         	$titulo=$modelEventos->titulo; 
             $mensaje=$modelEventos->mensaje;
             $subtitulo=$modelEventos->subtitulo; 
             $submensaje=$modelEventos->submensaje;
-          	$imagenes=$modelEventos->imagenes;
+            //subida de imagenes a la carpeta
+            $subirimagen=CUploadedFile::getInstance($modelEventos,'imagenes');//recoge la imagen subida con el nombre
+          	$ruta ="{$subirimagen}";//guardamos el nombre de la imagen en temporal
+          	$subirimagen->saveAs(Yii::app()->basePath.'/../imagenes/eventos/'.$ruta);//movemos la imagen a la ruta
+          	$imagenes='/imagenes/eventos/'.$ruta; //guardamos en la base de datos la ruta y el nombre de la imagen
             $estado=$modelEventos->idestadoeventos;
-            
-           $tmpo=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
+	        $tmpo=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
+           $this->redirect('insertareventos');
             $modelEventos->unsetAttributes();// limpia los campos
         }   
     }
-
-
        		$consultaeventos = $modelEventos->getEventos();//llamdado de las consulta y los datos en get
      		$consultaeventosDos = $modelEventos->getEventosDos();
      		$consultaesteventos = $modelEventos->getEventosEstado();
@@ -271,32 +274,32 @@ class SiteController extends Controller{
             ); // variable de asignacion modelo
 	}
 	public function actionConsultaClientes ($consultaclientes,$opcion,$nombre,$apellido,$telefono,$celular,$correo,$cedula){ // setraen los datos desde el ajax correspondientes a cada variable
-	$tablas=''; //creamos variable de retorno de informacion
-     $sql=''; // creamos variable de consulta
+	
      if($opcion==1){ // en el ajax se creo una variable de opcines la cual se extrae en este punto correspondiente a la caja buscar
-     if(isset($_GET['consultaclientes'])) //si la variable consulta clientes contiene informacion
-        {
+     $tablas=''; //creamos variable de retorno de informacion
+     $sql='';
+     if(isset($_GET['consultaclientes'])){ //si la variable consulta clientes contiene informacion
+       // creamos variable de consulta
         $sq= $_GET['consultaclientes'];//asignamos la informacion recogida de la variable de busqueda
         $sql = "SELECT U.nombre,U.apellido,U.telefono,U.celular,U.correo,R.nombre_rol FROM usuarios U  
       	inner join roles R on R.id = U.roles_id WHERE roles_id  in ('4','5','6','3','2' ) AND u.cedula='".$sq."'";
       	//cnosulta de busqueda
         }
         $data=Yii::app()->db->createCommand($sql)->queryAll(); //conectamos a la DB asignandola a la variable data
-         foreach($data as $value=>$dt){ // creamos una for indicando que la data va a tener una alias para mostrar datos a la variable dt
-         }
+        foreach($data as $value=>$dt){}// creamos una for indicando que la data va a tener una alias para mostrar datos a la variable dt
          //llenamos la variable tablas con un formulario para la midifcacion en este foreach traemos lo que tenemos en la consulta y a cada dt le asignamos un campo de la DB
-        $tablas.=' 
+        $tablas.='
         <div class="form-group">
         <label>nombre</label>
-        <input type="text" class="form-control fecha" id="nombre" placeholder="Inicio" value="'.$dt["nombre"].'">
+        <input type="text" class="form-control" id="nombre" placeholder="Inicio" value="'.$dt["nombre"].'">
         <label>Apellido</label>
-        <input type="text" class="form-control fecha" id="apellido" placeholder="Nombre" value="'.$dt["apellido"].'">
+        <input type="text" class="form-control" id="apellido" placeholder="Nombre" value="'.$dt["apellido"].'">
         <label>Telefono</label>
-        <input type="text" class="form-control fecha1" id="telefono" placeholder="Quien Recibe" value="'.$dt["telefono"].'">
+        <input type="text" class="form-control" id="telefono" placeholder="Quien Recibe" value="'.$dt["telefono"].'">
         <label>Celular</label>
-        <input type="text" class="form-control fecha" id="celular" placeholder="Factura" value="'.$dt["celular"].'">
+        <input type="text" class="form-control" id="celular" placeholder="Factura" value="'.$dt["celular"].'">
         <label>Correo</label>
-        <input type="text" class="form-control fecha" id="correo" placeholder="Referencia" value="'.$dt["correo"].'">
+        <input type="text" class="form-control" id="correo" placeholder="Referencia" value="'.$dt["correo"].'">
         <label>Clíck para Modificar</label><br>
         <input class="form-control" type="button" id="modifcar" value="Modifcar" style="width:50%;">
        	';
@@ -307,8 +310,8 @@ class SiteController extends Controller{
         'telefono' => $telefono,//""
         'celular' => $celular,//""
         'correo' => $correo,//""
-        
         ], 'cedula = :up', [':up' => $cedula]); // indicamos que lo que se va a buscar esta en la variable cedula o primery key
+        alert("los datos Fueron Modificados Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
 	    }
  		$this->render('consultaclientes', //renderizamos todo en la pagina consultaclientes
                array(
@@ -326,10 +329,8 @@ class SiteController extends Controller{
         $sqlDos = "SELECT U.nombre,U.apellido,U.telefono,U.celular,U.correo,R.nombre_rol FROM usuarios U  
       	inner join roles R on R.id = U.roles_id WHERE roles_id  in ('4','5','6','3','2' ) AND u.cedula='".$sq."'";
         }
-          $data=Yii::app()->db->createCommand($sqlDos)->queryAll(); 
-            foreach($data as $value=>$dt){
-
-            }
+        $data=Yii::app()->db->createCommand($sqlDos)->queryAll(); 
+        foreach($data as $value=>$dt){}
 		$tablasDos.=' 
         <div class="form-group">
         <label>nombre</label>
@@ -349,11 +350,21 @@ class SiteController extends Controller{
 
     	Yii::app()->db->createCommand()->delete('usuarios','cedula = :del', [':del' => $busquedasa]); // indicamos que lo que se va a buscar esta en la variable cedula o primery key
 	    }
- $this->render('consultaclientesDos', 
+ 			$this->render('consultaclientesDos', 
                array(
                    'respuestaDos'=>$tablasDos,
                 ));
         }
+
+        public function actionInformes (){
+				//aqui se programa y se declaran algunas variables
+			$this->render('informes', // nombre de la pagina a renderizar
+               array(
+				//                   'respuestaDos'=>$tablasDos, // aqui van las consultas a renderizar
+                ));
+
+
+}
 
 }
 
