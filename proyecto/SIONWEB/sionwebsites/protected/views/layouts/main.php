@@ -37,9 +37,9 @@
 							<div style="width: 100%;">
 								<ul >
 								<?php $this->widget('zii.widgets.CMenu',array(
+									
 								'items'=>array(
-								
-								array('label'=>'Inicio Sesion', 'url'=>array('site/login'), 'visible'=>Yii::app()->user
+								array('label'=>'Inicio Sesion','url'=>array('site/login'), 'visible'=>Yii::app()->user
 									->isGuest),
 								array('label'=>'salir('.Yii::app()->user->name.')', 'url'=>array('site/logout'), 'visible'=>Yii::app()->user
 									->isGuest),
@@ -49,9 +49,10 @@
 								array('label'=>'Reportes', 'url'=>array('site/informes')),
 								array('label'=>'Contáctenos', 'url'=>array('site/contact')),
 								array('label'=>'Acerca', 'url'=>array('site/page', 'view'=>'about')),
-								
 								),
 								)); ?>
+						
+
 								</ul>
 								<header class="major">
 								<h2>Destacados</h2>

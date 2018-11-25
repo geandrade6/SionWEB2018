@@ -19,9 +19,9 @@
 			
 
 		<section>
-			<input type="submit" name="acciones" value="Insertar" class="insertados" >
-			<input type="submit" name="acciones" value="Modificar" class="modificados" >
-			<input type="submit" name="acciones" value="Eliminar" class="eliminados" >
+			<input type="submit" name="acciones" value="Insertar" class="insertados btn-primary">
+			<input type="submit" name="acciones" value="Modificar" class="modificados btn-primary">
+			<input type="submit" name="acciones" value="Eliminar" class="eliminados btn-primary">
 
 			<div class="main" >
 
@@ -106,7 +106,7 @@
 
 				 <?php  //esto es un boton en PHP
 
-                    echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
+                    echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
                            
                  ?>
 

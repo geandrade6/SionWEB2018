@@ -17,11 +17,10 @@ class SiteController extends Controller{
    public function accessRules() {
         return array(
          array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','informes','contact','about'),'users' => array('*'),
+                'actions' => array('index','login','eventos','contact','about'),'users' => array('*'),
             ),
              array('allow', // allow authenticated user to perform 'create' action
-               'actions' => array('index'),
-                'users' => array('@'),
+               'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','informes','contact','about'),'users' => array('juaand'),
             ),
             array('allow', // allow only the owner to perform 'view' 'update' 'delete' actions
                 'actions' => array('view','insert','update','delete'),
@@ -88,13 +87,9 @@ class SiteController extends Controller{
 		$this->render('contact',array('model'=>$model));
 	}
 
-    /*public function actionSite()
+    public function actionSite()
 	{
-         /*$usuarios=new Visorinicios();
-      $getUsuarios=$usuarios->getUsuarios(0,0);
-     $this->render('visorinicios',array(
-                    "usuarios"=>$getUsuarios
-                   ));
+         
         if (!defined('CRYPT_BLOWFISH')||!CRYPT_BLOWFISH)
 			throw new CHttpException(500,"This application requires that PHP was compiled with Blowfish support for crypt().");
 
@@ -114,12 +109,12 @@ class SiteController extends Controller{
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
 				//$this->redirect(Yii::app()->user->returnUrl);
-                $this->redirect(array('site/home','option'=>'0','option2'=>'0'));
+                $this->redirect(array('site/eventos','option'=>'0','option2'=>'0'));
                 
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
-	}*/
+	}
 
 	/**
 	 * Displays the login page

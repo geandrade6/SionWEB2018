@@ -14,7 +14,7 @@ return array(
 
 	// autoloading model and component classes
 	'import'=>array(
-			'application.models.*',
+		'application.models.*',
 		'application.components.*',
         'application.extensions.coco.*',
         'application.extensions.notify.*',
@@ -28,6 +28,10 @@ return array(
 
 	// application components
 	'components'=>array(
+		'authManager'=>array(
+			'class'=>'CDbauthManager',
+			'connectionID'=>'db',
+		),
 		'mail' => array(
                 'class' => 'ext.yii-mail.YiiMail',
                 'transportType'=>'smtp',

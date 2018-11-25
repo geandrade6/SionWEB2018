@@ -48,7 +48,7 @@ class Eventos extends CActiveRecord{
             array('submensaje','required',"message"=>"El campo Sub-Mensaje es obligatorio"),
             array('idestadoeventos','required',"message"=>"El campo Estado es obligatorio"),
             array('imagenes', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'), 
-            
+
         );
       
   }
