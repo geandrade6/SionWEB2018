@@ -27,6 +27,20 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode = self::ERROR_NONE;
 			return !$this->errorCode;
 					}
+	/*$user=User::model()->find('Login=?',array(strtolower($this->username)));
+		if($user===null)
+			$this->errorCode=self::ERROR_USERNAME_INVALID;
+		else if(!$user->validatePassword($this->password))
+			$this->errorCode=self::ERROR_PASSWORD_INVALID;
+		else
+		{
+			$this->_id=$user->ID;
+			$this->username=$user->Nombre;
+            $this->setState('_id', $user->ID);
+            $this->setState('IDAppPerfilesUsrs', $user->IDAppPerfilesUsrs);
+			$this->errorCode=self::ERROR_NONE;
+		}
+		return $this->errorCode==self::ERROR_NONE;*/
 
 	}
 

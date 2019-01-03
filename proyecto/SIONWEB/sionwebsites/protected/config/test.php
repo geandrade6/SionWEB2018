@@ -8,12 +8,12 @@ return CMap::mergeArray(
 				'class'=>'system.test.CDbFixtureManager',
 			),
 			/*'db'=>array(
-				'connectionString'=>'sqlite:'.dirname(__FILE__).'/../data/blog-test.db',
-			),
+				'connectionString'=>'sqlite:'.dirname(__FILE__).'/../data/camegovp_sionweb2.db',
+			),*/
 			// uncomment the following to use a MySQL database
-			
+			/*
 			'db'=>array(
-				'connectionString' => 'mysql:host=localhost;dbname=blog-test',
+				'connectionString' => 'mysql:host=localhost;dbname=camegovp_sionweb2',
 				'emulatePrepare' => true,
 				'username' => 'root',
 				'password' => '',

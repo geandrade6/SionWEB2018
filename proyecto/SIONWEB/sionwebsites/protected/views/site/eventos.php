@@ -24,7 +24,7 @@ $this->breadcrumbs=array(
 	'Enventos',
 );
 ?>
-			<h1>Eventos destacados</h1>
+			<h1>Evento Principal</h1>
 			</header>
 			<div class="col-lg-12">
 				<div class="row">
@@ -43,7 +43,7 @@ $this->breadcrumbs=array(
 							<p><?php echo  $mensaje; ?>	</p>
 						</div>
 						<div class="col-lg-6">
-							<h2 id="content"><?php echo $subtitulo; ?></h2>
+							<h3 id="content"><?php echo $subtitulo; ?></h3>
 							<p><?php echo  $submensaje; ?><p>
 						</div>
 						<div class="col-lg-6" style="width: 200px; height: 200px;">
@@ -56,7 +56,7 @@ $this->breadcrumbs=array(
 				</div>
 					<hr class="major" />
 					<!-- Elements -->
-					<h2 id="elements">Historial Eventos</h2>
+					<h2 id="elements">Historial de Eventos</h2>
 				<div class="col-lg-12">
 					<?php
 					foreach($consultaeventosDos as $key=>$value) { 
@@ -64,20 +64,20 @@ $this->breadcrumbs=array(
 					$mensaje=$value["mensaje"]; // se asigna la variable que se quiere mostrar
 					$subtitulo=$value["subtitulo"]; // se asigna la variable que se quiere mostrar
 					$submensaje=$value["submensaje"]; // se asigna la variable que se 
+					$imagenes=$value["imagenes"]; // se asigna la variable que se 
 					?>	
 					<!-- Text stuff -->
 					<div class="col-lg-6" style="float: left; padding: 1%;">
 					<h3><?php echo $titulo;?></h3>
 					<p><?php echo $mensaje;?></p>
-					<h3><?php echo $subtitulo;?></h3>
+					<h4><?php echo $subtitulo;?></h4>
 					<p><?php echo $submensaje;?></p>
+					<img src='<?php echo Yii::app()->request->baseUrl;?>/<?php echo $imagenes?>' style="width: 150px; height: 100px;">
+					
 					<hr />
 					</div>
 					<?php }?>
-					<div class="col-lg-12">
-						<h3>Informacion General</h3>
-						<p>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac aipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus.</p>
-					</div>			
+							
 				</div>
 				<!-- Blockquote -->
 				<br>
@@ -89,21 +89,21 @@ $this->breadcrumbs=array(
 				</div>
 				<div class="col-lg-12">
 						<h3>Listado de Eventos</h3>
-						<h4>Listado Eventos Realizados Durante el Año</h4>
+						<h4 style="text-align: center;">Listado Eventos Realizados Durante el Año</h4>
 					<div class="table-wrapper">
-						<div class="table-responsive" style="height: 300px; overflow: scroll;">
+						<div class="table-responsive contenedor" style="height: 300px; overflow: scroll;">
 							<table class="table table-small-font table-bordered table-striped table-responsive" >
 								<thead>
 								<tr>
-								<th class=columna>titulo</th>
-								<th class=columna>mensaje</th>
-								<th class=columna>subtitulo</th>
-								<th class=columna>submensaje</th>
+								<th style="background: orange; color: black;" class=columna>titulo</th>
+								<th style="background: orange; color: black;" class=columna>mensaje</th>
+								<th style="background: orange; color: black;" class=columna>subtitulo</th>
+								<th style="background: orange; color: black;" class=columna>submensaje</th>
 								</tr>
 								</thead>
 								<tbody>
 									<?php
-									foreach($consultaeventosDos as $key=>$value) { // se manda a llamar la variable que toma la informacion en este caso informa y hace un recorrido de la informacion en forma de array de lo que esta en el value mostrando datos la inforacion es extraida de la variable informa que esta en el controlador con una query.
+									foreach($consultaeventosTres as $key=>$value) { // se manda a llamar la variable que toma la informacion en este caso informa y hace un recorrido de la informacion en forma de array de lo que esta en el value mostrando datos la inforacion es extraida de la variable informa que esta en el controlador con una query.
 									$titulo=$value["titulo"]; // se asigna la variable que se quiere mostrar
 									$mensaje=$value["mensaje"]; // se asigna la variable que se quiere mostrar
 									$subtitulo=$value["subtitulo"]; // se asigna la variable que se quiere mostrar

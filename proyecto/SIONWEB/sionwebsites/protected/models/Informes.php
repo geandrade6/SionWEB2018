@@ -4,10 +4,14 @@ class Informes extends CActiveRecord{
   private $connection;
 
 // de bajo de este van getters
+  public $getInformesuser;
+  public $getInformesveh;
+  public $getEstadodos;
 
 // de bajo de este van setters
 
 // de bajo de este van variables normales
+   public $rolesus;
 
 public function __construct(){
         //Lanzamos la conexión a la base de datos
@@ -30,7 +34,9 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
 //Reglas de validación
   public function rules(){//estas reglas son para formularios donde se inserta informacion para enviar
     return array(
-            //array('aqui va el nombre del campo de la BD se utiliza coma y comillas para otro campo','safe'),
+            array('roles_id', 
+                  'required', 
+                  "message"=>"El campo roles es obligatorio"),
             
         );
       
@@ -41,12 +47,38 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
   }
 //ejemplo de getters o consultas de la base de datos
 
- public function getInformes(){ 
+ public function getInformesuser(){ 
       
-  //    $consultaeventos ="SELECT * FROM eventos WHERE  idestadoeventos = 1";
-    //  $this->getEventos=Yii::app()->db->createCommand($consultaeventos)->queryAll();// consulta base de datos Mysql            
+   $consultacantidaduser ="SELECT count(*) cantidad_usuarios, R.nombre_rol
+    FROM roles R
+    INNER JOIN usuarios U 
+    ON U.roles_id = R.id 
+    GROUP BY R.nombre_rol ASC";
+    
+    $this->getInformesuser=Yii::app()->db->createCommand($consultacantidaduser)->queryAll();// consulta base de datos Mysql            
  
-     //return $this->getEventos;// devuelve el valor de la funcion get de el modelo
+     return $this->getInformesuser;// devuelve el valor de la funcion get de el modelo
   } 
 
+  public function getInformesveh(){ 
+      
+   $consultacantidadveh ="SELECT COUNT(*) cantidad_vehiculos, T.tipo 
+   FROM vehiculos V
+   INNER JOIN tipos T 
+   ON V.tipo_de_vehiculo = T.id 
+   GROUP BY V.tipo_de_vehiculo ";
+    
+    $this->getInformesveh=Yii::app()->db->createCommand($consultacantidadveh)->queryAll();// consulta base de datos Mysql            
+ 
+     return $this->getInformesveh;// devuelve el valor de la funcion get de el modelo
+  } 
+
+  public function getEstadodos(){ // funcion para el combo box
+    $consultaRolDos="SELECT id, nombre_rol FROM roles ordeR by id asc";
+
+     $this->getEstadodos=Yii::app()->db->createCommand($consultaRolDos)->queryAll();// consulta base de datos 
+        
+       
+       return $this->getEstadodos;// devuelve el valor de la funcion get 
+  }
 }

@@ -7,6 +7,7 @@ class Eventos extends CActiveRecord{
   public $getEventos;
   public $getEventosDos;
   public $getEventosEstado;
+  public $getEventosTres;
   //setters
   public $setEventos;
   //variables normales
@@ -16,6 +17,8 @@ class Eventos extends CActiveRecord{
   public $submensaje;
   public $imagenes;
   public $estado; 
+  public $fecharegistroevento; 
+
   public function __construct(){
         //Lanzamos la conexión a la base de datos
        $this->connection=new CDbConnection(
@@ -47,6 +50,7 @@ class Eventos extends CActiveRecord{
             array('subtitulo','required',"message"=>"El campo Sub-Título es obligatorio"),
             array('submensaje','required',"message"=>"El campo Sub-Mensaje es obligatorio"),
             array('idestadoeventos','required',"message"=>"El campo Estado es obligatorio"),
+            array('fecha_registro','required',"message"=>"El campo Fecha es obligatorio"),
             array('imagenes', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'), 
 
         );
@@ -73,17 +77,25 @@ class Eventos extends CActiveRecord{
  
      return $this->getEventosDos;// devuelve el valor de la funcion get de el modelo
   }  
+  public function getEventosTres(){ 
+      
+      $consultaeventosTres ="SELECT * FROM eventos WHERE  idestadoeventos ORDER BY id DESC" ;
+      
+      $this->getEventosTres=Yii::app()->db->createCommand($consultaeventosTres)->queryAll();// consulta base de datos Mysql            
+ 
+     return $this->getEventosTres;// devuelve el valor de la funcion get de el modelo
+  }  
  public function getEventosEstado(){ // funcion para el combo box
-    $consultaesteventos="SELECT idestadoeventos, nombre_estado_eventos FROM estadoeventos ordeR by idestadoeventos asc";
+    $consultaesteventos="SELECT idestadoeventos, nombre_estado_eventos FROM estadoeventos order by idestadoeventos asc";
 
      $this->getEventosEstado=Yii::app()->db->createCommand($consultaesteventos)->queryAll();// consulta base de datos 
         
        return $this->getEventosEstado;// devuelve el valor de la funcion get 
   } 
         //enviar informacion 
-  public function setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado){
+  public function setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado,$fecharegistroevento){
       
-        if ($titulo!='' && $mensaje!='' && $subtitulo!='' && $submensaje!='' && $estado!='') {
+        if ($titulo!='' && $mensaje!='' && $subtitulo!='' && $submensaje!='' && $estado!='' && $fecharegistroevento='') {
            
            Yii::app()->db->createCommand()->insert('eventos', [
             
@@ -93,6 +105,7 @@ class Eventos extends CActiveRecord{
             'submensaje'=>$submensaje,
             'imagenes'=>$imagenes,
             'idestadoeventos'=>$estado,
+            'fecha_registro'=>$fecharegistroevento,
             ]);
          
         }else {
