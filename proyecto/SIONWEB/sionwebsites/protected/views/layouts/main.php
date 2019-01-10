@@ -13,16 +13,17 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-responsive.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/font-awesome.min.css" />
 		<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	</head>
 	<body">
 <div id="wrapper">
 	<div id="main">	
 		<div class="">
-			<aside id="sidebar" class="col-lg-3" style="width:25em;" >
+			<aside id="sidebar" class="col-lg-3" style="width:25em;">
 				<div class="inner">
 				<div id="logo"><h3><?php echo CHtml::encode(Yii::app()->name); ?></h3> <!--_____ traemos el nombre TIMIZA PARK-LOT desde el main de la carpeta config-->
-		 		<img id="logs" style="width: 50px; margin-right: 100px;" src='<?php echo Yii::app()->request->baseUrl; ?>/imagenes/sion.png' align=left><!--_____ traemos la imagen desde    	
+		 			<img id="logs" style="width: 50px; margin-right: 100px;" src='<?php echo Yii::app()->request->baseUrl; ?>/imagenes/sion.png' align=left><!--_____ traemos la imagen desde    	
 				la carpeta imagenes-->
 				</div><!-- header -->
 					<!--MENU SION NAV SUPERIOR-->
@@ -62,6 +63,7 @@
 					)); ?>
 				</ul>
 				<header class="major">
+					<br>
 				<h2>Gleria Timiza</h2>
 				</header>
 				<div class="mini-posts">
