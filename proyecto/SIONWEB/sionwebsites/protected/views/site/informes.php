@@ -27,7 +27,7 @@
 
 			<h1 style="text-align: center;">REPORTES Y CONSULTAS </h1>
 			<div style="width: 100%; height: 300px;" class="col-lg-12">
-    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/9.jpg" style="width: 100%; height: 280px;">
+    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/9.jpg" style="width: 100%; height: 350px;">
     			<br>
     		</div>
 
