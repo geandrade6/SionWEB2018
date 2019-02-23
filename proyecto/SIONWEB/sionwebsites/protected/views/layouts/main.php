@@ -53,6 +53,7 @@
 					array('label'=>'Gestión Vehículos', 'url'=>array('site/gestionvehiculos')),
 					array('label'=>'Sorteo Parqueo', 'url'=>array('site/sorteo')),
 					array('label'=>'Reportes', 'url'=>array('site/informes')),
+					array('label'=>'Solicitudes', 'url'=>array('site/pqrs')),
 					array('label'=>'Eventos', 'url'=>array('site/eventos')),
 					array('label'=>'Contáctenos', 'url'=>array('site/contact')),
 					array('label'=>'Acerca', 'url'=>array('site/page', 'view'=>'about')),

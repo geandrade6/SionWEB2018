@@ -113,6 +113,18 @@ class GestionUsuarios extends CActiveRecord{
     $consultatipoparqueo="SELECT id, tipo FROM tipos ordeR by id asc";
      $this->getTipoparqueo=Yii::app()->db->createCommand($consultatipoparqueo)->queryAll();// consulta base de datos 
        return $this->getTipoparqueo;// devuelve el valor de la funcion get 
+
+       //____________________________________________________ prodecimiento almacenado-----------
+
+//$SQL = "TU QUERY, PROCEDIMIENTO O FUNCION";
+
+//Yii::app()->db->createCommand( $SQL )->execute();
+
+
+ //$result = \Yii::$app->db->createCommand("CALL storedProcedureName(:paramName1, :paramName2)") 
+                    //  ->bindValue(':paramName1' , $param1 )
+                     // ->bindValue(':paramName2', $param2)
+                    //  ->execute();      
   }
         //enviar informacion 
   public function setGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser){

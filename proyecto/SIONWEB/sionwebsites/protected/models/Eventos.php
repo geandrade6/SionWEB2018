@@ -16,8 +16,8 @@ class Eventos extends CActiveRecord{
   public $subtitulo;
   public $submensaje;
   public $imagenes;
-  public $estado; 
-  public $fecharegistroevento; 
+  public $idestadoeventos; 
+  public $fecha_registro; 
 
   public function __construct(){
         //Lanzamos la conexión a la base de datos
@@ -25,7 +25,7 @@ class Eventos extends CActiveRecord{
                 //Cogemos la configuración asignada en config/main.php
             Yii::app()->db->connectionString,
             Yii::app()->db->username,
-          Yii::app()->db->password
+            Yii::app()->db->password
        );
         //Activamos la conexión
         $this->connection->active=true;
@@ -44,12 +44,12 @@ class Eventos extends CActiveRecord{
   //Reglas de validación
   public function rules(){
     return array(
-            array('titulo,mensaje,subtitulo,submensaje,imagenes,estado','safe'),
+            
             array('titulo','required',"message"=>"El campo Título es obligatorio"),
             array('mensaje','required',"message"=>"El campo Mensaje Principal es obligatorio"),
             array('subtitulo','required',"message"=>"El campo Sub-Título es obligatorio"),
             array('submensaje','required',"message"=>"El campo Sub-Mensaje es obligatorio"),
-            array('idestadoeventos','required',"message"=>"El campo Estado es obligatorio"),
+            array('idestadoeventos','required',"message"=>"El campo Estados es obligatorio"),
             array('fecha_registro','required',"message"=>"El campo Fecha es obligatorio"),
             array('imagenes', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'), 
 
@@ -93,24 +93,28 @@ class Eventos extends CActiveRecord{
        return $this->getEventosEstado;// devuelve el valor de la funcion get 
   } 
         //enviar informacion 
-  public function setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado,$fecharegistroevento){
-      
-        if ($titulo!='' && $mensaje!='' && $subtitulo!='' && $submensaje!='' && $estado!='' && $fecharegistroevento='') {
-           
-           Yii::app()->db->createCommand()->insert('eventos', [
-            
+        //$titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$idestadoeventos,$fecha_registro
+public function setEventos($titulo,$mensaje,$subtitulo,$submensaje, $imagenes,$idestadoeventos,$fecha_registro)
+{
+      if ($titulo!='' && $mensaje!='' && $subtitulo!='' && $submensaje!='' && $idestadoeventos!='' && $fecha_registro!='') {
+            echo "<script>alert('contiene datos');</script>";            
+      Yii::app()->db->createCommand()->insert('eventos', 
+      [
             'titulo'=>$titulo,
             'mensaje'=>$mensaje,
             'subtitulo'=>$subtitulo,
             'submensaje'=>$submensaje,
+            'idestadoeventos'=>$idestadoeventos,
             'imagenes'=>$imagenes,
-            'idestadoeventos'=>$estado,
-            'fecha_registro'=>$fecharegistroevento,
-            ]);
-         
-        }else {
-              echo "<script>alert('no tiene datos');</script>";
-        }
-        }   
+            'fecha_registro'=>$fecha_registro,
+
+      ]);
+      echo "<script>alert('Datos enviados');</script>";
+      }
+      else
+      {
+            echo "<script>alert('no tiene datos');</script>";
+      }
+}
   
 }

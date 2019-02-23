@@ -182,37 +182,37 @@ class SiteController extends Controller{
 		    $subtitulo='';
 		    $submensaje='';
 		   	$imagenes='';
-		    $estado='';
-		    $fecharegistroevento='';
-		    
-			
-        
-       // aqui en adelante sale el error 500 de property not defined
-    if(isset($_POST['Eventos'])){ // Modelo Eventos
-            $modelEventos->attributes=$_POST['Eventos'];
-            
-        if( $modelEventos->validate()){ // valida el modelo y sus atributos
-        	//atributos del modelo
-        	$titulo=$modelEventos->titulo; 
-            $mensaje=$modelEventos->mensaje;
-            $subtitulo=$modelEventos->subtitulo; 
-            $submensaje=$modelEventos->submensaje;
-            //subida de imagenes a la carpeta
-            $subirimagen=CUploadedFile::getInstance($modelEventos,'imagenes');//recoge la imagen subida con el nombre
-          	$ruta ="{$subirimagen}";//guardamos el nombre de la imagen en temporal
-          	$subirimagen->saveAs(Yii::app()->basePath.'/../imagenes/eventos/'.$ruta);//movemos la imagen a la ruta
-          	$imagenes='/imagenes/eventos/'.$ruta; //guardamos en la base de datos la ruta y el nombre de la imagen
-            $estado=$modelEventos->idestadoeventos;
-            $fecharegistroevento=$modelEventos->fecha_registro;
-	        $tmpo=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje,$imagenes,$estado,$fecharegistroevento); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
-           $this->redirect('insertareventos');
-            $modelEventos->unsetAttributes();// limpia los campos
-        }   
-    }
+		    $idestadoeventos='';
+		    $fecha_registro='';
+
        		$consultaeventos = $modelEventos->getEventos();//llamdado de las consulta y los datos en get
      		$consultaeventosDos = $modelEventos->getEventosDos();
      		$consultaeventosTres = $modelEventos->getEventosTres(); // SE LLAMA LA ACCION PARA 
-     		$consultaesteventos = $modelEventos->getEventosEstado();
+            $consultaesteventos = $modelEventos->getEventosEstado();
+
+            // aqui ingresamos insertar los eventos
+            if(isset($_POST['Eventos'])){ // Modelo Eventos
+                $modelEventos->attributes=$_POST['Eventos'];
+                echo "<script>alert('Ingreso a Controlador');</script>";
+                if( $modelEventos->validate()){ // valida el modelo y sus atributos
+                    $titulo=$modelEventos->titulo;
+                    $mensaje=$modelEventos->mensaje;
+                    $subtitulo=$modelEventos->subtitulo;
+                    $submensaje=$modelEventos->submensaje;
+                    $idestadoeventos=$modelEventos->idestadoeventos;
+                    //$imagenes=$modelEventos->imagenes;                    
+                    $subirimagen=CUploadedFile::getInstance($modelEventos,'imagenes');//recoge la imagen subida con el nombre
+          	        $ruta ="{$subirimagen}";//guardamos el nombre de la imagen en temporal
+          	        $subirimagen->saveAs(Yii::app()->basePath.'/../imagenes/eventos/'.$ruta);//movemos la imagen a la ruta
+          	        $imagenes='/imagenes/eventos/'.$ruta;
+                    $fecha_registro=$modelEventos->fecha_registro;
+                    $seteventos=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje, $imagenes,$idestadoeventos,$fecha_registro);
+                    $modelEventos->unsetAttributes();// limpia los campos
+                    echo "<script>alert('Acceso a DB');</script>";
+                }
+                echo "<script>alert('la validacion fue nula');</script>";
+            }
+            
             $this->render('insertareventos', array(//se renderiza la pagina
             "consultaeventos"=>$consultaeventos, // se renderiza la consula
             "consultaeventosDos"=>$consultaeventosDos, // se renderiza la consula
@@ -922,6 +922,15 @@ class SiteController extends Controller{
 
         		));
         }
+
+       public function actionPqrs(){
+
+
+        $this->render("pqrs",
+                array(
+                        
+                ));
+       } 
 
 }
 

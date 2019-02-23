@@ -54,6 +54,13 @@
 					echo $form->textarea($modelEventos,'submensaje',array('class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal")); //
 				?>
 				<br>
+				<h4>Estado Eventos</h4>
+				<?php
+					echo $form->dropDownList/*SELECT EN PHP*/($modelEventos,'idestadoeventos',//squi va el id de la tabla
+       				 CHtml::listData($consultaesteventos, 'idestadoeventos', 'nombre_estado_eventos')//aqui va el id y de seguido lo que se va a mostrar.
+        			,array('class'=>'form-control columnas','style'=>'width:100%;')); 
+				?>
+				<br>
 				<h4>Subir Imagen</h4>
         		<?php echo CHtml::activeFileField($modelEventos,'imagenes'); //reclectamos la imagen?>  
         		<?php echo $form->error($modelEventos,'imagenes');//error de si no  es imagen ?>
@@ -62,17 +69,11 @@
 					//echo CHtml::activeFileField($modelEventos,'imagenes');
 				?-->
 				<br>
-				<h4>Estado Eventos</h4>
-				<?php
-					echo $form->dropDownList/*SELECT EN PHP*/($modelEventos,'idestadoeventos',//squi va el id de la tabla
-       				 CHtml::listData($consultaesteventos, 'idestadoeventos', 'nombre_estado_eventos')//aqui va el id y de seguido lo que se va a mostrar.
-        			,array('class'=>'form-control columnas','style'=>'width:100%;')); 
-				?>
-				<br>
+			
 				<h4>Fecha Registro</h4>
 				<?php
-					$fecharegistroevento = date('Y-m-d');
-					echo $form->textField($modelEventos,'fecha_registro',array('value'=>$fecharegistroevento,'readonly'=>'readonly'));
+					$fecha_registro = date('Y-m-d');
+					echo $form->textField($modelEventos,'fecha_registro',array('value'=>$fecha_registro,'readonly'=>'readonly'));
 				?>
 				<br>
 				 <?php  //esto es un boton en PHP
