@@ -108,6 +108,7 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
           'fecha_registro'=> $fecharegistrovehiculos,
           'tipo_de_vehiculo'=>$tipo_de_vehiculo,
             ]);
+            echo '<Script> alert("Registro del vehiculo correctamente");</Script>';
         }else{ echo '<Script> alert("No pudo registrarse el vehiculo");</Script>';}
   }
 

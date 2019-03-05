@@ -74,14 +74,16 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
   }
   public function setGestionControlAcceso($fechauno,$fechados,$puntoparqueo_id,$vehiculos_placa){
         if ($vehiculos_placa !='' )  {
-          echo "<script> alert('ingreso Datos');</script>";
+          
             # code...
            Yii::app()->db->createCommand()->insert('ingresos_salidas', [
           'fecha_ingreso'=>$fechauno,
           'fecha_salida'=> $fechados,
           'puntoparqueo_id'=>$puntoparqueo_id,
           'vehiculos_placa'=> $vehiculos_placa,
+
             ]);
+            echo "<script> alert('ingreso Datos correcto');</script>";
         }else{
           echo "<script> alert('No! se ingresaron Datos');</script>";
         }

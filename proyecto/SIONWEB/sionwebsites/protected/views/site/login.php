@@ -30,16 +30,22 @@ et-2" style="width: 100%;">
   
 
   <div class="row">
+  <div class="row">
+   
+
+	</div>
+
     <h3>USUARIO</h3>
     <?php echo $form->textField($model,'username',array('class'=>'form-control')); ?>
     <?php echo $form->error($model,'username',array('class'=>'label-warning')); ?>
+    <?php echo $form->error($model,'username'); ?>
   </div>
 
   <div class="row">
     <h3>CONTRASEÑA</h3>
     <?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
     <?php echo $form->error($model,'password',array('class'=>'label-warning')); ?>
-    
+    <?php echo $form->error($model,'paswword'); ?>
   </div>
 <br>
   <div class="row rememberMe">

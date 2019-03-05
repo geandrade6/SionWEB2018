@@ -4,7 +4,7 @@ $dbFile=dirname(__FILE__).'/blog.db';
 $sqlFile=dirname(__FILE__).'/schema.sqlite.sql';
 
 @unlink($dbFile);
-$db=new PDO('sqlite:'.$dbFile);
+$db=new PDO('sqlite:'. $dbFile,$username,$passwd,$options);
 $sqls=file_get_contents($sqlFile);
 foreach(explode(';',$sqls) as $sql)
 {

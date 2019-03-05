@@ -11,31 +11,46 @@ class SiteController extends Controller{
 	 public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
+            'postOnly + delete',
         );
     }
     
-   public function accessRules() {
+    public function accessRules() {
         return array(
+/*
+         	array('allow', // allow authenticated user to perform 'create' action
+               'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','consultaclientes','consultaclientesdos','consultapartamento','gestionvehiculos','consultavehiculos','consultavehiculosdos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol','galeriapersonal','sorteo','pqrs','contact','about','consultaeventos'),'users' => array('gusangad'),
+            ),
+            array('allow', // allow authenticated user to perform 'create' action
+               'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','gestionvehiculos','consultavehiculos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol','galeriapersonal','pqrs','contact','about'),'users' => array('adrtor'),
+            ),
+             array('deny', // deny all users
+             	'actions' => array('consultaclientes','consultaclientesdos','consultapartamento','consultavehiculosdos','sorteo','pqrs'),
+                'users' => array('adrtor'),
+                
+            ), 
+             array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('index','login','logout','eventos','contact','galeriapersonal','about','sorteo'),
+                'users' => array('abc'),
+            ),
 
-         array('allow', // allow authenticated user to perform 'create' action
-               'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','gestionvehiculos','informes','contact','about'),'users' => array('juaand'),
-            ),
      		   array('allow', // allow all users to perform 'index' and 'view' actions
-                /*'actions' => array('index','login','eventos','contact','about'),*/'users' => array('*'),
+                'actions' => array('index','login','contact','galeriapersonal','about','sorteo'),
+                'users' => array('?'),
             ),
-            /*
-            array('allow', // allow only the owner to perform 'view' 'update' 'delete' actions
+            
+            array('allow', // allow only the owner to perform 'view' 'update' 'delete' actions 
                 'actions' => array('view','insert','update','delete'),
                 'expression' => array('ExampleController','allowOnlyOwner')
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete'),
                 'users' => array('admin', 'foo', 'bar'),
-            ),*/
+            ),
             array('deny', // deny all users
                 'users' => array('*'),
                 
-            ), 
+            ), */
         );
     }
     
@@ -193,24 +208,22 @@ class SiteController extends Controller{
             // aqui ingresamos insertar los eventos
             if(isset($_POST['Eventos'])){ // Modelo Eventos
                 $modelEventos->attributes=$_POST['Eventos'];
-                echo "<script>alert('Ingreso a Controlador');</script>";
+              
                 if( $modelEventos->validate()){ // valida el modelo y sus atributos
                     $titulo=$modelEventos->titulo;
                     $mensaje=$modelEventos->mensaje;
                     $subtitulo=$modelEventos->subtitulo;
                     $submensaje=$modelEventos->submensaje;
                     $idestadoeventos=$modelEventos->idestadoeventos;
-                    //$imagenes=$modelEventos->imagenes;                    
+                    //$imagenes=$modelEventos->imagenes;   
                     $subirimagen=CUploadedFile::getInstance($modelEventos,'imagenes');//recoge la imagen subida con el nombre
           	        $ruta ="{$subirimagen}";//guardamos el nombre de la imagen en temporal
-          	        $subirimagen->saveAs(Yii::app()->basePath.'/../imagenes/eventos/'.$ruta);//movemos la imagen a la ruta
-          	        $imagenes='/imagenes/eventos/'.$ruta;
+                    $subirimagen->saveAs(Yii::app()->basePath.'/../imagenes/eventos/'.$ruta);//movemos la imagen a la ruta
+                    $imagenes='/imagenes/eventos/'.$ruta;
                     $fecha_registro=$modelEventos->fecha_registro;
                     $seteventos=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje, $imagenes,$idestadoeventos,$fecha_registro);
                     $modelEventos->unsetAttributes();// limpia los campos
-                    echo "<script>alert('Acceso a DB');</script>";
                 }
-                echo "<script>alert('la validacion fue nula');</script>";
             }
             
             $this->render('insertareventos', array(//se renderiza la pagina
@@ -466,7 +479,14 @@ class SiteController extends Controller{
         }
 
     	//---------------------------------------insertar-----------vehiculos----------------------------------------
-        public function actionGestionvehiculos (){		
+        public function actionGestionvehiculos (){	
+        
+            if(isset($_GET["excel"])){
+                $model= GestionVehiculos::model()->findAll();
+                $content=$this->renderPartial("excel",array("model"=>$model),true);
+                Yii::app()->request->sendFile("text.xls",$content);
+                }    
+            
 		$modelocrearvehiculo = new GestionVehiculos();
 		$placa='';
 		$marca='';
@@ -922,15 +942,60 @@ class SiteController extends Controller{
 
         		));
         }
+        public function actionAbout(){
+           
+        	$this->render('about',
+        		array( 
 
-       public function actionPqrs(){
+        		));
+        }
+       
 
+        public function actionPqrs ()
+        {
+                $modelpqrs = new PqrsModel();    
+                $idpqrs='';
+                $asunto='';
+                $mensaje='';
+                $correo='';
+                $adjunto='sin archivo';
+                $idestadopqrs='';
+                $idusuario='';
+                $fecha_crea='';
+                $setpqrs='';
+    
+                $consultpqrs = $modelpqrs->getPqrs();//llamdado de las consulta y los datos en get
+                $consultestadopqrs = $modelpqrs->getPqrs();//llamdado de las consulta y los datos en get
+               
+                // aqui ingresamos insertar los eventos
+                if(isset($_POST['PqrsModel'])){ // Modelo Eventos
+                    $modelpqrs->attributes=$_POST['PqrsModel'];
+                  
+                    if( $modelpqrs->validate()){ // valida el modelo y sus atributos
+                        $idpqrs=$modelpqrs->idpqrs;
+                        $asunto=$modelpqrs->asunto;
+                        $mensaje=$modelpqrs->mensaje;
+                        $correo=$modelpqrs->correo;
+                        $subirdocu=CUploadedFile::getInstance($modelpqrs,'adjunto');//recoge la imagen subida con el nombre
+                          $ruta ="{$subirdocu}";//guardamos el nombre de la imagen en temporal
+                        $subirdocu->saveAs(Yii::app()->basePath.'/../imagenes/archivos/'.$ruta);//movemos la imagen a la ruta
+                        $adjunto='/imagenes/archivos/'.$ruta;
+                        $idestadopqrs=$modelpqrs->idestadopqrs;
+                        $idusuario=$modelpqrs->idusuario;
+                        $fecha_crea=$modelpqrs->fecha_crea;
+                        $setpqrs=$modelpqrs->setPqrs($idpqrs,$asunto,$mensaje,$correo, $adjunto,$idestadopqrs,$idusuario,$fecha_crea);
+                        $modelpqrs->unsetAttributes();// limpia los campos
+                    }
+                }
+                
+                $this->render('pqrs', array(//se renderiza la pagina
+                "consultpqrs"=>$consultpqrs, // se renderiza la consula
+                "consultestadopqrs"=>$consultestadopqrs,
+                "modelpqrs"=>$modelpqrs // se renderiza el modelo
+                )
+                ); // variable de asignacion modelo
+        }
 
-        $this->render("pqrs",
-                array(
-                        
-                ));
-       } 
 
 }
 

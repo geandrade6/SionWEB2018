@@ -97,7 +97,7 @@ class Eventos extends CActiveRecord{
 public function setEventos($titulo,$mensaje,$subtitulo,$submensaje, $imagenes,$idestadoeventos,$fecha_registro)
 {
       if ($titulo!='' && $mensaje!='' && $subtitulo!='' && $submensaje!='' && $idestadoeventos!='' && $fecha_registro!='') {
-            echo "<script>alert('contiene datos');</script>";            
+           
       Yii::app()->db->createCommand()->insert('eventos', 
       [
             'titulo'=>$titulo,
@@ -109,7 +109,7 @@ public function setEventos($titulo,$mensaje,$subtitulo,$submensaje, $imagenes,$i
             'fecha_registro'=>$fecha_registro,
 
       ]);
-      echo "<script>alert('Datos enviados');</script>";
+      echo "<script>alert('Registro del evento correcto');</script>";
       }
       else
       {

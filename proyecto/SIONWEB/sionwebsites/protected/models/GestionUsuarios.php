@@ -126,9 +126,11 @@ class GestionUsuarios extends CActiveRecord{
                      // ->bindValue(':paramName2', $param2)
                     //  ->execute();      
   }
+ 
         //enviar informacion 
   public function setGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser){
-        if ($cedulausuarios !='' && $nombreusuarios !='' && $apellidousuarios !='' && $celularusuarios !='' && $correousuarios !='' && $contrasenausuarios !='' && $estadousuarios !='' && $rolesusuarios !='' && $tiposvehiculosuser !='' && $fecharegistrouser!='' && $activaruser !='')  {
+        if ($cedulausuarios !='' && $nombreusuarios !='' && $apellidousuarios !='' && $celularusuarios !='' && $correousuarios !='' && $contrasenausuarios !='' && $estadousuarios !='' && $rolesusuarios !='' && $tiposvehiculosuser !='' && $fecharegistrouser!='' && $activaruser !='')  
+        {
          if ($estadousuarios == $activaruser) {
             # code...
            Yii::app()->db->createCommand()->insert('usuarios', [
@@ -161,6 +163,7 @@ class GestionUsuarios extends CActiveRecord{
           'fecha_registro'=>  $fecharegistrouser,
           'activar_user'=> $activaruser,
             ]);
+            echo '<Script> alert("Registro del usuario correctamente");</Script>';
            } else{ echo '<Script> alert("digite el mismo tipo de activacion");</Script>';}
         }
         } 

@@ -1,55 +1,104 @@
 <?php
-class Eventos extends CActiveRecord{ // cambiamos el eventos por el nombre del modelo creado
-// creamos las variables de tipo publico o privado importante la de coneccion
-  private $connection; // no se toca
+class PqrsModel extends CActiveRecord{
+  //  class LoginForm extends CFormModel
+ // creamos las variables de tipo publico o privado importante la de coneccion
+  private $connection;
+  //getters
+  public $getPqrs;
+ 
+  //setters
+  public $setPqrs;
+  //variables normales
+  public $idpqrs;
+  public $asunto;
+  public $mensaje;
+  public $correo;
+  public $adjunto;
+  public $idestadopqrs;
+  public $idusuario;
+  public $fecha_crea;
 
-// de bajo de este van getters
-
-// de bajo de este van setters
-
-// de bajo de este van variables normales
-
-public function __construct(){ // no se toca
-        //Lanzamos la conexi�n a la base de datos
+  public function __construct(){
+        //Lanzamos la conexión a la base de datos
        $this->connection=new CDbConnection(
-                //Cogemos la configuraci�n asignada en config/main.php
+                //Cogemos la configuración asignada en config/main.php
             Yii::app()->db->connectionString,
             Yii::app()->db->username,
-          Yii::app()->db->password
+            Yii::app()->db->password
        );
-        //Activamos la conexi�n
+        //Activamos la conexión
         $this->connection->active=true;
         //Esto nos permite utilizar el Query Builder y las consultas normales
   }
-
-public function tableName() // esto indica que vamos a trabajar con una tabla principal
+     /**
+   * @return string the associated database table name
+   */
+  /**
+   * @return string the associated database table name
+   */
+  public function tableName()
   {
-    return 'pqrs';// rertnamos la tabla osea la que va en la base de datos
+    return 'pqrs';
   }
-
-//Reglas de validaci�n
-  public function rules(){//estas reglas son para formularios donde se inserta informacion para enviar
+  //Reglas de validación
+  public function rules(){
     return array(
-            array('aqui va el nombre del campo de la BD, se utiliza coma y comillas para otro campo','safe'),
-		//ejemplo a utilizar mejor;
-		array('nombre','required','message'=>'Este campo es obligatorio'),
-		array('nombre','required','message'=>'Este campo xxxx es obligatorio'),
             
+         	//ejemplo a utilizar mejor;
+        array('idpqrs','required','message'=>'Código campo es obligatorio'),
+        array('asunto','required','message'=>'Asunto campo es obligatorio'),
+        array('asunto', 'match', 'pattern' => "/^.{10,30}$/", 'message' => 'Asunto: Mínimo 10 y máximo 30 caracteres'),
+        array('mensaje','required','message'=>'Mensaje campo es obligatorio'),
+        array('mensaje', 'match', 'pattern' => "/^.{5,255}$/", 'message' => 'Mensaje: Mínimo 5 y máximo 255 caracteres'),
+        array('correo','required','message'=>'Correo campo es obligatorio'),
+        array('correo', 'match', 'pattern' => "/^.{5,80}$/", 'message' => 'Correo: Mínimo 5 y máximo 80 caracteres'),
+        array('adjunto', 'file','types'=>'','maxSize' => 1024*1024*5,'allowEmpty'=>true, 'on'=>'update','tooMany' => 'El máximo de archivos permitidos son {limit}'), 
+        array('idestadopqrs','required','message'=>'Correo campo es obligatorio'),
+        array('idusuario','required','message'=>'Cedula campo es obligatorio'),
+        array('idusuario', 'match', 'pattern' => "/^.{7,18}$/", 'message' => 'Cedula: Mínimo 7 y máximo 18 caracteres'),
+        array('fecha_crea','required','message'=>'Fecha campo es obligatorio'),
+         
+
         );
       
   }
- //Heredamos del modelo
-  public static function model($className=__CLASS__){//no se toca
+  //Heredamos del modelo
+  public static function model($className=__CLASS__){
         return parent::model($className);
   }
-//ejemplo de getters o consultas de la base de datos
-
- public function getEventos(){ 
+  //configuracion personal
+  
+  public function getPqrs(){ 
       
-      $consultaeventos ="SELECT * FROM eventos WHERE  idestadoeventos = 1";
-      $this->getEventos=Yii::app()->db->createCommand($consultaeventos)->queryAll();// consulta base de datos Mysql            
- 
-     return $this->getEventos;// devuelve el valor de la funcion get de el modelo
-  } 
+    $consultpqrs ="SELECT * FROM pqrs WHERE idestadopqrs != 4";
+    $this->getPqrs=Yii::app()->db->createCommand($consultpqrs)->queryAll();// consulta base de datos Mysql            
 
+    $consultestadopqrs ="SELECT * FROM estadopqrs";
+    $this->getPqrs=Yii::app()->db->createCommand($consultestadopqrs)->queryAll();// consulta base de datos Mysql            
+ 
+     return $this->getPqrs;// devuelve el valor de la funcion get de el modelo
+  } 
+  
+public function setPqrs($idpqrs,$asunto,$mensaje,$correo,$adjunto,$idestadopqrs,$idusuario,$fecha_crea)
+{
+  echo "<script>alert('ingreso al modelo');</script>";
+          
+      Yii::app()->db->createCommand()->insert('pqrs', 
+      [
+        'idpqrs'=>$idpqrs,
+        'asunto'=> $asunto,
+        'mensaje'=>$mensaje,
+        'correo'=> $correo,
+        'adjunto'=> $adjunto,
+        'idestadopqrs'=> $idestadopqrs,
+        'idusuario'=> $idusuario,
+        'fecha_crea'=> $fecha_crea,
+
+      ]);
+      echo '<Script> alert("Registro del PQRS correcto");</Script>';
+     
+      
+  }
+  
 }
+?>

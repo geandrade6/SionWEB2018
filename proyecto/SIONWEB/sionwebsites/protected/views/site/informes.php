@@ -26,10 +26,6 @@
 		<section>
 
 			<h1 style="text-align: center;">REPORTES Y CONSULTAS </h1>
-			<div style="width: 100%; height: 300px;" class="col-lg-12">
-    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/9.jpg" style="width: 100%; height: 350px;">
-    			<br>
-    		</div>
 
 			<fieldset style="border: 1px solid #b4b3b3;">
 				<div class="col-lg-6">
@@ -70,7 +66,13 @@
 			</fieldset>
 			<div class="col-lg-12">
 				<h3 style="text-align: center;">TABLA DE REPORTES INFORMACIÓN Y VERIFICACIÓN DE DATOS</h3>	
+				<div class="col-lg-6">
+				<h4>Exportar a Excel</h4>
+				<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn")); ?>
+		</div>
 			</div>
+	
+		
 			<!--___________________________________primer consulta___boton1__________________________________-->
 			<div id="fechar" style="display: block;">
 			    <div class="col-lg-12">
