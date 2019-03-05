@@ -71,7 +71,7 @@ class CWebUser extends CApplicationComponent implements IWebUser
 	 * @var string the name for a guest user. Defaults to 'Guest'.
 	 * This is used by {@link getName} when the current user is a guest (not authenticated).
 	 */
-	public $guestName='Guest';
+	public $guestName='Publico';
 	/**
 	 * @var string|array the URL for login. If using array, the first element should be
 	 * the route to the login action, and the rest name-value pairs are GET parameters
