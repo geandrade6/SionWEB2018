@@ -44,19 +44,33 @@ class PqrsModel extends CActiveRecord{
   public function rules(){
     return array(
             
-         	//ejemplo a utilizar mejor;
+        // digitar solo numeros
         array('idpqrs','required','message'=>'Código campo es obligatorio'),
+        array('idpqrs', 'match', 'pattern' => "/^.[0-9]+$/i", 'message' => 'Codigo: Sólo se aceptan Numeros '),
+        //solo letras
         array('asunto','required','message'=>'Asunto campo es obligatorio'),
         array('asunto', 'match', 'pattern' => "/^.{10,30}$/", 'message' => 'Asunto: Mínimo 10 y máximo 30 caracteres'),
+        array('asunto', 'match', 'pattern' => "/^.[a-z]+$/i", 'message' => 'Asunto: Sólo se aceptan letras '),
+        //solo letras, numeros y tildes
         array('mensaje','required','message'=>'Mensaje campo es obligatorio'),
         array('mensaje', 'match', 'pattern' => "/^.{5,255}$/", 'message' => 'Mensaje: Mínimo 5 y máximo 255 caracteres'),
+        array('mensaje', 'match', 'pattern' => "/^.[0-9a-záéíóúñ]+$/i", 'message' => 'Mensaje: Sólo se aceptan letras y numeros no signos'),
+        //solo carreo
         array('correo','required','message'=>'Correo campo es obligatorio'),
         array('correo', 'match', 'pattern' => "/^.{5,80}$/", 'message' => 'Correo: Mínimo 5 y máximo 80 caracteres'),
+        array('correo','email'),
+        //archivo adjunto
         array('adjunto', 'file','types'=>'','maxSize' => 1024*1024*5,'allowEmpty'=>true, 'on'=>'update','tooMany' => 'El máximo de archivos permitidos son {limit}'), 
-        array('idestadopqrs','required','message'=>'Correo campo es obligatorio'),
-        array('idusuario','required','message'=>'Cedula campo es obligatorio'),
+        array('adjunto','required','message'=>'Adjunto: campo es obligatorio'),
+        //pqrs
+        array('idestadopqrs','required','message'=>'Estado: campo es obligatorio'),
+        //cedula
+        array('idusuario','required','message'=>'Cedula: campo es obligatorio'),
         array('idusuario', 'match', 'pattern' => "/^.{7,18}$/", 'message' => 'Cedula: Mínimo 7 y máximo 18 caracteres'),
+        array('idusuario', 'match', 'pattern' => "/^.[0-9a-z]+$/i", 'message' => 'Cedula: Sólo se aceptan letras y numeros '),
+        //fecha
         array('fecha_crea','required','message'=>'Fecha campo es obligatorio'),
+        array('fecha_crea','date','message'=>'Verifique la fecha'),
          
 
         );

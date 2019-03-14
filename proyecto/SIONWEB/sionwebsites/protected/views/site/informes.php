@@ -2,7 +2,7 @@
 <meta name="language" content="es" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <!-- blueprint CSS framework -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilos.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>assets/fonts/fontawesome-webfont.ttf" media="print" />
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
@@ -66,29 +66,38 @@
 			</fieldset>
 			<div class="col-lg-12">
 				<h3 style="text-align: center;">TABLA DE REPORTES INFORMACIÓN Y VERIFICACIÓN DE DATOS</h3>	
-				<div class="col-lg-6">
-				<h4>Exportar a Excel</h4>
-				<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn")); ?>
-		</div>
+				
 			</div>
 	
 		
 			<!--___________________________________primer consulta___boton1__________________________________-->
 			<div id="fechar" style="display: block;">
 			    <div class="col-lg-12">
-			        <div class="col-lg-12">
+			      <div class="col-lg-12">
+									<h2>Vehículos</h2>
 			        		<h3>Rango de fecha <br> ( Fecha de ingreso y salida de vehiculos )</h3>
+									
 			                <label style="color: orange;">Consulta por Fecha desde (Acción Fecha inicial).</label>
 			                <input type="date" name="desde" class="form-control" id="desde" style="width: 100%; float: left;"/> 
 			                <br>
 			                <label style="color: orange;">Consulta por Fecha hasta (Acción Fecha final).</label>
 			                <input type="date" name="hasta" class="form-control" id="hasta" style="width: 100%; float: left;"/>  
 			                <br>
-	 		        </div>
-					<div class="col-lg-12">
-					<br>
-					<input type="button" name="buscarfecha" id="buscarfecha" value="Buscar">
-					</div>
+	 		      </div>
+						<div class="col-lg-12">
+							<br>
+							<input type="button" name="buscarfecha" id="buscarfecha" value="Buscar">
+							<br>
+							<h4>Exportar Excel o PDF Reporte General</h4>
+								<div class="col-lg-3">
+								<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
+								<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
+								</div>
+								<div class="col-lg-3">
+								<?php echo CHtml::link("Exportar a PDF",array("generarpdf"),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+								</div>
+						</div>
+					
 				    <div class="col-lg-12">
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
@@ -103,6 +112,7 @@
 			<div id="plaquear" style="display: none;">
 			    <div class="col-lg-12">
 			        <div class="col-lg-12">
+							<h2>Vehículos</h2>
 			        	<h3>Búsqueda por placa <br> ( Digitar el número de la placa )</h3>
 			                <label style="color: orange;">Consulta por placa (Acción Busqueda).</label>
 			                <input type="text" name="placas" class="form-control caja" id="placas" style="width: 100%; float: left;"/> 
@@ -111,7 +121,18 @@
 					<br>
 					<input type="button" name="buscarplaca" id="buscarplaca" value="Buscar">
 					</div>
-					            <br>
+					<br>
+					<div class="col-lg-12">
+					<h4>Exportar Excel o PDF Reporte General</h4>	
+					</div>
+					<div class="col-lg-3">
+					<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
+					<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
+					</div>
+					<div class="col-lg-3">
+					<?php echo CHtml::link("Exportar a PDF",array("generarpdf"),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+					</div>
+					</div>
 				    <div class="col-lg-12">
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
@@ -135,16 +156,29 @@
 			        <div class="col-lg-12">
 					<br>
 					<input type="button" name="buscarcedula" id="buscarcedula" value="Buscar">
-					</div>  
-
-					            <br>
+					</div> 
+					<br> 
+					<div class="col-lg-12">
+					<h4>Exportar Excel o PDF Reporte General</h4>	
+					</div>
+					<div class="col-lg-3">
+					<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
+					<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
+					</div>
+					<div class="col-lg-3">
+					<?php echo CHtml::link("Exportar a PDF",array("generarpdf"),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+					</div>
+					</div>
+					            
 				    <div class="col-lg-12">
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
 					    		<div class="registros" id="busquedaporusuario" placeholder="Buscar" style="overflow:auto; width:100%;height: 100vh;">
 					    		</div>
 					        </fieldset>
+									
 				    </div>
+						
 			    </div>
 			</div>
 			<!--________________________________ cuarta consulta_____boton Cuarto_______________________________-->
@@ -291,8 +325,8 @@
 	</div>
 </div>
 
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/java.js""></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/skel.min.js"></script>

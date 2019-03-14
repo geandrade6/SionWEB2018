@@ -36,9 +36,11 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
   public function rules(){//estas reglas son para formularios donde se inserta informacion para enviar
     return array(
    array('fecha_ingreso','safe',"message"=>"El campo fecha uno es obligatorio"),
-    array('fecha_salida','safe',"message"=>"El campo fecha dos es obligatorio"),
+   array('fecha_salida','safe',"message"=>"El campo fecha dos es obligatorio"),
    array('puntoparqueo_id','required',"message"=>"El campo Punto es obligatorio"),
    array('vehiculos_placa','required',"message"=>"El campo Placa es obligatorio"),
+   array('vehiculos_placa', 'match', 'pattern' => "/^.{5,6}$/", 'message' => 'Placa: Mínimo 5 y máximo 6 caracteres'),
+   array('vehiculos_placa', 'match', 'pattern' => "/^.[0-9a-z]+$/i", 'message' => 'Placa: Sólo se aceptan letras'),
 	
             
         );
@@ -73,7 +75,7 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
      return $this->getListadopunto;// devuelve el valor de la funcion get de el modelo
   }
   public function setGestionControlAcceso($fechauno,$fechados,$puntoparqueo_id,$vehiculos_placa){
-        if ($vehiculos_placa !='' )  {
+        if ($vehiculos_placa !='' && $fechados != null )  {
           
             # code...
            Yii::app()->db->createCommand()->insert('ingresos_salidas', [
@@ -85,7 +87,7 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
             ]);
             echo "<script> alert('ingreso Datos correcto');</script>";
         }else{
-          echo "<script> alert('No! se ingresaron Datos');</script>";
+          echo "<script> alert('No! se ingresaron Datos Verifique los campos');</script>";
         }
         } 
 

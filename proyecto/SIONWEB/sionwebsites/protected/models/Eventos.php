@@ -46,9 +46,17 @@ class Eventos extends CActiveRecord{
     return array(
             
             array('titulo','required',"message"=>"El campo Título es obligatorio"),
+            array('titulo', 'match', 'pattern' => "/^.{5,25}$/", 'message' => 'Titulo: Mínimo 5 y máximo 25 caracteres'),
+            array('titulo', 'match', 'pattern' => "/^.[a-záéíóúñ]+$/i", 'message' => 'Titulo: Sólo se aceptan letras'),
             array('mensaje','required',"message"=>"El campo Mensaje Principal es obligatorio"),
+            array('mensaje', 'match', 'pattern' => "/^.{5,500}$/", 'message' => 'Mensaje: Mínimo 5 y máximo 500 caracteres'),
+            array('mensaje', 'match', 'pattern' => "/^.[0-9a-záéíóúñ]+$/i", 'message' => 'Mensaje: Sólo se aceptan letras y numeros no signos'),
             array('subtitulo','required',"message"=>"El campo Sub-Título es obligatorio"),
+            array('subtitulo', 'match', 'pattern' => "/^.{5,25}$/", 'message' => 'Subtitulo: Mínimo 5 y máximo 25 caracteres'),
+            array('subtitulo', 'match', 'pattern' => "/^.[a-záéíóúñ]+$/i", 'message' => 'Subtitulo: Sólo se aceptan letras'),
             array('submensaje','required',"message"=>"El campo Sub-Mensaje es obligatorio"),
+            array('submensaje', 'match', 'pattern' => "/^.{5,500}$/", 'message' => 'Submensaje: Mínimo 5 y máximo 500 caracteres'),
+            array('submensaje', 'match', 'pattern' => "/^.[0-9a-záéíóúñ]+$/i", 'message' => 'Submensaje: Sólo se aceptan letras y numeros no signos'),
             array('idestadoeventos','required',"message"=>"El campo Estados es obligatorio"),
             array('fecha_registro','required',"message"=>"El campo Fecha es obligatorio"),
             array('imagenes', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'update'), 

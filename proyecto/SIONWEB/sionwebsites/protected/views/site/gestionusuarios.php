@@ -1,10 +1,8 @@
-
-
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="language" content="es" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!-- blueprint CSS framework -->
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilos.css" media="screen, projection"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>assets/fonts/fontawesome-webfont.ttf" media="print" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
@@ -28,8 +26,8 @@
 
 			?>
 
-			<div style="width: 100%; height: 300px;" class="col-lg-12">
-    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/4.jpg" style="width: 100%; height: 280px;">
+			<div style="width: 100%; height: 300px;margin-bottom: 10%;" class="col-lg-12">
+    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/4.jpg" style="width: 100%; height: 400px;">
     			<br>
     		</div>
     		<div class="col-lg-12">
@@ -50,62 +48,86 @@
 				  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
 				  echo $form->errorSummary($modelocrearusuario); // se llama la variablre
 				?>	
+				<div class=" col-lg-12">
 				<h4>Cedula</h4>
 				<?php
-					echo $form->numberField($modelocrearusuario,'cedula',array('class'=>'form-control ','placeholder'=>"Digita Cedula")); //
+					echo $form->textField($modelocrearusuario,'cedula',array('class'=>'form-control ','placeholder'=>"Digita Cedula")); //
 				?>
-				
+				</div>
+				<div class=" col-lg-6">
 				<h4>Nombre</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'nombre',array('class'=>'form-control caja ','placeholder'=>"Digita Nombre")); //
 				?>
+				</div>
+				<div class=" col-lg-6">
 				<h4>Apellido</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'apellido',array('class'=>'form-control caja','placeholder'=>"Digita el apellido")); //
 				?>
+				</div>
+				<div class=" col-lg-6">
 				<h4>Teléfono</h4>
 				<?php
 					echo $form->numberField($modelocrearusuario,'telefono',array('class'=>'form-control ','placeholder'=>"Digita el telefono")); //
 				?>
+				</div>
+				<div class=" col-lg-6">
 				<h4>Celular</h4>
 				<?php
 					echo $form->numberField($modelocrearusuario,'celular',array('class'=>'form-control ','placeholder'=>"Digita el celular")); //
 				?>
+				</div>
+				<div class=" col-lg-6">
 				<h4>Correo</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'correo',array('class'=>'form-control ','type'=>'mail','placeholder'=>"Digita el Correo")); //
 				?>	
+				</div>
+				<div class=" col-lg-6">
 				<h4>Conraseña</h4>
 				<?php
 					echo $form->PasswordField($modelocrearusuario,'password',array('password ','class'=>'form-control ','placeholder'=>"Digita la Contraseña")); //
 				?>
+				</div>
+				<div class=" col-lg-6">
 				<h4>Estado usuario</h4>
 				<?php 
 				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'estado_usuario',//squi va el id de la tabla
        				 CHtml::listData($consultaEstadoUser, 'activar_user', 'estado_user')//aqui va el id y de seguido lo que se va a mostrar.
         		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
 				?>
+				</div>
+				<div class=" col-lg-12">
 				<h4>Observaciones</h4>
 				<?php
 					echo $form->textarea($modelocrearusuario,'observaciones',array('class'=>'form-control caja','placeholder'=>"Digita mensaje")); //
 				?>
+				</div>
+				<div class=" col-lg-6">
 				<h4>Roles</h4>
 				<?php 
 				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'roles_id',//squi va el id de la tabla
        				 CHtml::listData($consultaRol, 'id', 'nombre_rol')//aqui va el id y de seguido lo que se va a mostrar.
         		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
 				?>
+				</div>
+				<div class=" col-lg-6">
 				<h4>Tipo de Vehículo</h4>
 				<?php 
 				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'tipos_id',//squi va el id de la tabla
        				 CHtml::listData($consultatipoparqueo, 'id', 'tipo')//aqui va el id y de seguido lo que se va a mostrar.
         		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
 				?>
+				</div>
+				<div class=" col-lg-12">
 				<h4>Fecha Registro</h4>
 				<?php
 					$fecha = date('Y-m-d');
 					echo $form->textField($modelocrearusuario,'fecha_registro',array('value'=>$fecha,'readonly'=>'readonly'));
 				?>
+				</div>
+				<div class=" col-lg-6">
 				<h4>Activación Usurio</h4>
 				<?php 
 				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'activar_user',//squi va el id de la tabla
@@ -113,12 +135,16 @@
         		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
 				?>
 				<br>
-
+				</div>
+				
+				<div class=" col-lg-12" style="margin-bottom: 5%;">
 				 <?php  //esto es un boton en PHP
 
                     echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
                            
                  ?>
+                 <br>
+             	</div>
 
 				<?php	
 					 $this->endWidget();				
@@ -131,7 +157,7 @@
 			        <div class="col-lg-12">
 			            <div class="col-lg-6">
 			                <label>Buscar Cliente por Identificación (Acción modificar ).</label>
-			                <input type="number" name="cedula" placeholder="Digita y Enter al terminar" class="form-control" id="cedula" style="width: 100%; float: left;"/>  
+			                <input type="text" name="cedula" placeholder="Digita y Enter al terminar" class="form-control" id="cedula" style="width: 100%; float: left;"/>  
 	 		            </div>
 					            <br>
 				        <div class="col-lg-12">
@@ -147,7 +173,7 @@
 			        <div class="col-lg-12">
 			            <div class="col-lg-6">
 			                <label>Buscar Cliente por Identificación (Acción Eliminar).</label>
-			                <input type="number" name="busquedasa" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasa" style="width: 100%; float: left;"/>  
+			                <input type="text" name="busquedasa" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasa" style="width: 100%; float: left;"/>  
 	 		            </div>
 					            <br>
 				        <div class="col-lg-12">
@@ -223,8 +249,8 @@
 	</div>
 </div>
 
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/java.js""></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/skel.min.js"></script>

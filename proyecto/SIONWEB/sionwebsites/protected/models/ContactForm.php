@@ -21,8 +21,14 @@ class ContactForm extends CFormModel
 		return array(
 			// name, email, subject and body are required
 			array('name, email, subject, body', 'required'),
+			array('name', 'match', 'pattern' => "/^.{5,10}$/", 'message' => 'Nombre: Mínimo 5 y máximo 10 caracteres'),
 			// email has to be a valid email address
 			array('email', 'email'),
+			array('email', 'match', 'pattern' => "/^.{10,30}$/", 'message' => 'E-mail: Mínimo 10 y máximo 30 caracteres'),
+			array('subject', 'match', 'pattern' => "/^.{5,20}$/", 'message' => 'Asunto: Mínimo 5 y máximo 20 caracteres'),
+			array('subject', 'match', 'pattern' => "/^.[a-z]+$/i", 'message' => 'Asunto: Sólo se aceptan letras '),
+			array('body', 'match', 'pattern' => "/^.{20,500}$/", 'message' => 'Mensaje: Mínimo 20 y máximo 500 caracteres'),
+        	array('body', 'match', 'pattern' => "/^.[0-9a-záéíóúñ]+$/i", 'message' => 'Mensaje: Sólo se aceptan letras y numeros no signos'),
 			// verifyCode needs to be entered correctly
 			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
@@ -36,7 +42,7 @@ class ContactForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'verifyCode'=>'Verification Code',
+			'verifyCode'=>'Codigo de Verificación',
 		);
 	}
 }

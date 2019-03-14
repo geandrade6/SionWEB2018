@@ -39,10 +39,14 @@ return array(
                 'host'=>'wnks.wnkserver1.com',
                 'username'=>'administrador@sionwebsites.com',
                 'password'=>'Directv..02',
-                'port'=>'25',                       
+                'port'=>'465',                       
                 ),
                 'viewPath' => 'application.views.mail',             
-        ),
+		),
+		'excel'=>array(
+			'class'=>'application.vendors.PHPExcel',
+				),
+			
 		        'ePdf' => array(
 		 		'class' => 'ext.yii-pdf.EYiiPdf',
 		 		'params' => array(

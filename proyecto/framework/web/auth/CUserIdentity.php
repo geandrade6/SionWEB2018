@@ -35,14 +35,17 @@ class CUserIdentity extends CBaseUserIdentity
 	 */
 	public $password;
 
+	public $correo;
+
 	/**
 	 * Constructor.
 	 * @param string $username username
 	 * @param string $password password
 	 */
-	public function __construct($username,$password)
+	public function __construct($username,$password,$correo)
 	{
 		$this->username=$username;
+		$this->correo=$correo;
 		$this->password=$password;
 	}
 

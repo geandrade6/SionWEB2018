@@ -10,6 +10,8 @@
  */
 class User extends CActiveRecord
 {
+	
+	public $getEstadodos;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return static the static model class
@@ -36,7 +38,9 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password', 'required'),
-			array('username, password', 'length', 'max'=>128),
+			array('username', 'length', 'max'=>30),
+			array('password', 'length', 'max'=>10),
+			array('correo', 'length', 'max'=>10),
 			array('profile', 'safe'),
 		);
 	}
@@ -62,7 +66,7 @@ class User extends CActiveRecord
 			'id' => 'Id',
 			'username' => 'Username',
 			'password' => 'Password',
-			'email' => 'Email',
+			'correo' => 'Correo',
 			'profile' => 'Profile',
 		);
 	}
@@ -86,4 +90,10 @@ class User extends CActiveRecord
 	{
 		return CPasswordHelper::hashPassword($password);
 	}
+
+	public function getEstadodos(){ // funcion para el combo box
+			$consultaRoldos="SELECT id, nombre_rol FROM roles ordeR by id asc";
+		 	$this->getEstadodos=Yii::app()->db->createCommand($consultaRoldos)->queryAll();// consulta base de datos 
+		   return $this->getEstadodos;// devuelve el valor de la funcion get 
+	  }
 }

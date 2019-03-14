@@ -5,8 +5,10 @@
 		<meta name="language" content="es" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!-- blueprint CSS framework -->
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilos.css" media="screen, projection" />
+		<!-- Icono del las paginas -->
+		<link rel="icon" href="<?php echo Yii::app()->request->baseUrl; ?>/img/sion.png" type="image/x-icon">
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>assets/fonts/fontawesome-webfont.ttf" media="print" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
@@ -30,12 +32,12 @@
 				<nav id="menu">
 				<header class="major">
 				
-				<h4><?php echo "Usuario Actual: ",Yii::app()->user->name; ?></h4>
+			
 				<h2 style="color: black;">Menu</h2>
 				</header>
 				<div style="width: 100%;">
 				<ul >
-					<?php if(Yii::app()->user->name == 'gusangad'){ ?>
+					<?php if(Yii::app()->user->name == 'Administrador'){ ?>
 					<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 						
@@ -46,31 +48,32 @@
 					array('label'=>'Gestión Vehículos', 'url'=>array('site/gestionvehiculos')),
 					array('label'=>'Sorteo Parqueo', 'url'=>array('site/sorteo')),
 					array('label'=>'Reportes', 'url'=>array('site/informes')),
-					array('label'=>'Solicitudes', 'url'=>array('site/pqrs')),
+					array('label'=>'Solicitudes', 'url'=>array('site/pqrsadmin')),
 					array('label'=>'Eventos', 'url'=>array('site/eventos')),
 					array('label'=>'salir', 'url'=>array('site/logout'), 'visible'=>Yii::app()->user->isGuest),
 					),
 					)); ?>
 
-					<?php }elseif(Yii::app()->user->name == 'adrtor'){?>
+					<?php }elseif(Yii::app()->user->name == 'Operador'){?>
 						<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 						
 					array('label'=>'Salida y Entrada de Vehiculos', 'url'=>array('site/controldeacceso')),
 					array('label'=>'Reportes', 'url'=>array('site/informes')),
-					array('label'=>'Solicitudes', 'url'=>array('site/pqrs')),
 					array('label'=>'Eventos', 'url'=>array('site/eventos')),
+					array('label'=>'Solicitudes', 'url'=>array('site/pqrsadmin')),
 					array('label'=>'salir', 'url'=>array('site/logout'), 'visible'=>Yii::app()->user->isGuest),
 					),
 					)); ?>
 
-					<?php }elseif(Yii::app()->user->name == 'abc'){?>
+					<?php }elseif(Yii::app()->user->name == 'Residente'){?>
 						<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 						
 					array('label'=>'Eventos', 'url'=>array('site/eventos')),
 					array('label'=>'Contáctenos', 'url'=>array('site/contact')),
 					array('label'=>'Acerca', 'url'=>array('site/about')),
+					array('label'=>'Solicitudes', 'url'=>array('site/pqrs')),
 					array('label'=>'Inicio Sesion','url'=>array('site/login')),
 					array('label'=>'salir', 'url'=>array('site/logout'), 'visible'=>Yii::app()->user->isGuest),
 
@@ -81,6 +84,10 @@
 					'items'=>array(
 						
 					array('label'=>'Inicio Sesion','url'=>array('site/login')),
+					array('label'=>'Eventos','url'=>array('site/eventos')),
+					array('label'=>'Acerca','url'=>array('site/about')),
+					array('label'=>'Contactenos','url'=>array('site/contact')),
+					
 
 					),
 					)); ?>
@@ -133,9 +140,9 @@
 	</body>
 </html>
 
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/java.js""></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/java.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/skel.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/util.js"></script>

@@ -17,12 +17,13 @@ class UserIdentity extends CUserIdentity
 	{
 		
 		$conexion=yii::app()->db;
-		$consultadeconexion = "SELECT username,password FROM usuarios WHERE username ='".$this->username."' AND password ='".$this->password."' AND activar_user = 1";
+		$consultadeconexion = "SELECT username,password,correo FROM usuarios WHERE username ='".$this->username."' AND correo = '".$this->correo."' AND  password ='".$this->password."' AND activar_user = 1";
 
 		$resultadoconecion= $conexion->createCommand($consultadeconexion)->query();
 
 		$resultadoconecion->bindColumn(1,$this->username);
 		$resultadoconecion->bindColumn(2,$this->password);
+		$resultadoconecion->bindColumn(3,$this->correo);
 		while ($resultadoconecion ->read()!==false) {
 			$this->errorCode = self::ERROR_NONE;
 			return !$this->errorCode;

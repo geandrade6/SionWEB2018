@@ -2,7 +2,7 @@
 		<meta name="language" content="es" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!-- blueprint CSS framework -->
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilos.css" media="screen, projection" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>assets/fonts/fontawesome-webfont.ttf" media="print" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
@@ -60,9 +60,7 @@
 				<br>
 				<h4>Estados PQRS</h4>
 				<?php
-					echo $form->dropDownList/*SELECT EN PHP*/($modelpqrs,'idestadopqrs',//squi va el id de la tabla
-       				 CHtml::listData($consultestadopqrs, 'idestadopqrs', 'nombre_estado_pqr')//aqui va el id y de seguido lo que se va a mostrar.
-        			,array('class'=>'form-control columnas','style'=>'width:100%;')); 
+					echo $form->textField($modelpqrs,'idestadopqrs',array('value'=>'EN PROCESO','class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal",'readonly'=>'readonly')); //
 				?>
 				<br>
 				<h4>Identificacion usuario</h4>
@@ -138,8 +136,8 @@
 	</div>
 </div>
 
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/java.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/skel.min.js"></script>

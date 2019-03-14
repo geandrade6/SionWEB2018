@@ -7,9 +7,13 @@
  */
 class LoginForm extends CFormModel
 {
+	
 	public $username;
 	public $password;
+	public $correo;
 	public $rememberMe;
+	public $getRoles;
+	
 
 	private $_identity;
 
@@ -22,7 +26,7 @@ class LoginForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('username, password', 'required'),
+			array('username, password, correo', 'required'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
@@ -48,7 +52,7 @@ class LoginForm extends CFormModel
 	 */
 	public function authenticate($attribute,$params)
 	{
-		$this->_identity=new UserIdentity($this->username,$this->password);
+		$this->_identity=new UserIdentity($this->username,$this->password,$this->correo);
 		if(!$this->_identity->authenticate())
 			$this->addError('password','Usuario o Contraseña incorrecta.');
 	}
@@ -61,7 +65,7 @@ class LoginForm extends CFormModel
 	{
 		if($this->_identity===null)
 		{
-			$this->_identity=new UserIdentity($this->username,$this->password);
+			$this->_identity=new UserIdentity($this->username,$this->password,$this->correo);
 			$this->_identity->authenticate();
 		}
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
@@ -73,4 +77,10 @@ class LoginForm extends CFormModel
 		else
 			return false;
 	}
+	public function getRoles(){
+		$consultarol = "SELECT id,nombre_rol FROM roles ORDER BY id ASC";
+		 $this->getRoles=Yii::app()->db->createCommand($consultarol)->queryAll();// consulta base 
+   		return $this->getRoles;
+	}
+	//conexion
 }
