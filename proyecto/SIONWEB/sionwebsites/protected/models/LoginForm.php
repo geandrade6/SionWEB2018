@@ -13,6 +13,7 @@ class LoginForm extends CFormModel
 	public $correo;
 	public $rememberMe;
 	public $getRoles;
+	public $consultarl;
 	
 
 	private $_identity;
@@ -78,8 +79,8 @@ class LoginForm extends CFormModel
 			return false;
 	}
 	public function getRoles(){
-		$consultarol = "SELECT id,nombre_rol FROM roles ORDER BY id ASC";
-		 $this->getRoles=Yii::app()->db->createCommand($consultarol)->queryAll();// consulta base 
+		$consultarl = "SELECT id,nombre_rol FROM roles ORDER BY id ASC";
+		 $this->getRoles=Yii::app()->db->createCommand($consultarl)->queryAll();// consulta base 
    		return $this->getRoles;
 	}
 	//conexion

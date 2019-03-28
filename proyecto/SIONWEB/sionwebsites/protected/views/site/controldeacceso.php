@@ -20,62 +20,93 @@
 							$this->pageTitle=Yii::app()->name . ' - Gestión Control de Acceso';
 							$this->breadcrumbs=array(
 								'Gestión Control de Acceso',
+								'Esta sección se encarga de el ingreso y salida de vehículos'
 							);
-				?>
-						<div style="width: 100%; height: 300px;" class="col-lg-12">
-			    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
-			    			<br>
-			    		</div>
+				?>			
+						<h1 style="color:#2a7ab8;">Entrada y Salida de Vehículos</h1>
+						<div style="width: 100%; height: 500px;" class="col-lg-12">
+                		<video autoplay src="<?php echo Yii::app()->request->baseUrl; ?>/videos/parqueo.mp4" style="width: 100%; height: 500px;border-radius:50px;">
+                		<br>
+  						</div>
+  						<hr style="width: 100%;">
 						<div class="col-lg-12">
-			    		<h1>Acción a ejecutar</h1>
-			    		<input type="submit" name="acciones" style="display: none;" id="salida" value="Salida Vehiculos" class="insertado btn-primary">
-						<input type="submit" name="acciones" value="Ingreso Vehiculos" style="display: block;" id="entrada" class="modificado btn-primary">
+			    		<h5 style=" color: red;">Al dar click tendrá dos Opciones.</h5>
+			    		<h6>* Consultar Vehículo que ingresa al Conjunto por Placa y Modificar la Fecha de ingreso.</h6>
+			    		<h6>* Registrar Salida de Vehiculos del Conjunto.</h6>
+			    		<input type="submit" name="acciones" style="display: none;" id="salida" value="Salida Vehiculos" class="insertado btn-primary" title="Aqui ingresamos la salida de un vehiculo">
+			    		<div class="col-lg-3">
+						<input type="submit" name="acciones" value="Ingreso Vehiculos" style="display: block;" id="entrada" class="modificado btn-primary" title="Aqui ingresamos la entrada de un vehiculo">
+						<br>
+						</div>
 			    		</div>
+						<hr style="width: 100%;">
 						<div class="main col-lg-12" >
 							
 							<div id="insertado" style="display: block;" class="col-lg-12">
-								<h1>Control salida de Vehículos</h1>
+
+								<h1 style="color:#2a7ab8;">Registro salida de Vehículos</h1>
 								<!-- Inicio de Formulario con Wigdet-->
 								<?php
 								  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
 								  echo $form->errorSummary($controles); // se llama la variablre
 								?>	
+								<div class="col-lg-6">
+
 								<h4>Placa</h4>
+								<h6><span class="required" style="color: red;">*</span>digite la placa.</h6>
 								<?php
 									echo $form->textField($controles,'vehiculos_placa',array('class'=>'form-control caja','placeholder'=>"Digita Placa")); //
 								?>
+								</div>
+								<div class="col-lg-6">
 								<h4>Punto de Parqueo</h4>
+								<h6><span class="required" style="color: red;">*</span>Escoja el punto de parqueo según la ficha.</h6>
 								<?php 
 								echo $form->dropDownList/*SELECT EN PHP*/($controles,'puntoparqueo_id',//squi va el id de la tabla
 				       				 CHtml::listData($consultapuntopar, 'id', 'nombre_punto')//aqui va el id y de seguido lo que se va a mostrar.
-				        		,array('class'=>'form-control columnas','id'=>'punto', 'style'=>'width:100%;')); 
+				        		,array('class'=>'form-control columnas','id'=>'punto', 'style'=>'width:100%; height:39px;')); 
 								?>
+								</div>
+								<div class="col-lg-6">
 								<h4>Fecha de Ingreso</h4>
+								<h6>Fecha Manual</h6>
 								<?php
 									echo $form->dateField($controles,'fecha_ingreso',array('class'=>'form-control','readonly'=>'readonly')); //
 								?>
+								<br>
+								</div>
+								<div class="col-lg-6">
 								<h4>Fecha de Salida</h4>
+								<h6><span class="required" style="color: red;">*</span>Fecha automatica</h6>
 								<?php
-									echo $form->dateField($controles,'fecha_salida',array('class'=>'form-control ')); //
+								$fecha = date('Y-m-d');
+								echo $form->textField($controles,'fecha_salida',array('value'=>$fecha,'readonly'=>'readonly'));
 								?>
+								<br>
+								</div>
+								<div class="col-lg-3">
 								<br>
 								 <?php  //esto es un boton en PHP
 
 				                    echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
 				                 ?>
+				                 <br>
+				             	</div>
 								<?php	
 									 $this->endWidget();				
 								?>
 							<!--Fin del Widget-->
 							</div>
+
 				</div>
 				<div id="modificado" style="display: none;">
 
 					<div class="col-lg-12">
 
 					    <div class="col-lg-12">
-					    	<h1>Control Entrada de Vehículos</h1>
+					    	<h1 style="color:#2a7ab8;">Registro Entrada de Vehículos</h1>
 					        <label>Buscar Placa (Acción modificar ).</label>
+					        <h6><span class="required" style="color: red;">*</span>Digita la Placa y Luego presiona Enter, si no se refleja información la placa de busqueda no existe.</h6>
 					        <input type="text" name="placa" placeholder="Digita y Enter al terminar" class="form-control" id="placa" style="width: 100%; float: left;"/>  
 				 	    </div>
 					    <br>
@@ -87,9 +118,14 @@
 							</fieldset>
 						</div>
 			        </div>
+			        <br>
 				</div>
+						
 						<div class="col-lg-12">
-						<h2>Listado Puntos de Parqueo</h2> 
+						<br>
+						<hr style="width: 100%;">
+						<br>
+						<h2 style="color:#2a7ab8;">Listado de Vehículos</h2> 
 			      		<div class="col-lg-12 table-responsive " id="div2" style="overflow: scroll; width: 100%; height: 50vh;"><!--se nombra la clase columna long tipo 9 bootrap tabla reponsive o adaptable con id2 para el llamdo en el script de ocultar secciones de pagina-->
 
 
@@ -129,6 +165,30 @@
 					             </table>
 			      		</div>
 			      		</div>
+			      		
+			      		<div class="col-lg-6">
+
+			      			<h1>Historia</h1>
+			      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			      		</div>
+			      		<div class="col-lg-6">
+			      			<h1>Ideas</h1>
+			      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			      		</div>
+			      		<div style="width: 100%; height: 300px;" class="col-lg-12">
+			    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+			    			<br>
+			    		</div>
 			</section>
 		</div>
 	</div>

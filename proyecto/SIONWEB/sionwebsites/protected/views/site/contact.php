@@ -22,9 +22,11 @@
 				'Contáctenos',
 			);
 			?>
-
-			<h1>Contácto</h1>
-
+			<div class="col-lg-12">
+			<div class="col-lg-12">
+				<h1 style="color:#2a7ab8;">Contácto</h1>
+			</div>
+			<div class="col-lg-12">
 			<?php if(Yii::app()->user->hasFlash('contact')): ?>
 
 			<div class="flash-success">
@@ -36,48 +38,52 @@
 			<p>
 			Sí tiene un Requerimiento u otra Cuetión de intéres, Puede contactarse con nosotros. Gracias.
 			</p>
-
-			<div class="form">
+			</div>
+			</div>
+			<div class="form col-lg-12">
 
 			<?php $form=$this->beginWidget('CActiveForm'); ?>
-
+				<div class="col-lg-12">
 				<p class="note">Los campos con  <span class="required">*</span> son Requeridos.</p>
-
+				</div>
 				<?php echo $form->errorSummary($model); ?>
 
-				<div class="row">
-					<label>Nombre</label>
+				<div class="row col-lg-6">
+					<label><span class="required">*</span>Nombre</label>
 					<?php echo $form->textField($model,'name'); ?>
 				</div>
 
-				<div class="row">
-					<label>Email</label>
+				<div class="row col-lg-6">
+					<label><span class="required">*</span>Email</label>
 					<?php echo $form->textField($model,'email'); ?>
 				</div>
 
-				<div class="row">
-					<label>Asunto</label>
+				<div class="row col-lg-12">
+					<label><span class="required">*</span>Asunto</label>
 					<?php echo $form->textField($model,'subject',array('size'=>60,'maxlength'=>128)); ?>
 				</div>
 
-				<div class="row">
-					<label>Mensaje</label>
+				<div class="row col-lg-12">
+					<label><span class="required">*</span>Mensaje</label>
 					<?php echo $form->textArea($model,'body',array('rows'=>6, 'cols'=>50)); ?>
 				</div>
 
 				<?php if(CCaptcha::checkRequirements()): ?>
-				<div class="row">
-					<label>Verificacion del Código</label>
-					<div>
+				<div class="row col-lg-12">
+					<label><span class="required">*</span>Verificacion del Código</label>
+					<br>
+					<div class="hint col-lg-6">Por favor ingrese la letras que se muetran en la imagen.
+					</div>
+					<div class="col-lg-6">
 					<?php $this->widget('CCaptcha'); ?>
 					<?php echo $form->textField($model,'verifyCode'); ?>
-					</div>
-					<div class="hint">Por favor ingrese la letras que se muetran en la imagen.
-					</div>
+					</div><br>
+
+					
 				</div>
 				<?php endif; ?>
 
-				<div class="row submit">
+				<div class="row submit col-lg-6">
 					<?php echo CHtml::submitButton('Enviar'); ?>
 				</div>
 

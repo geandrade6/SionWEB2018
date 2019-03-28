@@ -16,27 +16,71 @@
 	<div id="main">
 		<div class="inner">
 			<section>
-			<div class="col-lg-12" style="text-align:center;color:blue;"><h1>SORTEAR</h1></div>
-			<input type="submit" value="Sortear">
-			<input type="submit" value="Guardar">
-			<input type="submit" value="Limpiar">
+			<div class="col-lg-12"><h1 style="text-align:center;color:#2a7ab8;">SORTEAR</h1>
+				<h6>El sistema de sorteo simplemente cuenta con tres funciones las cules el usuario administrador podra hacer uso, este sistema consta de los siguiente.</h6>
+				<h6><span class="required" style="color: red;">*</span>Boton lmpiar: como su nombre lo indica hace una limpieza total de sorteo hasta el nuevo sorteo segun lo desee el administrador.</h6>
+				<h6><span class="required" style="color: red;">*</span>Boton: sortear: este se encargara de generar un sorteo el cual se reflejara en primera instancia en una tabla l cual sera quien asignara los puntos de parqueo a cada apartamento.</h6>
+				<h6><span class="required" style="color: red;">*</span>Boton Guardar: este guardará finalmete el sorteo deseado por el administrador en donde los residentes podran ver la tabla y ubicar su punto de parqueo.</h6>
+			<hr style="color: black;width: 100%;">
+			<div class="col-lg-4">
+				<br>
+				<?php echo CHtml::link("LIMPIAR",array("LimpiarSorteo"),array("style"=>"background-color: #3f8a55; color: white; width:150px;","class"=>"btn",'title'=>'Limpiar el sorteo actual para generar uno nuevo.')); ?>
+			</div>
 			
+			<div class="col-lg-4">
+				<br>
+				<?php echo CHtml::link("SORTEAR",array("GenerarSorteo"),array("style"=>"background-color: #11acc2; color: white; width:150px;","class"=>"btn",'title'=>'Sortear los puntos de parqueo vs apartamentos.')); ?>
+			</div>
+			
+			<div class="col-lg-4">
+				<br>
+				<?php echo CHtml::link("GUARDAR",array("GuardarSorteo"),array("style"=>"background-color: #0c287e; color: white; width:150px;","class"=>"btn", 'title'=>'Guardar la información actual del sorteo.')); ?>
+			</div>
+			</div>
 				<?php
 				  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
 				  echo $form->errorSummary($modelsorteo); // se llama la variablre
 				?>	
-				<div class="col-lg-12"><h3>Sorteo Actual:  <?php
-					$fecha = date('Y-m-d');
-					echo $form->dateField($modelsorteo,'fecha_registro',array('value'=>$fecha,'readonly'=>'readonly','style'=>'border-radius: 10px; border: none;'));
+				<div class="col-lg-12">
+				<hr style="color: black;width: 100%;">	
+				<h3>Sorteo Actual:  <?php
+				$fecha = date('Y-m-d');
+				echo $form->dateField($modelsorteo,'fecha_registro',array('value'=>$fecha,'readonly'=>'readonly','style'=>'border-radius: 10px; border: none;'));
 				?>
 				</h3>
-				
-					
 				</div>
 				<?php	
 					 $this->endWidget();				
 				?>
-				<div class="col-lg-12" style="overflow: auto; height:500px;">
+				
+				<div class="col-lg-12 contenedor" style="overflow: auto; height:500px;">
+					<table>
+					<tr>
+					<th>Punto de Parqueo</th>
+					<th>Apartemento</th>
+					<th>Torre</th>
+					</tr>
+					<?php
+					foreach ($consultagenerador as $key => $valores) {
+					?>
+					<tbody>
+					<tr>
+					<td><?= $valores['nombre_punto']; ?></td>
+					<td><?= $valores['numero_apartamento']; ?></td>
+					<td><?= $valores['torre']; ?></td>
+					</tr>
+					</tbody>
+					<?php 
+					}
+					?>
+					</table>
+				</div>	
+				<div class=" col-lg-12">
+				<br>	
+				<h4 style="color: red; text-align: center; ">Sorteo guardado del MES:</h4>
+				</div>
+				<br>
+				<div class="col-lg-12 contenedor" style="overflow: auto; height:500px;">
 					<table>
 					<tr>
 					<th>Apartamento</th>
@@ -59,7 +103,8 @@
 					}
 					?>
 					</table>
-				</div>	
+				</div>
+					
 			</section>
 		</div>
 	</div>
@@ -72,6 +117,3 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/skel.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/util.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/main.js"></script>
-<script type="text/javascript">
-	
-</script>

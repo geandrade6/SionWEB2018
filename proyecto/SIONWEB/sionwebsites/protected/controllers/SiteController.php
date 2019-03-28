@@ -18,20 +18,20 @@ class SiteController extends Controller{
  // _______________________ permisos de usuarios __________________________________   
     public function accessRules() {
         return array(
-/*
+
          	array('allow', // allow authenticated user to perform 'create' action
-               'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','consultaclientes','consultaclientesdos','consultapartamento','gestionvehiculos','consultavehiculos','consultavehiculosdos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol','galeriapersonal','sorteo','pqrs','pqrsadmin','contact','about','consultaeventos'),'users' => array('Administrador'),
+               'actions' => array('index','logout','eventos','insertareventos','gestionusuarios','consultaclientes','consultaclientesdos','consultapartamento','gestionvehiculos','consultavehiculos','consultavehiculosdos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol','galeriapersonal','sorteo','pqrs','pqrsadmin','contact','about','consultaeventos','limpiarSorteo','generarSorteo','guardarSorteo','versorteos','consultapart'),'users' => array('Administrador'),
             ),
             array('allow', // allow authenticated user to perform 'create' action
-               'actions' => array('index','login','logout','eventos','insertareventos','gestionusuarios','gestionvehiculos','consultavehiculos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol','galeriapersonal','contact','about','pqrsadmin'),'users' => array('Operador'),
+               'actions' => array('index','logout','eventos','insertareventos','gestionusuarios','gestionvehiculos','consultavehiculos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol','galeriapersonal','contact','about','pqrsadmin','versorteos','consultapart'),'users' => array('Operador'),
             ),
              array('deny', // deny all users
-             	'actions' => array('consultaclientes','consultaclientesdos','consultapartamento','consultavehiculosdos','sorteo','pqrs'),
+             	'actions' => array('consultaclientes','consultaclientesdos','consultapartamento','consultavehiculosdos','sorteo','pqrs','limpiarSorteo','generarSorteo','guardarSorteo'),
                 'users' => array('Operador'),
                 
             ), 
              array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index','login','logout','eventos','contact','galeriapersonal','about','sorteo','pqrs'),
+                'actions' => array('index','logout','eventos','contact','galeriapersonal','about','sorteo','pqrs','versorteos'),
                 'users' => array('Residente'),
             ),
 
@@ -51,7 +51,7 @@ class SiteController extends Controller{
             array('deny', // deny all users
                 'users' => array('*'),
                 
-            ), */
+            ), 
         );
     }
     
@@ -137,6 +137,12 @@ class SiteController extends Controller{
 	/**
 	 * Displays the login page
 	 */
+    public function actionRoles(){
+        $model = new LoginForm;
+        $consultarl = $model->getRoles;
+
+        $this->render('login',array('model'=>$model,'consultarl'=>$consultarl));
+    }
 	public function actionLogin()
 	{
 		if (!defined('CRYPT_BLOWFISH')||!CRYPT_BLOWFISH)
@@ -227,9 +233,16 @@ class SiteController extends Controller{
                     $idestadoeventos=$modelEventos->idestadoeventos;
                     //$imagenes=$modelEventos->imagenes;   
                     $subirimagen=CUploadedFile::getInstance($modelEventos,'imagenes');//recoge la imagen subida con el nombre
+                    if (isset($subirimagen)) {
+                        # code...
+                    
           	        $ruta ="{$subirimagen}";//guardamos el nombre de la imagen en temporal
                     $subirimagen->saveAs(Yii::app()->basePath.'/../imagenes/eventos/'.$ruta);//movemos la imagen a la ruta
                     $imagenes='/imagenes/eventos/'.$ruta;
+                    }else{
+                     $imagenes='/imagenes/eventos/constante.png';
+                    }
+
                     $fecha_registro=$modelEventos->fecha_registro;
                     $seteventos=$modelEventos->setEventos($titulo,$mensaje,$subtitulo,$submensaje, $imagenes,$idestadoeventos,$fecha_registro);
                     $modelEventos->unsetAttributes();// limpia los campos
@@ -245,6 +258,8 @@ class SiteController extends Controller{
             )
             ); // variable de asignacion modelo
 	}
+    //__________________-------------sorteo_______________________-
+   
 	//------------------------------------------modificar eventos------------------------------------------------------
 	public function actionConsultaeventos ($modificareventos,$opcionevento,$titulo,$mensaje,$subtitulo,$submensaje,$estado,$imagenes,$ideventos){ // setraen los datos desde el ajax correspondientes a cada variable
 	
@@ -272,10 +287,10 @@ class SiteController extends Controller{
         <input type="text" class="form-control" id="submensaje" value="'.$dt["submensaje"].'">
         <label>Estado de Posicionamiento del Anuncio</label>
         <select type="text"  id="estado" class="form-control" >
-        		<option value="1">INICIAL</option>
-				<option value="2">HISTORIALES</option>
-				<option value="3">NO VISIBLES</option>
-		</select>
+        <option value=1>INICIAL</option>
+				<option value=2>HISTORIALES</option>
+				<option value=3>NO VISIBLES</option>
+		    </select>
         <label>Ruta Imagen</label>
         <input type="text" class="form-control" id="imagenes" value="'.$dt["imagenes"].'">
         <label>Clíck para Modificar</label><br>
@@ -299,9 +314,35 @@ class SiteController extends Controller{
                    'respuestaevento'=>$tablas, // asignamos ese render de tablas a respuesta
                 ));
         }
-	//--------------------------------------------------insertar-------- usuarios---------------------------------------
+    //--------------------------------------------------insertar-------- usuarios---------------------------------------
+               //__________________________-- pdf --_________________-
+    public function actionGenerarPdfuser()
+    {
+        
+        $model =GestionUsuarios::model()->findAll('username = :username', array(
+            ':username' => 'Residente') ); //Consulta para buscar todos los registros de residentes
+        $mPDF1 = Yii::app()->ePdf->mpdf('utf-8','A4','','',15,15,35,25,9,9,'P'); //Esto lo pueden configurar como quieren, para eso deben de entrar en la web de MPDF para ver todo lo que permite.
+        $mPDF1->useOnlyCoreFonts = true;
+        $mPDF1->SetTitle("TIMIZA DEL PARQUE - Reporte");
+        $mPDF1->SetAuthor("SIONWEBSITES");
+        $mPDF1->SetWatermarkText("SION");
+        $mPDF1->showWatermarkText = true;
+        $mPDF1->watermark_font = 'Colombia - Bogota D.C';
+        $mPDF1->watermarkTextAlpha = 0.1;
+        $mPDF1->SetDisplayMode('fullpage');
+        $mPDF1->WriteHTML($this->renderPartial('pdfReportusuario', array('model'=>$model), true)); //hacemos un render partial a una vista preparada, en este caso es la vista pdfReport
+        $mPDF1->Output('Reporte'.date('YmdHis'),'I');  //Nombre del pdf y parámetro para ver pdf o descargarlo directamente.
+        exit;
+    }
 	public function actionGestionusuarios ()
 	{		
+        
+        if(isset($_GET["excelusuarios"])){ // llamamos el archivo que viene de la vista Excel
+            $model= GestionUsuarios::model()->findAll('username = :username', array(
+                ':username' => 'Residente') ); // buscamos la consulta general de todo el documento de residentes
+            $content=$this->renderPartial("excelusuarios",array("model"=>$model),true); // creamos una renderizado temporal del excel
+            Yii::app()->request->sendFile("usuarios.xls",$content); // guardamos ese render como y se renombrar al guardar si se desea
+            } 
 		$modelocrearusuario = new GestionUsuarios();
 		$cedulausuarios='';
 		$nombreusuarios='';
@@ -309,6 +350,7 @@ class SiteController extends Controller{
 		$telefonousuarios='';
 		$celularusuarios='';
 		$correousuarios='';
+        $username='';
 		$contrasenausuarios='';
 		$estadousuarios='';
 		$observacionesusuarios='';
@@ -327,6 +369,7 @@ class SiteController extends Controller{
 			$telefonousuarios=$modelocrearusuario->telefono;
 			$celularusuarios=$modelocrearusuario->celular;
 			$correousuarios=$modelocrearusuario->correo;
+            $username=$modelocrearusuario->username;
 			$contrasenausuarios=$modelocrearusuario->password;
 			$estadousuarios=$modelocrearusuario->estado_usuario;
 			$observacionesusuarios=$modelocrearusuario->observaciones;
@@ -334,7 +377,7 @@ class SiteController extends Controller{
 			$tiposvehiculosuser=$modelocrearusuario->tipos_id;
 			$fecharegistrouser=$modelocrearusuario->fecha_registro;
 			$activaruser=$modelocrearusuario->activar_user;
-         	$setuser=$modelocrearusuario->setGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
+         	$setuser=$modelocrearusuario->setGestionusuarios($cedulausuarios,$nombreusuarios,$apellidousuarios,$telefonousuarios,$celularusuarios,$correousuarios,$username,$contrasenausuarios,$estadousuarios,$observacionesusuarios,$rolesusuarios,$tiposvehiculosuser,$fecharegistrouser,$activaruser); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
             $modelocrearusuario->unsetAttributes();// limpia los campos
         }   
     }
@@ -342,12 +385,14 @@ class SiteController extends Controller{
     	 $consultatipoparqueo = $modelocrearusuario->getTipoparqueo();//get para el combo box id_tipoparqueo
     	 $consultagestionuser = $modelocrearusuario->getGestionusuarios();
     	 $consultaEstadoUser = $modelocrearusuario->getEstadoUser();
+         $consultaroles = $modelocrearusuario->getRoles();//get para el combo box id_tipoparqueo
 		 $this->render('gestionusuarios', array(//se renderiza la pagina
 		 	'modelocrearusuario'=>$modelocrearusuario,
 		 	'consultaRol'=>$consultaRol, //consulta de combox
 		 	'consultatipoparqueo'=>$consultatipoparqueo, //consulta de combox
 		 	'consultagestionuser'=>$consultagestionuser,
-		 	'consultaEstadoUser'=>$consultaEstadoUser
+		 	'consultaEstadoUser'=>$consultaEstadoUser,
+            'consultaroles'=>$consultaroles
             )
             ); // variable de asignacion modelo
 	}
@@ -488,7 +533,7 @@ class SiteController extends Controller{
                 ));
         }
 
-        //---------------------------------------insertar-----------vehiculos----------------------------------------
+        //---------------------------------------insertar vehiculos----------------------------------------
         
             //__________________________-- pdf --_________________-
     public function actionGenerarPdf()
@@ -512,7 +557,7 @@ class SiteController extends Controller{
             if(isset($_GET["excel"])){ // llamamos el archivo que viene de la vista Excel
                 $model= GestionVehiculos::model()->findAll(); // buscamos la consulta general de todo el documento
                 $content=$this->renderPartial("excel",array("model"=>$model),true); // creamos una renderizado temporal del excel
-                Yii::app()->request->sendFile("text.xls",$content); // guardamos ese render como y se renombrar al guardar si se desea
+                Yii::app()->request->sendFile("vehiculos.xls",$content); // guardamos ese render como y se renombrar al guardar si se desea
                 }         
             
 		$modelocrearvehiculo = new GestionVehiculos();
@@ -531,12 +576,12 @@ class SiteController extends Controller{
         if( $modelocrearvehiculo->validate()){ // valida el modelo y sus atributos
         	//atributos del modelo
         $placa=$modelocrearvehiculo->placa;
-		$marca=$modelocrearvehiculo->marca;
-		$color=$modelocrearvehiculo->color;
-		$modelo=$modelocrearvehiculo->modelo;
-		$usuarios_cedula=$modelocrearvehiculo->usuarios_cedula;
-		$fecharegistrovehiculos=$modelocrearvehiculo->fecha_registro;
-		$tipo_de_vehiculo=$modelocrearvehiculo->tipo_de_vehiculo;
+    		$marca=$modelocrearvehiculo->marca;
+    		$color=$modelocrearvehiculo->color;
+    		$modelo=$modelocrearvehiculo->modelo;
+    		$usuarios_cedula=$modelocrearvehiculo->usuarios_cedula;
+    		$fecharegistrovehiculos=$modelocrearvehiculo->fecha_registro;
+    		$tipo_de_vehiculo=$modelocrearvehiculo->tipo_de_vehiculo;
         $setvehiculo=$modelocrearvehiculo->setGestionvehiculos($placa,$marca,$color,$modelo,$usuarios_cedula,$fecharegistrovehiculos,$tipo_de_vehiculo); // SE ENVIA LOS CAMPOS A LA ACCION DEL MODELO 
         $modelocrearvehiculo->unsetAttributes();// limpia los campos
         }   
@@ -650,12 +695,14 @@ class SiteController extends Controller{
         $consultacantidaduser = $modeloinformes->getInformesuser();
         $consultacantidadveh = $modeloinformes->getInformesveh();
         $consultaRolDos = $modeloinformes->getEstadodos();
+        $consultaingsal = $modeloinformes->getIngresosalida();
 
 		 $this->render('informes', array(//se renderiza la pagina
 		 	'modeloinformes'=>$modeloinformes, // se renderiza el modelo
 		 	'consultacantidaduser'=>$consultacantidaduser,
 		 	'consultacantidadveh'=>$consultacantidadveh,
 		 	'consultaRolDos'=>$consultaRolDos,
+      'consultaingsal'=>$consultaingsal
 
             )
             ); // variable de asignacion modelo
@@ -738,6 +785,44 @@ class SiteController extends Controller{
 	 		$this->render('reportes/consultaplaca', 
                array(
                    'respuestaplaca'=>$tablas,
+                ));
+    }
+  //---------------------------------------reportes placa tres ------------------------------------------------
+    public function actionConsultapart ($apart){ // se crea una accion para llamr el archivo que se tiene como mensaje
+       if(isset($_GET['apart'])){
+        $sqpla= $_GET['apart'];
+          $sqlveplac = "
+          SELECT PQ.nombre_punto,A.numero_apartamento,A.torre  FROM sorteo S
+          INNER JOIN puntoparqueo PQ ON PQ.id = S.id_sorteo
+          INNER JOIN apartamentos A ON A.id = S.id_apartamento
+          WHERE A.numero_apartamento = '".$sqpla."'";
+      }
+              $tablas='';
+              $tablas.='<table class="table-bordered">';
+              $tablas.='<tr>';
+              $tablas.= "
+              <td style='background:grey;color:white;'>Apartamento</td>
+              <td style='background:grey;color:white;'>Torre</td>
+              <td style='background:grey;color:white;'>Punto de Parqueo</td>
+            
+                        
+              ";
+              $tablas.='</tr>';
+             
+              $data=Yii::app()->db->createCommand($sqlveplac)->queryAll(); 
+              foreach($data as $value=>$dt){
+              $tablas.= " 
+              <tbody>
+              <td>".$dt['numero_apartamento']."</td>
+              <td>".$dt['torre']."</td>
+              <td>".$dt['nombre_punto']."</td>
+              </tbody>
+              ";  
+          }
+          $tablas.='</table>';
+      $this->render('reportes/consultapartamento', 
+               array(
+                   'respuestaapartamento'=>$tablas,
                 ));
     }
     //-------------------------------------busqueda por cedula salida----------------------------
@@ -878,6 +963,169 @@ class SiteController extends Controller{
                    'respuestatipo'=>$tablas,
                 ));
     }
+     //------------------------------------busqueda por fecha pqrs-----------------------------------
+      public function actionConsultaporfechapqrs ($fechasolicitudini,$fechasolicitudfin){ // se crea una accion para llamr el archivo que se tiene como mensaje
+
+     
+     if(isset($_GET['fechasolicitudini'])){
+        $squno= $_GET['fechasolicitudini'];
+        if(isset($_GET['fechasolicitudfin'])){
+        $sqdos= $_GET['fechasolicitudfin'];
+
+
+        $sqlfeDos = "SELECT P.idpqrs,P.asunto,P.mensaje,P.correo,P.adjunto,E.nombre_estado_pqr,U.nombre,P.fecha_crea FROM pqrs P
+        INNER JOIN estadopqrs E ON E.idestadopqrs = P.idestadopqrs
+        INNER JOIN usuarios U ON U.cedula = P.idusuario
+        WHERE P.fecha_crea BETWEEN '".$squno."' AND '".$sqdos."'";
+            }
+        }
+        $tablas='';
+        $tablas.='<table class="table-bordered">';
+            $tablas.='<tr>';
+            $tablas.= "
+            <td style='background:grey;color:white;'>PQRS</td>
+            <td style='background:grey;color:white;'>Asunto</td>
+            <td style='background:grey;color:white;'>Mensaje Vehiculo</td>
+            <td style='background:grey;color:white;'>Correo</td>
+            <td style='background:grey;color:white;'>Ruta</td>
+            <td style='background:grey;color:white;'>Estado</td>
+            <td style='background:grey;color:white;'>Usuario</td>
+            <td style='background:grey;color:white;'>Fecha Solicitud</td>
+                      
+            ";
+            $tablas.='</tr>';
+           
+            $data=Yii::app()->db->createCommand($sqlfeDos)->queryAll(); 
+            foreach($data as $value=>$dt){
+            $tablas.= " 
+            <tbody>
+            <td>".$dt['idpqrs']."</td>
+            <td>".$dt['asunto']."</td>
+            <td>".$dt['mensaje']."</td>
+            <td>".$dt['correo']."</td>
+            <td>".$dt['adjunto']."</td>
+            <td>".$dt['nombre_estado_pqr']."</td>
+            <td>".$dt['nombre']."</td>
+            <td>".$dt['fecha_crea']."</td>
+            </tbody>
+            ";  
+                 
+        }
+        $tablas.='</table>';
+                  
+        $this->render('reportes/consultaporfechapqrs', 
+               array(
+                   'respuestafechapqrs'=>$tablas,
+                ));
+        } 
+    //-------------------------------------busqueda por cedula pqrs------------------------------------------------
+    public function actionConsultausuariopqrs($cedulas){ // se crea una accion para llamr el archivo que se tiene como mensaje
+         if(isset($_GET['cedulas'])){
+            $sqtp= $_GET['cedulas'];
+            $sqltp = "SELECT P.idpqrs,P.asunto,P.mensaje,P.correo,P.adjunto,E.nombre_estado_pqr,U.nombre,P.fecha_crea FROM pqrs P
+            INNER JOIN estadopqrs E ON E.idestadopqrs = P.idestadopqrs
+            INNER JOIN usuarios U ON U.cedula = P.idusuario
+            WHERE P.idusuario LIKE '%".$sqtp."%'";
+            }
+            $tablas='';
+            $tablas.='<table class="table-bordered">';
+                $tablas.='<tr>';
+                $tablas.= "
+                <td style='background:grey;color:white;'>PQRS</td>
+                <td style='background:grey;color:white;'>Asunto</td>
+                <td style='background:grey;color:white;'>Mensaje Vehiculo</td>
+                <td style='background:grey;color:white;'>Correo</td>
+                <td style='background:grey;color:white;'>Ruta</td>
+                <td style='background:grey;color:white;'>Estado</td>
+                <td style='background:grey;color:white;'>Usuario</td>
+                <td style='background:grey;color:white;'>Fecha Solicitud</td>
+                          
+                ";
+                $tablas.='</tr>';
+               
+                $data=Yii::app()->db->createCommand($sqltp)->queryAll(); 
+                foreach($data as $value=>$dt){
+                $tablas.= " 
+                <tbody>
+                <td>".$dt['idpqrs']."</td>
+                <td>".$dt['asunto']."</td>
+                <td>".$dt['mensaje']."</td>
+                <td>".$dt['correo']."</td>
+                <td>".$dt['adjunto']."</td>
+                <td>".$dt['nombre_estado_pqr']."</td>
+                <td>".$dt['nombre']."</td>
+                <td>".$dt['fecha_crea']."</td>
+                </tbody>
+                ";  
+                     
+            }
+            $tablas.='</table>';
+            $this->render('reportes/consultausuariopqrs', 
+               array(
+                   'respuestacedulaspqrs'=>$tablas,
+                ));
+    }
+    //------------------------------------------modificar pqrs------------------------------------------------------
+
+    public function actionConsultapq ($modificarpqrs/*variable de la accion*/,$opcionpqrs,$asunto,$mensaje,$correo,$idestadopqrs,$idusuario,$fecha_crea,$idpqrs){ // setraen los datos desde el ajax correspondientes a cada variable
+    
+     if($opcionpqrs==1){ // en el ajax se creo una variable de opcines la cual se extrae en este punto correspondiente a la caja buscar
+     $tablas=''; //creamos variable de retorno de informacion
+     $sql='';
+     if(isset($_GET['modificarpqrs'])){ //si la variable consulta clientes contiene informacion
+       // creamos variable de consulta
+        $sq= $_GET['modificarpqrs'];//asignamos la informacion recogida de la variable de busqueda
+        $sql = "SELECT P.idpqrs,P.asunto,P.mensaje,P.correo,EP.nombre_estado_pqr,P.idusuario,P.fecha_crea FROM pqrs P INNER JOIN estadopqrs EP ON P.idestadopqrs = EP.idestadopqrs WHERE P.idpqrs ='".$sq."'";
+        //cnosulta de busqueda
+        }
+        $data=Yii::app()->db->createCommand($sql)->queryAll(); //conectamos a la DB asignandola a la variable data
+        foreach($data as $value=>$dt){}// creamos una for indicando que la data va a tener una alias para mostrar datos a la variable dt
+         //llenamos la variable tablas con un formulario para la midifcacion en este foreach traemos lo que tenemos en la consulta y a cada dt le asignamos un campo de la DB
+        $tablas.='
+        <div class="form-group">
+        <label>Codigo PQRS</label>
+        <input type="text" class="form-control caja" id="idpqrs" value="'.$dt["idpqrs"].'" readonly>
+        <label>Asunto</label>
+        <input type="text" class="form-control caja" id="asunto" value="'.$dt["asunto"].'" readonly>
+        <label>Mensaje</label>
+        <input type="text" class="form-control" id="mensaje" value="'.$dt["mensaje"].'" readonly>
+        <label>Correo</label>
+        <input type="text" class="form-control caja" id="correo" value="'.$dt["correo"].'" readonly>
+        <label>Estado Actual</label>
+        <input type="text" class="form-control" value="'.$dt["nombre_estado_pqr"].'" readonly>
+        <label>Seleccionar Estado PQRS Nuevo</label>
+        <select type="text" class="form-control" id="idestadopqrs">
+        <option value=1>EN PROCESO</option>
+        <option value=2>PENDIENTES</option>
+        <option value=3>CANCELADOS</option>
+        <option value=4>SOLUCIONADOS</option>
+        <option value=5>NO APROBADOS</option>
+        <option value=6>SIN INFORMACION</option>
+        </select>
+        <label>Documento Ususario</label>
+        <input type="text" class="form-control" id="idusuario" value="'.$dt["idusuario"].'" readonly>
+        <label>Fecha Creacion PQRS</label>
+        <input type="text" class="form-control" id="fecha_crea" value="'.$dt["fecha_crea"].'" readonly>
+        <label>Clíck para Modificar</label><br>
+        <input class="form-control" type="button" id="modifcar" value="Modifcar" style="width:50%;">
+        </div>
+        ';
+        }elseif($opcionpqrs==2){//condicion de la variable opcion en estado 2 del ajax
+        Yii::app()->db->createCommand()->update('pqrs',[ //hacemos conexion con la DB en modo update
+        'asunto' => $asunto, //asignamos un valor a cada variable que proviene del ajax
+        'mensaje' => $mensaje, //""
+        'correo' => $correo,//""
+        'idestadopqrs' => $idestadopqrs,//""
+        'idusuario' => $idusuario,//""
+        'fecha_crea' => $fecha_crea,//""
+        ], 'idpqrs = :up', [':up' => $idpqrs]); // indicamos que lo que se va a buscar esta en la variable cedula o primery key
+        alert("los datos Fueron Modificados Exitosamente"); // mostramos un mensaje de alert para decir que se actualizo
+        }
+        $this->render('reportes/consultapqrsmodifi', //renderizamos todo en la pagina consultaclientes
+               array(
+                   'respuestamodifi'=>$tablas, // asignamos ese render de tablas a respuesta
+                ));
+        }
       //-------------------------------------control de acceso insertar------------------------------------------------
     public function actionControldeacceso (){
     	$controles = new GestionControlAcceso();
@@ -922,7 +1170,8 @@ class SiteController extends Controller{
         $sq= $_GET['modificaringreso'];//asignamos la informacion recogida de la variable de busqueda
         $sql = "SELECT SE.vehiculos_placa,SE.puntoparqueo_id,SE.fecha_ingreso,SE.fecha_salida
 		FROM ingresos_salidas SE
-		WHERE SE.vehiculos_placa = '".$sq."' ORDER BY SE.fecha_salida ASC";
+
+		WHERE SE.fecha_ingreso='' AND SE.vehiculos_placa = '".$sq."' ORDER BY SE.fecha_salida ASC";
       	//cnosulta de busqueda
         }
         $data=Yii::app()->db->createCommand($sql)->queryAll(); //conectamos a la DB asignandola a la variable data
@@ -969,13 +1218,51 @@ class SiteController extends Controller{
                    //'respuestacontrol'=>$tablas, // asignamos ese render de tablas a respuesta
                 ));	
         }
-        public function actionSorteo(){
+        public function actionLimpiarSorteo(){
+
+            $limpiar="CALL limpiar();";
+            $data = Yii::app()->db->createCommand($limpiar)->execute();
+           
+          $this->redirect(array('site/sorteo'));           
+        }
+         public function actionGenerarSorteo(){
+
+            $sortear="CALL sortear();";
+            $data=Yii::app()->db->createCommand($sortear)->queryAll();
+           
+                      
+          $this->redirect(array('site/sorteo'));           
+        }
+         public function actionGuardarSorteo(){
+
+            $guardar="CALL guardarsorteo();";
+            $data=Yii::app()->db->createCommand($guardar)->queryAll();
+           
+                      
+          $this->redirect(array('site/sorteo'));           
+        }
+        public function actionVersorteos(){
             $modelsorteo = new Sorteo();
             $consultasorteo = $modelsorteo->getVersorteo();
+
+            $this->render('versorteos',array(
+                    'consultasorteo'=>$consultasorteo,
+                    'modelsorteo'=>$modelsorteo,
+                ));
+        }
+        public function actionSorteo(){
+
+            $modelsorteo = new Sorteo();
+            $consultasorteo = $modelsorteo->getVersorteo();
+            $consultagenerador = $modelsorteo->getVergeneadorSorteo();
+            $consultaregistrodos = $modelsorteo->getRegistrosorteodos();
+
         	$this->render('sorteo',
         		array(
                     'consultasorteo'=>$consultasorteo,
                     'modelsorteo'=>$modelsorteo,
+                    'consultagenerador'=>$consultagenerador,
+                    'consultaregistrodos'=>$consultaregistrodos
         		));
         }
         public function actionAbout(){
@@ -1013,9 +1300,13 @@ class SiteController extends Controller{
                         $mensaje=$modelpqrs->mensaje;
                         $correo=$modelpqrs->correo;
                         $subirdocu=CUploadedFile::getInstance($modelpqrs,'adjunto');//recoge la imagen subida con el nombre
-                          $ruta ="{$subirdocu}";//guardamos el nombre de la imagen en temporal
-                        $subirdocu->saveAs(Yii::app()->basePath.'/../imagenes/archivos/'.$ruta);//movemos la imagen a la ruta
-                        $adjunto='/imagenes/archivos/'.$ruta;
+                        if (isset($subirdocu)) {
+                        $ruta ="{$subirdocu}";//guardamos el nombre de la imagen en temporal
+                        $subirdocu->saveAs(Yii::app()->basePath.'/../imagenes/documentos/'.$ruta);//movemos la imagen a la ruta
+                        $adjunto='/imagenes/documentos/'.$ruta;
+                        }else{
+                        $adjunto='sin archivo';
+                        }
                         $idestadopqrs=$modelpqrs->idestadopqrs;
                         $idusuario=$modelpqrs->idusuario;
                         $fecha_crea=$modelpqrs->fecha_crea;
@@ -1031,10 +1322,35 @@ class SiteController extends Controller{
                 )
                 ); // variable de asignacion modelo
         }
+        //--------------------------------- pdf pqrs --------------------------
+        public function actionGenerarpqrsPdf()
+            {
+            $model =PqrsModel::model()->findAll(); //Consulta para buscar todos los registros
+            $mPDF1 = Yii::app()->ePdf->mpdf('utf-8','A4','','',15,15,35,25,9,9,'P'); //Esto lo pueden configurar como quieren, para eso deben de entrar en la web de MPDF para ver todo lo que permite.
+            $mPDF1->useOnlyCoreFonts = true;
+            $mPDF1->SetTitle("TIMIZA DEL PARQUE - Reporte");
+            $mPDF1->SetAuthor("SIONWEBSITES");
+            $mPDF1->SetWatermarkText("SION");
+            $mPDF1->showWatermarkText = true;
+            $mPDF1->watermark_font = 'Colombia - Bogota D.C';
+            $mPDF1->watermarkTextAlpha = 0.1;
+            $mPDF1->SetDisplayMode('fullpage');
+            $mPDF1->WriteHTML($this->renderPartial('pdfReportpqrs', array('model'=>$model), true)); //hacemos un render partial a una vista preparada, en este caso es la vista pdfReport
+            $mPDF1->Output('Reporte'.date('YmdHis'),'I');  //Nombre del pdf y parámetro para ver pdf o descargarlo directamente.
+            exit;
+            }
+        //------------------------ pqrs admin --------------------------------
+
+
         public function actionPqrsadmin ()
         {
+              if(isset($_GET["excelpqrs"])){ // llamamos el archivo que viene de la vista Excel
+                $model= PqrsModel::model()->findAll(); // buscamos la consulta general de todo el documento
+                $content=$this->renderPartial("excelpqrs",array("model"=>$model),true); // creamos una renderizado temporal del excel
+                Yii::app()->request->sendFile("pqrs.xls",$content); // guardamos ese render como y se renombrar al guardar si se desea
+                }   
+
                 $modelpqrs = new PqrsModel();    
-                $idpqrs='';
                 $asunto='';
                 $mensaje='';
                 $correo='';
@@ -1044,37 +1360,54 @@ class SiteController extends Controller{
                 $fecha_crea='';
                 $setpqrs='';
     
-                $consultpqrs = $modelpqrs->getPqrs();//llamdado de las consulta y los datos en get
-                $consultestadopqrs = $modelpqrs->getPqrs();//llamdado de las consulta y los datos en get
+                $consultapqrs = $modelpqrs->getPqrs();//llamdado de las consulta y los datos en get
+                $consultestadopqrs = $modelpqrs->getPqrsDos();//llamdado de las consulta y los datos en get
                
                 // aqui ingresamos insertar los eventos
                 if(isset($_POST['PqrsModel'])){ // Modelo Eventos
                     $modelpqrs->attributes=$_POST['PqrsModel'];
                   
                     if( $modelpqrs->validate()){ // valida el modelo y sus atributos
-                        $idpqrs=$modelpqrs->idpqrs;
                         $asunto=$modelpqrs->asunto;
                         $mensaje=$modelpqrs->mensaje;
                         $correo=$modelpqrs->correo;
                         $subirdocu=CUploadedFile::getInstance($modelpqrs,'adjunto');//recoge la imagen subida con el nombre
+                        if (isset($subirdocu)) {
+                            # code...
                           $ruta ="{$subirdocu}";//guardamos el nombre de la imagen en temporal
-                        $subirdocu->saveAs(Yii::app()->basePath.'/../imagenes/archivos/'.$ruta);//movemos la imagen a la ruta
-                        $adjunto='/imagenes/archivos/'.$ruta;
+                        $subirdocu->saveAs(Yii::app()->basePath.'/../imagenes/documentos/'.$ruta);//movemos la imagen a la ruta
+                        $adjunto='/imagenes/documentos/'.$ruta;
+                        }
+                        else{
+                            $adjunto='Sin archivo';
+                        }
                         $idestadopqrs=$modelpqrs->idestadopqrs;
                         $idusuario=$modelpqrs->idusuario;
                         $fecha_crea=$modelpqrs->fecha_crea;
-                        $setpqrs=$modelpqrs->setPqrs($idpqrs,$asunto,$mensaje,$correo, $adjunto,$idestadopqrs,$idusuario,$fecha_crea);
+                        $setpqrs=$modelpqrs->setPqrs($asunto,$mensaje,$correo, $adjunto,$idestadopqrs,$idusuario,$fecha_crea);
                         $modelpqrs->unsetAttributes();// limpia los campos
                     }
                 }
                 
                 $this->render('pqrsadmin', array(//se renderiza la pagina
-                "consultpqrs"=>$consultpqrs, // se renderiza la consula
+                "consultapqrs"=>$consultapqrs, // se renderiza la consula
                 "consultestadopqrs"=>$consultestadopqrs,
                 "modelpqrs"=>$modelpqrs // se renderiza el modelo
                 )
                 ); // variable de asignacion modelo
         }
+        public function actionGrafica(){
+
+          $modelgraficos = new Informes;
+          $consultacantidaduser = $modelgraficos ->getInformesuser();
+    
+          $this->render('grafica',
+            array(
+              'modelgraficos'=>$modelgraficos,
+              'consultacantidaduser'=>$consultacantidaduser
+            ));
+        }
+
       
 
 }

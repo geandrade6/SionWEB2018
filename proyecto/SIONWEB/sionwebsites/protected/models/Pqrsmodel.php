@@ -5,6 +5,7 @@ class PqrsModel extends CActiveRecord{
   private $connection;
   //getters
   public $getPqrs;
+   public $getPqrsDos;
  
   //setters
   public $setPqrs;
@@ -44,9 +45,7 @@ class PqrsModel extends CActiveRecord{
   public function rules(){
     return array(
             
-        // digitar solo numeros
-        array('idpqrs','required','message'=>'Código campo es obligatorio'),
-        array('idpqrs', 'match', 'pattern' => "/^.[0-9]+$/i", 'message' => 'Codigo: Sólo se aceptan Numeros '),
+  
         //solo letras
         array('asunto','required','message'=>'Asunto campo es obligatorio'),
         array('asunto', 'match', 'pattern' => "/^.{10,30}$/", 'message' => 'Asunto: Mínimo 10 y máximo 30 caracteres'),
@@ -61,7 +60,7 @@ class PqrsModel extends CActiveRecord{
         array('correo','email'),
         //archivo adjunto
         array('adjunto', 'file','types'=>'','maxSize' => 1024*1024*5,'allowEmpty'=>true, 'on'=>'update','tooMany' => 'El máximo de archivos permitidos son {limit}'), 
-        array('adjunto','required','message'=>'Adjunto: campo es obligatorio'),
+        //array('adjunto','required','message'=>'Adjunto: campo es obligatorio'),
         //pqrs
         array('idestadopqrs','required','message'=>'Estado: campo es obligatorio'),
         //cedula
@@ -70,7 +69,7 @@ class PqrsModel extends CActiveRecord{
         array('idusuario', 'match', 'pattern' => "/^.[0-9a-z]+$/i", 'message' => 'Cedula: Sólo se aceptan letras y numeros '),
         //fecha
         array('fecha_crea','required','message'=>'Fecha campo es obligatorio'),
-        array('fecha_crea','date','message'=>'Verifique la fecha'),
+        //array('fecha_crea','date','message'=>'Verifique la fecha'),
          
 
         );
@@ -84,22 +83,28 @@ class PqrsModel extends CActiveRecord{
   
   public function getPqrs(){ 
       
-    $consultpqrs ="SELECT * FROM pqrs WHERE idestadopqrs != 4";
-    $this->getPqrs=Yii::app()->db->createCommand($consultpqrs)->queryAll();// consulta base de datos Mysql            
+    $consultapqrs ="SELECT P.idpqrs,P.asunto,P.mensaje,P.correo,P.adjunto,E.nombre_estado_pqr,U.nombre,P.fecha_crea FROM pqrs P
+    INNER JOIN estadopqrs E ON E.idestadopqrs = P.idestadopqrs
+    INNER JOIN usuarios U ON U.cedula = P.idusuario
+    WHERE E.idestadopqrs != 4";
+    $this->getPqrs=Yii::app()->db->createCommand($consultapqrs)->queryAll();// consulta base de datos Mysql            
 
-    $consultestadopqrs ="SELECT * FROM estadopqrs";
-    $this->getPqrs=Yii::app()->db->createCommand($consultestadopqrs)->queryAll();// consulta base de datos Mysql            
- 
      return $this->getPqrs;// devuelve el valor de la funcion get de el modelo
   } 
+  public function getPqrsDos(){ 
+      
+      $consultestadopqrs ="SELECT * FROM estadopqrs";
+    $this->getPqrsDos=Yii::app()->db->createCommand($consultestadopqrs)->queryAll();// consulta base de datos Mysql            
+ 
+     return $this->getPqrsDos;// devuelve el valor de la funcion get de el modelo
+  } 
   
-public function setPqrs($idpqrs,$asunto,$mensaje,$correo,$adjunto,$idestadopqrs,$idusuario,$fecha_crea)
+public function setPqrs($asunto,$mensaje,$correo,$adjunto,$idestadopqrs,$idusuario,$fecha_crea)
 {
-  echo "<script>alert('ingreso al modelo');</script>";
           
       Yii::app()->db->createCommand()->insert('pqrs', 
       [
-        'idpqrs'=>$idpqrs,
+        
         'asunto'=> $asunto,
         'mensaje'=>$mensaje,
         'correo'=> $correo,

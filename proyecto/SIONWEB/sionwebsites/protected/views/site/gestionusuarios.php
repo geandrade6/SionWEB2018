@@ -31,73 +31,73 @@
     			<br>
     		</div>
     		<div class="col-lg-12">
-    		<h1>Acción a ejecutar</h1>
-    		<input type="submit" name="acciones" value="Insertar" class="insertados btn-primary">
-			<input type="submit" name="acciones" value="Modificar" class="modificados btn-primary">
-			<input type="submit" name="acciones" value="Eliminar" class="eliminados btn-primary">
-			<input type="submit" name="acciones" value="Apartamento" class="modifiapart btn-primary">
+    		<br>
+    		<h1 style="color:#2a7ab8;">Funciones a Realizar</h1>
+    		<h5 style=" color: red;">Opciones de Acción.</h5>
+			<h6>* Insertar: Nuevo usuario donde el operador o administrador tienen acceso.</h6>
+			<h6>* Modificar: aquí podemos realizar los cambios pertinentes o actualizaciones de usuarios.</h6>
+			<h6>* Eliminar: se aplica cuando un residente se va del conjunto y si es encargado se debe hacer el cambio en apartartamento.</h6>
+			<h6>* Apartamentos:	Se modifica unicamente la cedula del encargado del apartamento segun el propietario.</h6>
+    		<input type="submit" name="acciones" value="Insertar" class="insertados btn-primary" title="Ingreso nuevo Registro">
+			<input type="submit" name="acciones" value="Modificar" class="modificados btn-primary" title="Modificar Registro correspodiente a la identifiación.">
+			<input type="submit" name="acciones" value="Eliminar" class="eliminados btn-primary" title="Eliminar Registro correspodiente a la identifiación.">
+			<input type="submit" name="acciones" value="Apartamento" class="modifiapart btn-primary" title="Modificar identificación usuario encargado Residente.">
     		</div>
 			
 
 			<div class="main col-lg-12" >
-				<h1>Insertar Usuarios</h1>
+				<h1 style="color:#2a7ab8;">Insertar Usuarios</h1>
 				<div id="insertado" style="display: block;" class="col-lg-12">
-				
+				<h6>Los campos con <span class="required" style="color: red;">*</span> son requeridos.</h6>
 				<!-- Inicio de Formulario con Wigdet-->
 				<?php
 				  $form=$this->beginWidget('CActiveForm'); //activacion del comando para el form
 				  echo $form->errorSummary($modelocrearusuario); // se llama la variablre
 				?>	
 				<div class=" col-lg-12">
-				<h4>Cedula</h4>
+				<h4><span class="required" style="color: red;">*</span>Cedula</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'cedula',array('class'=>'form-control ','placeholder'=>"Digita Cedula")); //
 				?>
 				</div>
 				<div class=" col-lg-6">
-				<h4>Nombre</h4>
+				<h4><span class="required" style="color: red;">*</span>Nombre</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'nombre',array('class'=>'form-control caja ','placeholder'=>"Digita Nombre")); //
 				?>
 				</div>
 				<div class=" col-lg-6">
-				<h4>Apellido</h4>
+				<h4><span class="required" style="color: red;">*</span>Apellido</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'apellido',array('class'=>'form-control caja','placeholder'=>"Digita el apellido")); //
 				?>
 				</div>
 				<div class=" col-lg-6">
-				<h4>Teléfono</h4>
+				<h4><span class="required" style="color: red;">*</span>Teléfono</h4>
 				<?php
 					echo $form->numberField($modelocrearusuario,'telefono',array('class'=>'form-control ','placeholder'=>"Digita el telefono")); //
 				?>
 				</div>
 				<div class=" col-lg-6">
-				<h4>Celular</h4>
+				<h4><span class="required" style="color: red;">*</span>Celular</h4>
 				<?php
 					echo $form->numberField($modelocrearusuario,'celular',array('class'=>'form-control ','placeholder'=>"Digita el celular")); //
 				?>
 				</div>
 				<div class=" col-lg-6">
-				<h4>Correo</h4>
+				<h4><span class="required" style="color: red;">*</span>Correo</h4>
 				<?php
 					echo $form->textField($modelocrearusuario,'correo',array('class'=>'form-control ','type'=>'mail','placeholder'=>"Digita el Correo")); //
 				?>	
 				</div>
+				
 				<div class=" col-lg-6">
-				<h4>Conraseña</h4>
+				<h4><span class="required" style="color: red;">*</span>Conraseña</h4>
 				<?php
 					echo $form->PasswordField($modelocrearusuario,'password',array('password ','class'=>'form-control ','placeholder'=>"Digita la Contraseña")); //
 				?>
 				</div>
-				<div class=" col-lg-6">
-				<h4>Estado usuario</h4>
-				<?php 
-				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'estado_usuario',//squi va el id de la tabla
-       				 CHtml::listData($consultaEstadoUser, 'activar_user', 'estado_user')//aqui va el id y de seguido lo que se va a mostrar.
-        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
-				?>
-				</div>
+				
 				<div class=" col-lg-12">
 				<h4>Observaciones</h4>
 				<?php
@@ -105,7 +105,7 @@
 				?>
 				</div>
 				<div class=" col-lg-6">
-				<h4>Roles</h4>
+				<h4><span class="required" style="color: red;">*</span>Roles</h4>
 				<?php 
 				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'roles_id',//squi va el id de la tabla
        				 CHtml::listData($consultaRol, 'id', 'nombre_rol')//aqui va el id y de seguido lo que se va a mostrar.
@@ -113,7 +113,16 @@
 				?>
 				</div>
 				<div class=" col-lg-6">
-				<h4>Tipo de Vehículo</h4>
+				<h4><span class="required" style="color: red;">*</span>Confirmar Rol</h4>
+				<?php 
+				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'username',//squi va el id de la tabla
+       				 CHtml::listData($consultaroles, 'nombre_rol', 'nombre_rol')//aqui va el id y de seguido lo que se va a mostrar.
+        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
+				?>
+				</div>
+				
+				<div class=" col-lg-12">
+				<h4>Si tiene Vehículo Seleccionar</h4>
 				<?php 
 				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'tipos_id',//squi va el id de la tabla
        				 CHtml::listData($consultatipoparqueo, 'id', 'tipo')//aqui va el id y de seguido lo que se va a mostrar.
@@ -128,7 +137,15 @@
 				?>
 				</div>
 				<div class=" col-lg-6">
-				<h4>Activación Usurio</h4>
+				<h4><span class="required" style="color: red;">*</span>Estado usuario</h4>
+				<?php 
+				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'estado_usuario',//squi va el id de la tabla
+       				 CHtml::listData($consultaEstadoUser, 'activar_user', 'estado_user')//aqui va el id y de seguido lo que se va a mostrar.
+        		,array('class'=>'form-control columnas','id'=>'idrol', 'style'=>'width:100%;')); 
+				?>
+				</div>
+				<div class=" col-lg-6">
+				<h4><span class="required" style="color: red;">*</span>Confirmar Activación</h4>
 				<?php 
 				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearusuario,'activar_user',//squi va el id de la tabla
        				 CHtml::listData($consultaEstadoUser, 'activar_user', 'estado_user')//aqui va el id y de seguido lo que se va a mostrar.
@@ -137,10 +154,10 @@
 				<br>
 				</div>
 				
-				<div class=" col-lg-12" style="margin-bottom: 5%;">
+				<div class=" col-lg-3" style="margin-bottom: 5%;">
 				 <?php  //esto es un boton en PHP
 
-                    echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
+                    echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar','title'=>'Ingresar Registro'));
                            
                  ?>
                  <br>
@@ -155,8 +172,9 @@
 
 				<div id="modificado" style="display: none;">
 			        <div class="col-lg-12">
-			            <div class="col-lg-6">
+			            <div class="col-lg-7">
 			                <label>Buscar Cliente por Identificación (Acción modificar ).</label>
+			                <h6><span class="required" style="color: red;">*</span>Digite la identificación y de Enter.</h6>
 			                <input type="text" name="cedula" placeholder="Digita y Enter al terminar" class="form-control" id="cedula" style="width: 100%; float: left;"/>  
 	 		            </div>
 					            <br>
@@ -171,8 +189,9 @@
 				</div>
 				<div id="eliminado" style="display: none;">
 			        <div class="col-lg-12">
-			            <div class="col-lg-6">
+			            <div class="col-lg-7">
 			                <label>Buscar Cliente por Identificación (Acción Eliminar).</label>
+			                <h6><span class="required" style="color: red;">*</span>Digite la identificación y de Enter.</h6>
 			                <input type="text" name="busquedasa" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasa" style="width: 100%; float: left;"/>  
 	 		            </div>
 					            <br>
@@ -187,9 +206,10 @@
 				</div>
 				<div id="modapartamentos" style="display: none;">
 			        <div class="col-lg-12">
-			            <div class="col-lg-6">
+			            <div class="col-lg-7">
 			               
 			                <label>Digita Cedula Propietario (Acción Modificar).</label>
+			                <h6><span class="required" style="color: red;">*</span>Digite la identificación del propietario y de Enter.</h6>
 			                <input type="text" name="busquedasapartados" placeholder="Digita y Enter al terminar" class="form-control" id="busquedasapartados" style="width: 100%; float: left;"/>  
 	 		            </div>
 					            <br>
@@ -204,7 +224,8 @@
 			        </div>
 				</div>				
 			</div>
-			<h2>Listado General de Usuarios Residentes y Visitantes</h2> 
+			<div class="col-lg-12">
+			<h2 style="color:#2a7ab8;">Listado de Usuarios Residentes y Operadores</h2> 
       		<div class="col-lg-9 table-responsive contenedor" id="div2" style="overflow: scroll; width: 100%; height: 50vh;"><!--se nombra la clase columna long tipo 9 bootrap tabla reponsive o adaptable con id2 para el llamdo en el script de ocultar secciones de pagina-->
 
                     <table class='table table-hover'>
@@ -243,6 +264,7 @@
 		            ?>
 		             </tbody>
 		             </table>
+      			</div>
       		</div>
 		</section>
 		</div>

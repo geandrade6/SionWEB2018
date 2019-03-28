@@ -25,9 +25,9 @@
 				?>
 				<div id="insertado" style="display: block;">
 
-				<h1>Insertar PQRS</h1>
+				<h1 style="color:#2a7ab8;">Insertar PQRS</h1>
 				<!-- Inicio de Formulario con Wigdet-->
-
+				<h6>Los campos con <span class="required" style="color: red;">*</span> son requeridos.</h6>
 				 <?php
 				  $form=$this->beginWidget('CActiveForm',array('htmlOptions'=>array('enctype'=>'multipart/form-data'),
 					)); //activacion del comando para el form
@@ -35,20 +35,20 @@
 					?>	
 				<h4>Codigo PQRS</h4>
 				<?php
-					echo $form->textField($modelpqrs,'idpqrs',array('class'=>'form-control caja','placeholder'=>"Digita Título")); //
+					echo $form->textField($modelpqrs,'idpqrs',array('class'=>'form-control caja','placeholder'=>"Digita Título",'readonly'=>'readonly')); //
 				?>
 				<br>
-				<h4>Asunto</h4>
+				<h4><span class="required" style="color: red;">*</span>Asunto</h4>
 				<?php
 					echo $form->textField($modelpqrs,'asunto',array('class'=>'form-control  ','placeholder'=>"Digita Mensaje Principal")); //
 				?>
 				<br>
-				<h4>Mensaje</h4>
+				<h4><span class="required" style="color: red;">*</span>Mensaje</h4>
 				<?php
 					echo $form->textarea($modelpqrs,'mensaje',array('class'=>'form-control caja ','placeholder'=>"Digita Sub-Título")); //
 				?>
 				<br>
-				<h4>Correo</h4>
+				<h4><span class="required" style="color: red;">*</span>Correo</h4>
 				<?php
 					echo $form->emailField($modelpqrs,'correo',array('class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal")); //
 				?>
@@ -63,7 +63,7 @@
 					echo $form->textField($modelpqrs,'idestadopqrs',array('value'=>'EN PROCESO','class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal",'readonly'=>'readonly')); //
 				?>
 				<br>
-				<h4>Identificacion usuario</h4>
+				<h4><span class="required" style="color: red;">*</span>Identificacion usuario</h4>
 				<?php
 					echo $form->textField($modelpqrs,'idusuario',array('class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal")); //
 				?>			
@@ -73,64 +73,63 @@
 					echo $form->textField($modelpqrs,'fecha_crea',array('value'=>$fecha_registro,'readonly'=>'readonly'));
 				?>
 				<br>
+				<div class="col-lg-4">
 				 <?php  //esto es un boton en PHP
-                    echo CHtml::submitButton('Enviar Información',array('class'=>'form-control btn-primary','style'=>'width:100%;;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
+                    echo CHtml::submitButton('Enviar Información',array('class'=>'form-control btn-primary','style'=>'width:100%;;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar','title'=>'Ingresar Solicitud.'));
                  ?>
+             	</div>
 
 				<?php	
 					 $this->endWidget();				
 				?>
 				</div>
 				<br>
-				<!--div id="modificado" style="display: none;">
-			        <div class="col-lg-12">
-			            <div class="col-lg-6">
-			                <label>Buscar Cliente por Identificación (Acción modificar ).</label>
-			                <input type="number" name="ideventos" placeholder="Digita y Enter al terminar" class="form-control" id="ideventos" style="width: 100%; float: left;"/>  
-	 		            </div>
-					            <br>
-				        <div class="col-lg-12">
+			
+		</section>
+		<section>
+			<div id="solicitaruser">
+			    <div class="col-lg-12">
+			        <div class="col-lg-8">
+			                <label style="color: orange;">Consulta Tú PQRS(Cedula de usuario).</label>
+			                <h6>><span class="required" style="color: red;">*</span>Aquí realizamos la busqueda de nuestros PQRS con nuestra identificación.</h6>
+			                <input type="text" name="cedulas" class="form-control" id="cedulas" style="width: 100%; float: left;"/> 
+	 		        </div>
+	 		        <div class="col-lg-12">
+	                	 <br>
+						<input type="button" name="buscarcedulapqrs" id="buscarcedulapqrs" value="Buscar" >
+						 <br>
+					</div>
+				    <div class="col-lg-12">
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
-					    		<div class="registros" id="eventosregistros" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
+					    		<div class="registros" id="busquedaporcedulasolicitud" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
+					    			<div class="col-lg-6">
+						      			<h1>Historia</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div class="col-lg-6">
+						      			<h1>Ideas</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div style="width: 100%; height: 300px;" class="col-lg-12">
+						    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+						    			<br>
+						    		</div>	
 					    		</div>
 					        </fieldset>
-				        </div>
-			        </div>
-				</div-->
-			<!--Fin del Widget-->
-
-				<!--div class="col-lg-12">
-						<h4 style="text-align: center;">Listado de PQRS</h4>
-					<div class="table-wrapper">
-						<div class="table-responsive contenedor" style="height: 300px; overflow: scroll;">
-							<table class="table table-small-font table-bordered table-striped table-responsive" >
-								<thead>
-								<tr>
-								<th style="background: orange; color: black;" class=columna>Asunto</th>
-								<th style="background: orange; color: black;" class=columna>Descripción</th>
-								</tr>
-								</thead>
-								<tbody>
-									<-?php
-									foreach($consultpqrs as $key=>$value) { // se manda a llamar la variable que toma la informacion en este caso informa y hace un recorrido de la informacion en forma de array de lo que esta en el value mostrando datos la inforacion es extraida de la variable informa que esta en el controlador con una query.
-									$asunto=$value["asunto"]; // se asigna la variable que se quiere mostrar
-									$mensaje=$value["mensaje"]; // se asigna la variable que se quiere mostrar
-								
-									?>
-									<tr>
-									<td class=columna style='font-weight:normal;'><-?php echo $asunto; ?></td>
-									<td class=columna style='font-weight:normal;'><-?php echo $mensaje; ?></td>
-									</tr>
-									<-?php
-									 }
-									?>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div-->
+				    </div>
+			    </div>
+			</div>
 		</section>
 		</div>
 	</div>
@@ -208,4 +207,24 @@
 			              }
 			          }); 
 				}
+
+				 if ('#cedulas') {
+	          function obtener_registros_ocho(cedulas) // inicio de la funcion obtener registros de la tabla clientes
+	          {
+	            $.ajax({ // inicio de ajax 
+	              url :'consultausuariopqrs', // se acciona la ubicacion del archivo de consulta
+	              type : 'get', // se indica que tipo de metodo sera
+	              data : {cedulas:cedulas}, // se indica la base a la cual va dirigida la extraccion
+	              })
+	            .done(function(resultadosA){ // estrae la informacion valida y la envia a la tabla resultados del div
+	              $("#busquedaporcedulasolicitud").html(resultadosA);
+	            })
+	          }
+	         $('#buscarcedulapqrs').click(function(){ //enviamos la funcion de un click e el boton
+				var cedulas;
+				cedulas=$('#cedulas').val()
+	   	 		obtener_registros_ocho(cedulas);
+	   	 		});
+	     }
+	  
 </script>

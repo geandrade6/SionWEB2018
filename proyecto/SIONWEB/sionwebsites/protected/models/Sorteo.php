@@ -6,6 +6,8 @@ class Sorteo extends CActiveRecord{ // cambiamos el eventos por el nombre del mo
 
 // de bajo de este van getters
     public $getVersorteo;
+    public $getVergeneadorSorteo;
+    public $getRegistrosorteodos;
 // de bajo de este van setters
     
 // de bajo de este van variables normales
@@ -49,6 +51,22 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
    return $this->getVersorteo;
 
  }
+ public function getVergeneadorSorteo(){
+  $consultagenerador ="SELECT PQ.nombre_punto,A.numero_apartamento,A.torre  FROM sorteo S
+  INNER JOIN puntoparqueo PQ ON PQ.id = S.id_sorteo
+  INNER JOIN apartamentos A ON A.id = S.id_apartamento";
+   $this->getVergeneadorSorteo=Yii::app()->db->createCommand($consultagenerador)->queryAll();// consulta base 
+  return $this->getVergeneadorSorteo;
+ }
+
+ public function getRegistrosorteodos(){
+  $consultaregistrodos="SELECT * FROM registro_sorteo_dos where nombre_punto = ''";
+
+
+ $this->getRegistrosorteodos=Yii::app()->db->createCommand($consultaregistrodos)->queryAll();// consulta base 
+  return $this->getRegistrosorteodos;
+ }
+
 
  
     

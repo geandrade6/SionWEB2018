@@ -19,10 +19,16 @@
 				<!-- seccion principal -->
 					<div id="main" style="background: white;">
 						<div class="inner"style="color: black;">
+							 <?php
+					          $this->pageTitle=Yii::app()->name . ' - Acerca';
+					          $this->breadcrumbs=array(
+					          	'Acerca de Nosotros',
+					          );
+					          ?>
 
 							<!-- titulo principal -->
 								<header id="header" class="headers" style="background: #fff;">
-									<a href="Administrador.php" class="logo"><strong>Timiza ParkLot</strong> Conjunto Residensial</a>
+									<a href="#" class="logo"style="color:#2a7ab8;"><strong>Timiza ParkLot</strong> Conjunto Residensial</a>
 									<ul class="icons">
 										<li><a href="cerrar_sesion.php" class="icon fa-instagram" id="test" onclick="test()"><span class="label" ></span></a></li>
 										<li><a href="cerrar_sesion.php" class="icon fa-facebook" id="test" onclick="test()"><span class="label" ></span></a></li>
@@ -34,7 +40,7 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h1>Nuestro Conjunto</h1>
+											<h1 style="color:#2a7ab8;">Nuestro Conjunto</h1>
 											<p>CONJUNTO RESIDENCIAL TIMIZA DEL PARQUE</p>
 										</header>
 										<p>Somos un Conjunto Residencial PARQUES DEL TIMIZA, donde le proporcionamos a nuestros copropietarios información y ayuda de todo lo relacionado con nuestro conjunto tal como seguridad, buen ambiente y buena atención en lo que se necesite.
@@ -52,7 +58,7 @@
 							<!-- Section -->
 								<section>
 									<header class="major">
-										<h2>Noticias</h2>
+										<h2 style="color:#2a7ab8;">Noticias</h2>
 									</header>
 									<div class="posts">
 										<article>
@@ -88,19 +94,20 @@
 										</article>
 										
 											<article>
-												<h1>Misión</h1>
+												<h1 style="color:#2a7ab8;">Misión</h1>
 											<p>
 												La Misión del Conjunto Residencial PARQUES DEL TIMIZA, es la de conformar un espacio de vivienda organizado y en donde se busca propiciar espacios de comunicación, sana convivencia y en donde reine la armonía, la paz, el respeto y la equidad para todos los propietarios siguiendo los lineamientos establecidos en nuestro reglamento con el fin de lograr un desarrollo humano sostenible.
 											</p>
 											</article>
 											<article>
-												<h1>Visión</h1>
+												<h1 style="color:#2a7ab8;">Visión</h1>
 											<p>
 												La Visión del Conjunto Residencial PARQUES DEL TIMIZA, es la de constituirse en la localidad de Kennedy específicamente en el sector de timiza un ejemplo a seguir desde el punto de vista de organización residencial, así mismo motivo de orgullo de todos los propietarios por ser reconocidos como el mejor conjunto residencial del sector, comprometidos con el progreso y caracterizados por la integridad de todos los Copropietarios.
 											</p>
 											</article>
 									</div>
 								</section>
+							
 						</div>
 					</div>
 			</section>

@@ -24,91 +24,114 @@
 				);
 			?>
 		<section>
-
-			<h1 style="text-align: center;">REPORTES Y CONSULTAS </h1>
-
+			<h1 style="text-align: center;color:#2a7ab8;">REPORTES Y CONSULTAS </h1>
+			<h6>Aquí el usuario administrador podra realizar las consultas pertienente deacuerdo al infromación que necesite, los reportes que se generan son generales, para manipulación del administrador.</h6>
+			<!--____________________________fielset_______________________-->
 			<fieldset style="border: 1px solid #b4b3b3;">
-				<div class="col-lg-6">
-					<h2>Salidas y Entradas Vehículos <br>(<label style="color: blue;">Generación de Reportes</label>)</h2>
+				<div class="col-lg-8">
+					<h2>Salidas y Entradas Vehículos <br>(<label style="color:#2a7ab8;">Generación de Reportes</label>)</h2>
 					<br>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<br>
-					<input style="width: 100%;" type="submit" name="acciones" value="Por Fecha" class="fechamos btn-primary"><br>
-					<input style="width: 100%;" type="submit" name="acciones" value="Por Placa" class="plaqueados btn-primary"><br>
-					<input style="width: 100%;" type="submit" name="acciones" value="Por Usuario" class="clientelas btn-primary"><br>
-				</div>
-			</fieldset>
-			<fieldset style="border: 1px solid #b4b3b3;">
-				<div class="col-lg-6">
-					<h2>Usuarios <br>(<label style="color: blue;">Generación de Reportes</label>)</h2>
-					<br>
-				</div>
-				<div class="col-lg-6">
-					<br>
-					<input style="width: 100%;" type="submit" name="acciones" value="Fecha Registrado" class="fechareg btn-primary"><br>
-					<input style="width: 100%;" type="submit" name="acciones" value="Cantidad Usuarios" class="cantidades btn-primary"><br>
-					<input style="width: 100%;" type="submit" name="acciones" value="Tipo Usuario" class="cargos btn-primary"><br>
+					<input style="width: 100% ;" type="submit" name="acciones" value="Por Fecha" class="fechamos btn-primary" title="Busqueda por Rango de fechas salida y entradas"><br>
+					<input style="width: 100%;" type="submit" name="acciones" value="Por Placa" class="plaqueados btn-primary" title="Busqueda por Numero de placa"><br>
+					<input style="width: 100%;" type="submit" name="acciones" value="Por Usuario" class="clientelas btn-primary" title="Busqueda por Numero de Cedula."><br>
 					<br>
 				</div>
 			</fieldset>
+			<!--____________________________fielset_______________________-->
 			<fieldset style="border: 1px solid #b4b3b3;">
-				<div class="col-lg-6">
-					<h2>PQRS Generados <br>(<label style="color: blue;">Generación de Reportes</label>)</h2>
+				<div class="col-lg-8">
+					<h2>Usuarios <br>(<label style="color:#2a7ab8;">Generación de Reportes</label>)</h2>
 					<br>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<br>
-					<input style="width: 100%;" type="submit" name="acciones" value="Fecha Solicitud" class="fechaspqrs btn-primary"><br>
-					<input style="width: 100%;" type="submit" name="acciones" value="Solicitud del Usuario" class="solicitudpqrs btn-primary"><br>
+					<input style="width: 100%;" type="submit" name="acciones" value="Fecha Registrado" class="fechareg btn-primary" title="Busqueda por fecha de registro del usuario."><br>
+					<input style="width: 100%;" type="submit" name="acciones" value="Cantidad Usuarios" class="cantidades btn-primary" title=" Cantidad total de usuarios registrados y cantidad de vehiculos."><br>
+					<input style="width: 100%;" type="submit" name="acciones" value="Tipo Usuario" class="cargos btn-primary" title="Busqueda por tipo de usuario o Rol."><br>
 					<br>
 				</div>
 			</fieldset>
+			<!--____________________________fielset_______________________-->
+			<fieldset style="border: 1px solid #b4b3b3;">
+				<div class="col-lg-8">
+					<h2>PQRS Generados <br>(<label style="color:#2a7ab8;">Generación de Reportes</label>)</h2>
+					<br>
+				</div>
+				<div class="col-lg-4">
+					<br>
+					<input style="width: 100%;" type="submit" name="acciones" value="Fecha Solicitud" class="fechaspqrs btn-primary" title=" Busqueda por un rango de fecha del PQRS"><br>
+					<input style="width: 100%;" type="submit" name="acciones" value="Solicitud del Usuario" class="solicitudpqrs btn-primary" title="Busqueda por identifiación segun el usuario"><br>
+					<br>
+				</div>
+			</fieldset>
+			<!--____________________________ Titulo tabla _______________________-->
 			<div class="col-lg-12">
-				<h3 style="text-align: center;">TABLA DE REPORTES INFORMACIÓN Y VERIFICACIÓN DE DATOS</h3>	
+				<h3 style="text-align: center;color:#2a7ab8;" >TABLA DE REPORTES INFORMACIÓN Y VERIFICACIÓN DE DATOS</h3>	
 				
 			</div>
-	
+			<hr style="width: 100%;">
 		
 			<!--___________________________________primer consulta___boton1__________________________________-->
 			<div id="fechar" style="display: block;">
 			    <div class="col-lg-12">
-			      <div class="col-lg-12">
-									<h2>Vehículos</h2>
-			        		<h3>Rango de fecha <br> ( Fecha de ingreso y salida de vehiculos )</h3>
-									
-			                <label style="color: orange;">Consulta por Fecha desde (Acción Fecha inicial).</label>
-			                <input type="date" name="desde" class="form-control" id="desde" style="width: 100%; float: left;"/> 
-			                <br>
-			                <label style="color: orange;">Consulta por Fecha hasta (Acción Fecha final).</label>
-			                <input type="date" name="hasta" class="form-control" id="hasta" style="width: 100%; float: left;"/>  
-			                <br>
-	 		      </div>
-						<div class="col-lg-12">
-							<br>
-							<input type="button" name="buscarfecha" id="buscarfecha" value="Buscar">
-							<br>
-							<h4>Exportar Excel o PDF Reporte General</h4>
-								<div class="col-lg-3">
-								<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
-								<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
-								</div>
-								<div class="col-lg-3">
-								<?php echo CHtml::link("Exportar a PDF",array("generarpdf"),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
-								</div>
+				    <div class="col-lg-12">
+						<h2>Vehículos</h2>
+				        <h3>Fecha de ingreso y salida de vehiculos</h3>
+		                <label style="color: orange;">Consulta por Fecha desde (Acción Fecha inicial).</label>
+		                <input type="date" name="desde" class="form-control" id="desde" style="width: 100%; float: left;"/> 
+		                <br>
+		                <label style="color: orange;">Consulta por Fecha hasta (Acción Fecha final).</label>
+		                <input type="date" name="hasta" class="form-control" id="hasta" style="width: 100%; float: left;"/>  
+		                <br>
+		 		    </div>
+					<div class="col-lg-12">
+						<br>
+						<input type="button" name="buscarfecha" id="buscarfecha" value="Buscar">
+						<br>
+						<h4>Exportar Reporte General</h4>
+						<div class="col-lg-3">
+						<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
+						<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
 						</div>
-					
+						<div class="col-lg-3">
+						<?php echo CHtml::link("Exportar a PDF",array("generarpdf"),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+						</div>
+					</div>
 				    <div class="col-lg-12">
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
 					    		<div class="registros" id="busquedaporfechasuno" placeholder="Buscar" style="overflow:auto; width:100%;height: 100vh;">
+							    	<div class="col-lg-6">
+						      			<h1 style="color:#2a7ab8;">Historia</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div class="col-lg-6">
+						      			<h1 style="color:#2a7ab8;">Ideas</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div style="width: 100%; height: 300px;" class="col-lg-12">
+						    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+						    			<br>
+						    		</div>
 					    		</div>
 					        </fieldset>
 				    </div>
 			    </div>
 			</div>
 			<!--________________________________segunda consulta_____boton Dos_______________________________-->
-
 			<div id="plaquear" style="display: none;">
 			    <div class="col-lg-12">
 			        <div class="col-lg-12">
@@ -117,31 +140,53 @@
 			                <label style="color: orange;">Consulta por placa (Acción Busqueda).</label>
 			                <input type="text" name="placas" class="form-control caja" id="placas" style="width: 100%; float: left;"/> 
 	 		        </div>
-	 		        <div class="col-lg-12">
-					<br>
-					<input type="button" name="buscarplaca" id="buscarplaca" value="Buscar">
+		 		    <div class="col-lg-12">
+						<br>
+						<input type="button" name="buscarplaca" id="buscarplaca" value="Buscar">
 					</div>
-					<br>
+						<br>
 					<div class="col-lg-12">
-					<h4>Exportar Excel o PDF Reporte General</h4>	
+						<h4>Exportar Excel o PDF Reporte General Vehículos</h4>	
 					</div>
 					<div class="col-lg-3">
-					<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
-					<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
+						<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
+						<?php echo CHtml::link("Exportar a Excel",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
 					</div>
 					<div class="col-lg-3">
-					<?php echo CHtml::link("Exportar a PDF",array("generarpdf"),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+						<?php echo CHtml::link("Exportar a PDF",array("generarpdf"),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
 					</div>
-					</div>
-				    <div class="col-lg-12">
-					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
-					        	<br>
-					    		<div class="registros" id="busquedaporplaca"  placeholder="Buscar" style="overflow:auto; width:100%;height: 100vh;">
-					    		</div>
-					        </fieldset>
-				    </div>
+				</div>
+				<div class="col-lg-12">
+				    <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
+				       	<br>
+				 		<div class="registros" id="busquedaporplaca"  placeholder="Buscar" style="overflow:auto; width:100%;height: 100vh;">
+				 			<div class="col-lg-6">
+						      			<h1>Historia</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						     </div>
+						     <div class="col-lg-6">
+						      			<h1>Ideas</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						     </div>
+						     <div style="width: 100%; height: 300px;" class="col-lg-12">
+						    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+						    			<br>
+						    </div>
+					    </div>
+				    </fieldset>
 			    </div>
 			</div>
+			<!--/div-->
 
 			<!--________________________________tercera consulta_____boton Tres_______________________________-->
 
@@ -159,7 +204,7 @@
 					</div> 
 					<br> 
 					<div class="col-lg-12">
-					<h4>Exportar Excel o PDF Reporte General</h4>	
+					<h4>Exportar Excel o PDF Reporte General Vehículos</h4>	
 					</div>
 					<div class="col-lg-3">
 					<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
@@ -174,16 +219,38 @@
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
 					    		<div class="registros" id="busquedaporusuario" placeholder="Buscar" style="overflow:auto; width:100%;height: 100vh;">
+					    			<div class="col-lg-6">
+						      			<h1>Historia</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div class="col-lg-6">
+						      			<h1>Ideas</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div style="width: 100%; height: 300px;" class="col-lg-12">
+						    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+						    			<br>
+						    		</div>
 					    		</div>
 					        </fieldset>
 									
 				    </div>
 						
 			    </div>
-			</div>
+			<!--/div-->
 			<!--________________________________ cuarta consulta_____boton Cuarto_______________________________-->
 
-			<div id="fechaclientar" style="display: none;">
+				<div id="fechaclientar" style="display: none;">
 			        <div class="col-lg-12" style="width: 100%;">
 			        	 <div class="col-lg-12">
 			        		<h3>Consulta Usuarios Regitrados por fecha <br> ( Fecha de Registro Usuarios )</h3>
@@ -192,94 +259,290 @@
 			                <label style="color: orange;">Consulta por Fecha Registro Ususario hasta (Fecha final).</label>
 			                <input type="date" name="hastafin" class="form-control" id="hastafin" style="width: 100%; float: left;"/> 
 			           	</div>
-
-	 		        
-	 		        <div class="col-lg-12">
+	 		        	<div class="col-lg-12">
 							<br>
 							<input type="button" name="buscarfechados" id="buscarfechados" value="Buscar">
 					         <br>
-					    <div class="col-lg-12">
-						        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
-						        	<br>
-						    		<div class="registros" id="busquedaporfechausuario" placeholder="Buscar" style="overflow:auto; width:100%;height: 100vh;">
-						    		</div>
-						        </fieldset>
-					    </div>
+								<div class="col-lg-12">
+								<h4>Exportar Excel o PDF Reporte General Usuarios</h4>	
+								</div>
+								<div class="col-lg-3">
+								<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
+								<?php echo CHtml::link("Exportar a Excel",array("Gestionusuarios","excelusuarios"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
+								</div>
+								<div class="col-lg-3">
+								<?php echo CHtml::link("Exportar a PDF",array("generarpdfuser",'useranme'=>'Residente'),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+								</div>		 
+						    <div class="col-lg-12">
+							        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
+							        	<br>
+							    		<div class="registros" id="busquedaporfechausuario" placeholder="Buscar" style="overflow:auto; width:100%;height: 100vh;">
+								    	<div class="col-lg-6">
+							      			<h1>Historia</h1>
+							      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							      		</div>
+							      		<div class="col-lg-6">
+							      			<h1>Ideas</h1>
+							      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							      		</div>
+							      		<div style="width: 100%; height: 300px;" class="col-lg-12">
+							    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+							    			<br>
+							    		</div>
+							    		</div>
+							        </fieldset>
+						    </div>
+			    		</div>
 			    	</div>
-			    </div>
-			</div>
+				</div>
 
 			<!--________________________________ quinta consulta_____boton quinto_______________________________-->
-			<div id="cantidar" style="display: none;">
-			    <div class="col-lg-12">
-			       
-      				<div class="col-lg-9 table-responsive " id="div2" style=" width: 100%;"><!--se nombra la clase columna long tipo 9 bootrap tabla reponsive o adaptable con id2 para el llamdo en el script de ocultar secciones de pagina-->
-      				<h2>Cantidad de Usuarios <br>(Propietarios, Arrendatarios y Administrativos)</h2> 
-		 			<?php  //finalizacion del comando para la variable this
-	                    foreach($consultacantidaduser as $key=>$value) { // se manda a llamar la variable que toma la informacion en este caso informa y hace un recorrido de la informacion en forma de array de lo que esta en el value mostrando datos la inforacion es extraida de la variable informa que esta en el controlador con una query.
-	                    //$cedulausuarios=$value["cedula"]; // se asigna la variable que se quiere mostrar
-		                $cantidad=$value["cantidad_usuarios"]; // se asigna la variable que se quiere mostrar
-		                $nombreasignado=$value["nombre_rol"]; // se asigna la variable que se quiere mostrar
-		                  //  $observacionesusuarios=$value["observaciones"];
-		             ?>
-			             <div class="col-lg-6">
-			            	<h3 style="color: orange;">Nombre Rol</h3>
-		               		<label><?php echo $nombreasignado?></label>
-			            </div>
-		            	<div class="col-lg-6">
-		                	<h3 style="color: orange;">Cantidad Roles</h3>
-		                	<label><?php echo $cantidad?></label>
-			            </div>
-                    <?php
-	                    }
-		            ?>
-      				</div>
-      				
-      				<div class="col-lg-9 table-responsive " id="div2" style=" width: 100%;"><!--se nombra la clase columna long tipo 9 bootrap tabla reponsive o adaptable con id2 para el llamdo en el script de ocultar secciones de pagina-->
-					<h2>Cantidad de Vehículos <br>(Carros y Motocicletas)</h2> 
-		 			<?php  //finalizacion del comando para la variable this
-	                    foreach($consultacantidadveh as $key=>$value) { // se manda a llamar la variable que toma la informacion en este caso informa y hace un recorrido de la informacion en forma de array de lo que esta en el value mostrando datos la inforacion es extraida de la variable informa que esta en el controlador con una query.
-	                    //$cedulausuarios=$value["cedula"]; // se asigna la variable que se quiere mostrar
-		                $cantidadve=$value["cantidad_vehiculos"]; // se asigna la variable que se quiere mostrar
-		                $tipo=$value["tipo"]; // se asigna la variable que se quiere mostrar
-		                  //  $observacionesusuarios=$value["observaciones"];
-		             ?>
-			             <div class="col-lg-6">
-			            	<h3 style="color: orange;">Vehículo Tipo</h3>
-		               		<label><?php echo $tipo?></label>
-			            </div>
-		            	<div class="col-lg-6">
-		                	<h3 style="color: orange;">Cantidad Tipo</h3>
-		                	<label><?php echo $cantidadve?></label>
-			            </div>
-                    <?php
-	                    }
+				<div id="cantidar" style="display: none;">
+				    <div class="col-lg-12">
+	      				<div class="col-lg-12 table-responsive " id="div2" style=" width: 100%;">
+			 			<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/highcharts.js"></script>
+						<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/modules/exporting.js"></script>
+						<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/modules/export-data.js"></script>
+						<div id="container" style="height: 600px; max-width: 100%; margin: 0 auto"></div>
+							<script type="text/javascript">
 
-		            ?>
-		           
-      				</div>
+									Highcharts.chart('container', {
+									    chart: {
+									        plotBackgroundColor: null,
+									        plotBorderWidth: null,
+									        plotShadow: false,
+									        type: 'pie'
+									    },
+									    title: {
+									        text: 'Grafica Informactiva de Personal: Menu exportación'
+									    },
+									    tooltip: {
+									        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+									    },
+									    plotOptions: {
+									        pie: {
+									            allowPointSelect: true,
+									            cursor: 'pointer',
+									            dataLabels: {
+									                enabled: true,
+									                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+									                style: {
+									                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+									                }
+									            }
+									        }
+									    },
+									    series: [{
+									        name: 'Personal de Timiza',
+									        colorByPoint: true,
+									        data: [
+									        <?php 
+												  $link=mysqli_connect('localhost','root','','camegovp_sionweb2');
+												  $sql="SELECT count(*) cantidad_usuarios, R.nombre_rol
+				    									FROM roles R
+				    									INNER JOIN usuarios U 
+				    									ON U.roles_id = R.id 
+				    									GROUP BY R.nombre_rol ASC";
+												  $result=mysqli_query($link,$sql);
 
-			    </div>
-			</div>
+												  while($mostrar=mysqli_fetch_array($result)){
+						 
+												  ?>
+									        {
+									            name: '<?php echo $mostrar['nombre_rol']; ?>',
+									            y: <?php echo $mostrar['cantidad_usuarios']; ?>,
+									            sliced: true,
+									            selected: true
+									        },
+									    <?php } ?>
+									        ]
+									    }]
+									});
+							</script>
+							 <table class='table table-hover'>
+				                    <thead>
+				                    <tr>
+				                    <th class=columna>Nombre Rol</th>
+				                    <th class=columna>Cantidad</th>
+				                    </tr>
+				                   	</thead>
+				                   	<tbody>
+				                   	<tr>
+						 			<?php  //finalizacion del comando para la variable this
+					                    foreach($consultacantidaduser as $key=>$value) { 
+					                    $nombre_rol=$value["nombre_rol"]; // se asigna la variable que se quiere mostrar
+						                $cantidad_usuarios=$value["cantidad_usuarios"];
+
+						             ?>
+						               	<td class=columna style='font-weight:normal;'><?php echo $nombre_rol?></td>
+						                <td class=columna style='font-weight:normal;'><?php echo $cantidad_usuarios?></td>
+						              
+						            </tr>
+				                    <?php
+					                    }
+						            ?>
+						             </tbody>
+						     </table>
+	      				</div>
+
+	      				
+	      				<div class="col-lg-12 table-responsive " id="div2" style=" width: 100%;">
+
+				 			<div class="col-lg-12 table-responsive " id="div2" style=" width: 100%;">
+				 			<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/highcharts.js"></script>
+							<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/modules/exporting.js"></script>
+							<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/modules/export-data.js"></script>
+							<div id="container2" style="height: 600px; max-width: 100%; margin: 0 auto"></div>
+								<script type="text/javascript">
+
+										Highcharts.chart('container2', {
+										    chart: {
+										        plotBackgroundColor: null,
+										        plotBorderWidth: null,
+										        plotShadow: false,
+										        type: 'pie'
+										    },
+										    title: {
+										        text: 'Grafica Informactiva de vehiculos:Menu exportación'
+										    },
+										    tooltip: {
+										        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+										    },
+										    plotOptions: {
+										        pie: {
+										            allowPointSelect: true,
+										            cursor: 'pointer',
+										            dataLabels: {
+										                enabled: true,
+										                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+										                style: {
+										                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+										                }
+										            }
+										        }
+										    },
+										    series: [{
+										        name: 'Vehiculos de Timiza',
+										        colorByPoint: true,
+										        data: [
+										        <?php 
+													  $link=mysqli_connect('localhost','root','','camegovp_sionweb2');
+													  $sql="SELECT COUNT(*) cantidad_vehiculos, T.tipo 
+   														FROM vehiculos V
+   														INNER JOIN tipos T 
+   														ON V.tipo_de_vehiculo = T.id 
+   														GROUP BY V.tipo_de_vehiculo";
+													  $result=mysqli_query($link,$sql);
+
+													  while($mostrar=mysqli_fetch_array($result)){
+							 
+													  ?>
+										        {
+										            name: '<?php echo $mostrar['tipo']; ?>',
+										            y: <?php echo $mostrar['cantidad_vehiculos']; ?>,
+										            sliced: true,
+										            selected: true
+										        },
+										    <?php } ?>
+										        ]
+										    }]
+										});
+								</script>
+								 <table class='table table-hover'>
+					                    <thead>
+					                    <tr>
+					                    <th class=columna>Tipo Vehículo</th>
+					                    <th class=columna>Cantidad</th>
+					                    </tr>
+					                   	</thead>
+					                   	<tbody>
+					                   	<tr>
+							 			<?php  //finalizacion del comando para la variable this
+						                    foreach($consultacantidadveh as $key=>$value) { 
+						                    $tipo=$value["tipo"]; // se asigna la variable que se quiere mostrar
+							                $cantidad_veh=$value["cantidad_vehiculos"];
+
+							             ?>
+							               	<td class=columna style='font-weight:normal;'><?php echo $tipo?></td>
+							                <td class=columna style='font-weight:normal;'><?php echo $cantidad_veh?></td>
+							              
+							            </tr>
+					                    <?php
+						                    }
+							            ?>
+							             </tbody>
+							     </table>
+		      				</div>
+	      				</div>
+				    </div>
+				</div>
 			<!--________________________________ sexta consulta_____boton sexto_______________________________-->
 			<div id="tipar" style="display: none;">
 			    <div class="col-lg-12">
 			        <div class="col-lg-12">
 			        
-			                <label style="color: orange;">Consulta por Tipo Usuario <br>  (ARRENDATARIO,ADMINISTRADOR,OPERADOR,PROPIETARIO,VISITANTE Y SUPERUSER).</label>
-			                <input type="text" name="tipo" class="form-control" id="tipo" style="width: 100%; float: left;"/> 
+			            <label style="color: orange;">Consulta por Tipo Usuario <br>  (ARRENDATARIO,ADMINISTRADOR,OPERADOR,PROPIETARIO,VISITANTE Y SUPERUSER).</label>
+			            <!--input type="text" name="tipo" class="form-control" id="tipo" style="width: 100%; float: left;"/--> 
+			            <select name="tipo" class="form-control" id="tipo" style="width: 100%; float: left;">
+			            	<option value="Administrador">Administrador</option>
+			            	<option value="Operador">Operador</option>
+			            	<option value="Residente">Residente</option>
+			            	<option value="Propietario">Propietario</option>
+			            </select>
 	 		        </div>
-	 		         <div class="col-lg-12">
-					        <br>
-							<input type="button" name="buscartipados" id="buscartipados" value="Buscar" >
-					        <br>
+	 		        <div class="col-lg-12">
+					    <br>
+						<input type="button" name="buscartipados" id="buscartipados" value="Buscar" >
+						<br>
 					    <div class="col-lg-12">
-						        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
-						        	<br>
-						        	<h2>TIPO DE USUARIOS (Clasificación)</h2>
-						    		<div class="registros" id="busquedaportipo" placeholder="Buscar" style="overflow: auto; width:100%;height: 400px">
+							<h4>Exportar Excel o PDF Reporte General Usuarios</h4>	
+						</div>
+						<div class="col-lg-4">
+							<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
+						<?php echo CHtml::link("Exportar a Excel",array("Gestionusuarios","excelusuarios"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
+						</div>
+						<div class="col-lg-4">
+							<?php echo CHtml::link("Exportar a PDF",array("generarpdfuser",'useranme'=>'Residente'),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+						</div>	
+					    <div class="col-lg-12">
+						    <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
+						       	<br>
+						       	<h2>TIPO DE USUARIOS (Clasificación)</h2>
+						   		<div class="registros" id="busquedaportipo" placeholder="Buscar" style="overflow: auto; width:100%;height: 400px">
+						   			<div class="col-lg-6">
+						      			<h1>Historia</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div class="col-lg-6">
+						      			<h1>Ideas</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div style="width: 100%; height: 300px;" class="col-lg-12">
+						    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+						    			<br>
 						    		</div>
-						        </fieldset>
+						   		</div>
+						    </fieldset>
 					    </div>
 					 </div>
 			    </div>
@@ -287,17 +550,56 @@
 			<!--________________________________ septima consulta_____boton septimo_______________________________-->
 			<div id="fechasolicitar" style="display: none;">
 			    <div class="col-lg-12">
-			        <div class="col-lg-8">
+			        <div class="col-lg-12">
 			                <label style="color: orange;">Consulta por Fecha Inicial Solicitud PQRS (Acción Busqueda).</label>
-			                <input type="date" name="fechasolicitud" class="form-control" id="fechasolicitud" style="width: 100%; float: left;"/>
+			                <input type="date" name="fechasolicitudini" class="form-control" id="fechasolicitudini" style="width: 100%; float: left;"/>
 			                <label style="color: orange;">Consulta por Fecha Final Solicitud PQRS (Acción Busqeuda).</label>
-			                <input type="date" name="fechasolicitudDos" class="form-control" id="fechasolicitudDos" style="width: 100%; float: left;"/> 
+			                <input type="date" name="fechasolicitudfin" class="form-control" id="fechasolicitudfin" style="width: 100%; float: left;"/> 
+
 	 		        </div>
-					            <br>
+	               
+	                <div class="col-lg-12">
+	                	 <br>
+						<input type="button" name="buscarfechadospqrs" id="buscarfechadospqrs" value="Buscar" >
+						 <br>
+						 <div class="col-lg-12">
+							<h4>Exportar Excel o PDF Reporte General Usuarios</h4>	
+						</div>
+						<div class="col-lg-4">
+							<!--?php echo CHtml::link(CHtml::image(Yii::app()->request->baseUrl."/imagenes/excel.png","",array("Gestionvehiculos","excel"=>1),array("style"=>"background-color: green; color: white;","class"=>"btn"))); ?-->
+						<?php echo CHtml::link("Exportar a Excel",array("Pqrsadmin","excelpqrs"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
+						</div>
+						<div class="col-lg-4">
+							<?php echo CHtml::link("Exportar a PDF",array("generarpqrsPdf",'idestadopqrs'!= 4),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+						</div>	
+					</div>
+		           
 				    <div class="col-lg-12">
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
 					    		<div class="registros" id="busquedaporfechasoli" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
+					    			<div class="col-lg-6">
+						      			<h1>Historia</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div class="col-lg-6">
+						      			<h1>Ideas</h1>
+						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						      		</div>
+						      		<div style="width: 100%; height: 300px;" class="col-lg-12">
+						    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+						    			<br>
+						    		</div>
 					    		</div>
 					        </fieldset>
 				    </div>
@@ -310,24 +612,60 @@
 			                <label style="color: orange;">Consulta por Cedula Usuario (Acción Busqueda).</label>
 			                <input type="text" name="cedulas" class="form-control" id="cedulas" style="width: 100%; float: left;"/> 
 	 		        </div>
-					            <br>
+	 		        <div class="col-lg-12">
+	                	 <br>
+							<input type="button" name="buscarcedulapqrs" id="buscarcedulapqrs" value="Buscar" >
+						 <br>
+						<div class="col-lg-12">
+							<h4>Exportar Excel o PDF Reporte General Usuarios</h4>	
+						</div>
+						<div class="col-lg-4">
+							<?php echo CHtml::link("Exportar a Excel",array("Pqrsadmin","excelpqrs"=>1),array("style"=>"background-color: green; color: white; width:150px;","class"=>"btn")); ?>
+						</div>
+						<div class="col-lg-4">
+							<?php echo CHtml::link("Exportar a PDF",array("GenerarpqrsPdf",'idpqrs'!= 4),array("title"=>"Exportar a PDF","style"=>"background-color: red; color: white; width:150px;","class"=>"btn","target"=>"_blank")); ?>
+						</div>	
+					</div>
 				    <div class="col-lg-12">
-					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
-					        	<br>
-					    		<div class="registros" id="busquedaporcedulasolicitud" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
-					    		</div>
-					        </fieldset>
+						<fieldset style="border: 1px solid white;border-radius: 5px 5px;">
+					        <br>
+						    <div class="registros" id="busquedaporcedulasolicitud" placeholder="Buscar" style="overflow: auto; width:100%;height: auto;">
+						    	<div class="col-lg-6">
+							    	<h1>Historia</h1>
+							    	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							    	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							    	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							    	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							    	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							    </div>
+							    <div class="col-lg-6">
+							    	<h1>Ideas</h1>
+							    	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							    	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+							    	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+							    	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+							    	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							    </div>
+							    <div style="width: 100%; height: 300px;" class="col-lg-12">
+							    	<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
+							    	<br>
+							    </div>	
+					    	</div>
+					    </fieldset>
 				    </div>
 			    </div>
 			</div>
-		</section>
+			
+			</section>
 		</div>
 	</div>
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/java.js""></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/java.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/skel.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/util.js"></script>
@@ -544,6 +882,45 @@
 				var tipo;
 				tipo=$('#tipo').val()
 	   	 		obtener_registros_tres(tipo);
+	   	 		});
+	     }
+	 //------------------------------------ ajax consulta SIETE---------------------------------
+	    if ('#fechasolicitudini'!='' && 'fechasolicitudfin'!='') {
+		          function obtener_registros_siete(fechasolicitudini,fechasolicitudfin) // inicio de la funcion obtener registros de la tabla clientes
+		          {
+		            $.ajax({ // inicio de ajax 
+		              url :'consultaporfechapqrs', // se acciona la ubicacion del archivo de consulta
+		              type : 'get', // se indica que tipo de metodo sera
+		              data : { fechasolicitudini:fechasolicitudini,fechasolicitudfin:fechasolicitudfin }, // se indica la base a la cual va dirigida la extraccion
+		              })
+		            .done(function(resultadosA){ // estrae la informacion valida y la envia a la tabla resultados del div
+		              $("#busquedaporfechasoli").html(resultadosA);
+		            })
+		          }
+		         $('#buscarfechadospqrs').click(function(){ //enviamos la funcion de un click e el boton
+					var fechasolicitudini,fechasolicitudfin; // delcaramos las variables a utilizar
+					fechasolicitudini=$('#fechasolicitudini').val() // el campo del input se evalua y lo que tenga se asigna a la variable
+					fechasolicitudfin=$('#fechasolicitudfin').val()
+		   	 		obtener_registros_siete(fechasolicitudini,fechasolicitudfin);
+		   	 		});
+		}
+	 //------------------------------------ ajax consulta OCHO---------------------------------
+	    if ('#cedulas') {
+	          function obtener_registros_ocho(cedulas) // inicio de la funcion obtener registros de la tabla clientes
+	          {
+	            $.ajax({ // inicio de ajax 
+	              url :'consultausuariopqrs', // se acciona la ubicacion del archivo de consulta
+	              type : 'get', // se indica que tipo de metodo sera
+	              data : {cedulas:cedulas}, // se indica la base a la cual va dirigida la extraccion
+	              })
+	            .done(function(resultadosA){ // estrae la informacion valida y la envia a la tabla resultados del div
+	              $("#busquedaporcedulasolicitud").html(resultadosA);
+	            })
+	          }
+	         $('#buscarcedulapqrs').click(function(){ //enviamos la funcion de un click e el boton
+				var cedulas;
+				cedulas=$('#cedulas').val()
+	   	 		obtener_registros_ocho(cedulas);
 	   	 		});
 	     }
 	  

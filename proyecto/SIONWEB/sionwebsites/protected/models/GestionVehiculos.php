@@ -82,9 +82,9 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
      return $this->getGestionvehiculos;// devuelve el valor de la funcion get de el modelo
   }
   public function setGestionvehiculos($placa,$marca,$color,$modelo,$usuarios_cedula,$fecharegistrovehiculos,$tipo_de_vehiculo){
-      
 
-        if ($placa !='' && $marca !='' && $color !='' && $modelo !='' && $usuarios_cedula !='' && $fecharegistrovehiculos !='')  {
+    try {
+      if ($placa !='' && $marca !='' && $color !='' && $modelo !='' && $usuarios_cedula !='' && $fecharegistrovehiculos !='')  {
            Yii::app()->db->createCommand()->insert('vehiculos', [
           'placa'=>$placa,
           'marca'=> $marca,
@@ -105,8 +105,10 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
             ]);
             echo '<Script> alert("Registro del vehiculo correctamente");</Script>';
         }else{ echo '<Script> alert("No pudo registrarse el vehiculo");</Script>';}
-  }
-
+    } catch (Exception $e) {
+        echo "Posiblemente el Vehículo yá existe";
+    }
     
+  }
 
 }

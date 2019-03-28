@@ -75,7 +75,10 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
      return $this->getListadopunto;// devuelve el valor de la funcion get de el modelo
   }
   public function setGestionControlAcceso($fechauno,$fechados,$puntoparqueo_id,$vehiculos_placa){
-        if ($vehiculos_placa !='' && $fechados != null )  {
+
+    try {
+      
+       if ($vehiculos_placa !='' && $fechados != null )  {
           
             # code...
            Yii::app()->db->createCommand()->insert('ingresos_salidas', [
@@ -88,7 +91,13 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
             echo "<script> alert('ingreso Datos correcto');</script>";
         }else{
           echo "<script> alert('No! se ingresaron Datos Verifique los campos');</script>";
+        
         }
-        } 
+    } catch (Exception $e) {
+      
+      echo "<script>alert('No existe esta placa Digite de nuevo');</script>";
+    }
+       
+    } 
 
 }

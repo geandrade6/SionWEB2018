@@ -12,22 +12,34 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-responsive.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" />
+		<style type="text/css">
+		
+  		/* Para 600px */  
+		@media only screen and (max-width: 620px) and (min-width: 301px) {  
+  		.informacion{
+       	
+       	color:#2a7ab8;
+  			}
+		}
+</style>
 
 <div id="wrapper">
 	<div id="main">
 		<div class="inner">
 		<section>
+			<div class="col-lg-12">
 			<header class="main">
 				<?php
-$this->pageTitle=Yii::app()->name . ' - Eventos';
-$this->breadcrumbs=array(
-	'Enventos',
-);
-?>
-			<h1>Evento Principal</h1>
+				$this->pageTitle=Yii::app()->name . ' - Eventos';
+				$this->breadcrumbs=array(
+					'Enventos',
+				);
+				?>
+					
+			<h1 style="color:#2a7ab8;">Evento Principal</h1>
 			</header>
+			</div>
 			<div class="col-lg-12">
-				<div class="row">
 						<?php
 						foreach($consultaeventos as $key=>$value) { 
 						$titulo=$value["titulo"]; // se asigna la variable que se quiere mostrar
@@ -53,11 +65,12 @@ $this->breadcrumbs=array(
 						</div>
 					</div>
 					<?php }?>
-				</div>
+			</div>
 					<hr class="major" />
 					<!-- Elements -->
-					<h2 id="elements">Historial de Eventos</h2>
-				<div class="col-lg-12">
+					
+			<div class="col-lg-12 informacion">
+					<h2 id="elements" style="color:#2a7ab8;">Historial de Eventos</h2>
 					<?php
 					foreach($consultaeventosDos as $key=>$value) { 
 					$titulo=$value["titulo"]; // se asigna la variable que se quiere mostrar
@@ -67,28 +80,30 @@ $this->breadcrumbs=array(
 					$imagenes=$value["imagenes"]; // se asigna la variable que se 
 					?>	
 					<!-- Text stuff -->
-					<div class="col-lg-6" style="float: left; padding: 1%;">
+					<div class="col-lg-6" style="float: left; padding: 1%;height: 630px; overflow: auto;">
 					<h3><?php echo $titulo;?></h3>
 					<p><?php echo $mensaje;?></p>
 					<h4><?php echo $subtitulo;?></h4>
 					<p><?php echo $submensaje;?></p>
-					<img src='<?php echo Yii::app()->request->baseUrl;?>/<?php echo $imagenes?>' style="width: 150px; height: 100px;">
-					
-					<hr />
+					<img src='<?php echo Yii::app()->request->baseUrl;?>/<?php echo $imagenes?>' style="width: 200px; height: 150px;border:2px solid #2a7ab8;border-radius: 10%;">
+					<hr width="100%">
+					<br>
 					</div>
+
 					<?php }?>
-							
-				</div>
+					<br>
+			</div>
 				<!-- Blockquote -->
-				<br>
-				<div class="col-lg-12">
+				
+			<div class="col-lg-12">
+					<br>
 					<h3>Informacion General</h3>
 					<p>
 					<blockquote>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis olutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus.</blockquote>
 					</p>
-				</div>
-				<div class="col-lg-12">
-						<h3>Listado de Eventos</h3>
+			</div>
+			<div class="col-lg-12">
+						<h3 style="color:#2a7ab8;">Listado de Eventos</h3>
 						<h4 style="text-align: center;">Listado Eventos Realizados Durante el Año</h4>
 					<div class="table-wrapper">
 						<div class="table-responsive contenedor" style="height: 300px; overflow: scroll;">
@@ -122,7 +137,6 @@ $this->breadcrumbs=array(
 							</table>
 						</div>
 					</div>
-				</div>
 			</div>
 		</section>
 		</div>

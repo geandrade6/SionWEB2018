@@ -10,46 +10,62 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-responsive.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" />
-
+		<style type="text/css">
+		@media only screen and (max-width: 620px) and (min-width: 301px) {  
+  		.informacion{
+       	
+       	color:#2a7ab8;
+  			}
+		}
+		</style>
 <div id="wrapper">
 	<div id="main">
 		<div class="inner">
 		<section>
-			<input type="submit" name="acciones" value="Insertar" class="insertados btn-primary">
-			<input type="submit" name="acciones" value="Modificar" class="modificados btn-primary">
+		<div class="col-lg-12">
+			<h5 style=" color: red;">Al dar click tendrá dos Opciones.</h5>
+			<h6>* Modificar Evento donde podrá modificar solo el texto y la posicion de publicación.</h6>
+			<h6>* Registrar Nuevo event, "donde ingresamos un nuevo evento".</h6>
+			<div class="col-lg-3">	
+			<input type="submit" name="acciones" value="Insertar" class="insertados btn-primary" title="Ingresar nuevo evento" style="display: none;">
+			<input type="submit" name="acciones" value="Modificar" class="modificados btn-primary" title="Modificar algun evento debe tener en cuenta al número de ID" style="display: block;">
+			</div>
+		</div>
+		<div class="col-lg-12">	
 			<header class="main">
 				<?php // esto son las migas de pan
 				$this->pageTitle=Yii::app()->name . ' - Nuevos Eventos';
 				$this->breadcrumbs=array(
 					'Insertar Nuevo Envento',
+					'Aquí generamos un nuevo evento para la solicitud del Residente según el PQRS'
 				);
 				?>
 				<div id="insertado" style="display: block;">
 
-				<h1>Insertar Eventos</h1>
+				<h1 style="color:#2a7ab8;">Insertar Eventos</h1>
 				<!-- Inicio de Formulario con Wigdet-->
-
+				<h6>Los campos con <span class="required" style="color: red;">*</span> son requeridos</h6>
 				 <?php
 				  $form=$this->beginWidget('CActiveForm',array('htmlOptions'=>array('enctype'=>'multipart/form-data'),
 					)); //activacion del comando para el form
 				  echo $form->errorSummary($modelEventos); // se llama la variablre
 					?>	
-				<h4>Título del Evento</h4>
+				<h4><span class="required" style="color: red;">*</span>Título del Evento</h4>
 				<?php
-					echo $form->textField($modelEventos,'titulo',array('class'=>'form-control caja','placeholder'=>"Digita Título")); //
+					echo $form->textField($modelEventos,'titulo',array('class'=>'form-control caja','placeholder'=>"Digite el titulo principal del evento")); //
 				?>
 				<br>
-				<h4>Mensaje principal del Evento</h4>
+				<h4><span class="required" style="color: red;">*</span>Mensaje principal del Evento</h4>
 				<?php
-					echo $form->textarea($modelEventos,'mensaje',array('class'=>'form-control  ','placeholder'=>"Digita Mensaje Principal")); //
+					echo $form->textarea($modelEventos,'mensaje',array('class'=>'form-control  ','placeholder'=>"Digite un Mensaje de acuerdo al Título Principal")); //
 				?>
 				<br>
-				<h4>Sub-Título del Evento</h4>
+				<h4><span class="required" style="color: red;">*</span>Sub-Título del Evento</h4>
 				<?php
-					echo $form->textField($modelEventos,'subtitulo',array('class'=>'form-control caja ','placeholder'=>"Digita Sub-Título")); //
+					echo $form->textField($modelEventos,'subtitulo',array('class'=>'form-control caja ','placeholder'=>"Digite el Sub-titulo del evento")); //
 				?>
 				<br>
-				<h4>Sub-Mensaje del Evento</h4>
+				<h4><span class="required" style="color: red;">*</span>Sub-Mensaje del Evento</h4>
 				<?php
 					echo $form->textarea($modelEventos,'submensaje',array('class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal")); //
 				?>
@@ -62,6 +78,7 @@
 				?>
 				<br>
 				<h4>Subir Imagen</h4>
+				<h6 style="color:red;">Solo imagenes en este archivo,<strong style="color: red;">!no se aceptan otras extensiones¡</strong>, preferiblemente png, jpg ó gif</h6>
         		<?php echo CHtml::activeFileField($modelEventos,'imagenes'); //reclectamos la imagen?>  
         		<?php echo $form->error($modelEventos,'imagenes');//error de si no  es imagen ?>
 				<!--?php
@@ -76,9 +93,11 @@
 					echo $form->textField($modelEventos,'fecha_registro',array('value'=>$fecha_registro,'readonly'=>'readonly'));
 				?>
 				<br>
+				<div class="col-lg-3">	
 				 <?php  //esto es un boton en PHP
                     echo CHtml::submitButton('Insertar',array('class'=>'form-control btn-primary','style'=>'width:100%;;','id'=>'insertar','title'=>'Ingreso Registro','name'=>'insertar'));
                  ?>
+             	</div>
 
 				<?php	
 					 $this->endWidget();				
@@ -87,9 +106,12 @@
 				<br>
 				<div id="modificado" style="display: none;">
 			        <div class="col-lg-12">
-			            <div class="col-lg-6">
+			            <div class="col-lg-12">
 			                <label>Buscar Cliente por Identificación (Acción modificar ).</label>
+			                <h6><span class="required" style="color: red;">*</span>Didite la posición del Evento y de Enter, si no se acuerda Verifique la tabla inferior</h6>
+			                <div class="col-lg-6">
 			                <input type="number" name="ideventos" placeholder="Digita y Enter al terminar" class="form-control" id="ideventos" style="width: 100%; float: left;"/>  
+			            	</div>
 	 		            </div>
 					            <br>
 				        <div class="col-lg-12">
@@ -102,11 +124,10 @@
 			        </div>
 				</div>
 			<!--Fin del Widget-->
-			<h1>Evento Principal</h1>
-			</header>
-
+				<h1 style="color:#2a7ab8;">Evento Principal</h1>
+				</header>
+			</div>
 			<div class="col-lg-12">
-				<div class="row">
 						<?php
 						foreach($consultaeventos as $key=>$value) { 
 						$titulo=$value["titulo"]; // se asigna la variable que se quiere mostrar
@@ -132,11 +153,12 @@
 						</div>
 					</div>
 					<?php }?>
-				</div>
+			</div>
 					<hr class="major" />
 					<!-- Elements -->
-					<h2 id="elements">Historial de Eventos</h2>
-				<div class="col-lg-12">
+					
+			<div class="col-lg-12">
+					<h2 id="elements" style="color:#2a7ab8;">Historial de Eventos</h2>
 					<?php
 					foreach($consultaeventosDos as $key=>$value) { 
 					$titulo=$value["titulo"]; // se asigna la variable que se quiere mostrar
@@ -146,26 +168,27 @@
 					$imagenes=$value["imagenes"]; // se asigna la variable que se 
 					?>	
 					<!-- Text stuff -->
-					<div class="col-lg-6" style="float: left; padding: 1%;">
+					<div class="col-lg-6" style="float: left; padding: 1%;height: 630px; overflow: auto;">
 					<h3><?php echo $titulo;?></h3>
 					<p><?php echo $mensaje;?></p>
 					<h4><?php echo $subtitulo;?></h4>
 					<p><?php echo $submensaje;?></p>
-					<img src='<?php echo Yii::app()->request->baseUrl;?>/<?php echo $imagenes?>' style="width: 150px; height: 100px;">
-					<hr />
+					<img src='<?php echo Yii::app()->request->baseUrl;?>/<?php echo $imagenes?>' style="width: 200px; height: 150px;border:2px solid #2a7ab8;border-radius: 10%;">
+					<hr width="100%">
 					</div>
+
 					<?php }?>
-				</div>
+			</div>
 				<!-- Blockquote -->
 				<br>
-				<div class="col-lg-12">
-					<h3>Informacion General</h3>
+			<div class="col-lg-12 informacion">
+					<h3 style="color:#2a7ab8;">Informacion General</h3>
 					<p>
 					<blockquote>Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis olutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus.</blockquote>
 					</p>
-				</div>
-				<div class="col-lg-12">
-						<h3>Listado de Eventos</h3>
+			</div>
+			<div class="col-lg-12">
+						<h3 style="color:#2a7ab8;">Listado de Eventos</h3>
 						<h4 style="text-align: center;">Listado Eventos Realizados Durante el Año</h4>
 					<div class="table-wrapper">
 						<div class="table-responsive contenedor" style="height: 300px; overflow: scroll;">
@@ -202,8 +225,9 @@
 							</table>
 						</div>
 					</div>
-				</div>
 			</div>
+			
+		
 		</section>
 		</div>
 	</div>
@@ -223,7 +247,8 @@
                       if(valor == 'Insertar'){
                         $("#insertado").css("display", "block");
                         $("#modificado").css("display", "none");
-                        
+                        $(".insertados").css("display", "none");
+                        $(".modificados").css("display", "block");
                        }
         });
          $(".modificados").click(function(evento){
@@ -231,6 +256,8 @@
                       if(valor == 'Modificar'){
                         $("#insertado").css("display", "none");
                         $("#modificado").css("display", "block");
+                        $(".insertados").css("display", "block");
+                        $(".modificados").css("display", "none");
                        }
         });
      

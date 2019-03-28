@@ -7,6 +7,7 @@ class Informes extends CActiveRecord{
   public $getInformesuser;
   public $getInformesveh;
   public $getEstadodos;
+  public $getIngresosalida;
 
 // de bajo de este van setters
 
@@ -80,5 +81,13 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
         
        
        return $this->getEstadodos;// devuelve el valor de la funcion get 
+  }
+  public function getIngresosalida (){
+
+    $consultaingsal="SELECT S.fecha_ingreso, S.fecha_salida,S.vehiculos_placa,p.nombre_punto FROM ingresos_salidas S
+    INNER JOIN puntoparqueo P on P.id = S.puntoparqueo_id";
+    $this->getIngresosalida=Yii::app()->db->createCommand($consultaingsal)->queryAll();// consulta base de datos 
+        return $this->getIngresosalida;// devuelve el valor de la funcion get 
+
   }
 }
