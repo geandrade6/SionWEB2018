@@ -8,6 +8,8 @@ class Informes extends CActiveRecord{
   public $getInformesveh;
   public $getEstadodos;
   public $getIngresosalida;
+  public $getEntradasalida;
+  public $getCantIngresosalida;
 
 // de bajo de este van setters
 
@@ -73,6 +75,16 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
  
      return $this->getInformesveh;// devuelve el valor de la funcion get de el modelo
   } 
+  public function getEntradasalida(){ 
+      
+   $consultalistacontrol =
+   "SELECT ES.fecha_ingreso,ES.fecha_salida,P.nombre_punto,ES.vehiculos_placa FROM ingresos_salidas ES
+    INNER JOIN puntoparqueo P ON P.id = ES.puntoparqueo_id ";
+    
+    $this->getEntradasalida=Yii::app()->db->createCommand($consultalistacontrol)->queryAll();// consulta base de datos Mysql            
+ 
+     return $this->getEntradasalida;// devuelve el valor de la funcion get de el modelo
+  } 
 
   public function getEstadodos(){ // funcion para el combo box
     $consultaRolDos="SELECT id, nombre_rol FROM roles ordeR by id asc";
@@ -84,10 +96,20 @@ public function tableName() // esto indica que vamos a trabajar con una tabla pr
   }
   public function getIngresosalida (){
 
-    $consultaingsal="SELECT S.fecha_ingreso, S.fecha_salida,S.vehiculos_placa,p.nombre_punto FROM ingresos_salidas S
+    $consultaingsal="SELECT S.fecha_ingreso, S.fecha_salida,S.vehiculos_placa,P.nombre_punto FROM ingresos_salidas S
     INNER JOIN puntoparqueo P on P.id = S.puntoparqueo_id";
     $this->getIngresosalida=Yii::app()->db->createCommand($consultaingsal)->queryAll();// consulta base de datos 
         return $this->getIngresosalida;// devuelve el valor de la funcion get 
+
+  }
+  public function getCantIngresosalida (){
+
+    $consultacantingresal="SELECT count(*) cantidad, P.nombre_punto, ES.vehiculos_placa
+    FROM ingresos_salidas ES
+    INNER JOIN puntoparqueo P ON ES.puntoparqueo_id = P.id
+    GROUP BY ES.vehiculos_placa";
+    $this->getCantIngresosalida=Yii::app()->db->createCommand($consultacantingresal)->queryAll();// consulta base de datos 
+        return $this->getCantIngresosalida;// devuelve el valor de la funcion get 
 
   }
 }

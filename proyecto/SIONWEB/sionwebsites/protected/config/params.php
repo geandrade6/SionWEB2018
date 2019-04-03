@@ -5,7 +5,7 @@ return array(
 	// this is displayed in the header section
 	'title'=>'TIMIZA PARK-LOT',
 	// this is used in error pages
-	'adminEmail'=>'',
+	'adminEmail'=>'gusangad@gmail.com',
 	// number of posts displayed per page
 	'postsPerPage'=>10,
 	// maximum number of comments that can be displayed in recent comments portlet

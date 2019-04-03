@@ -3788,19 +3788,19 @@
 			}
 
 				#sidebar .toggle:before {
-					color: #7f888f;
-					margin-left: -0.0625em;
-					margin-top: -0.25em;
+					color: #fcfeff;
+					margin-left: -3.0325em;
+					margin-top: -0.35em;
 					font-size: 1.1rem;
 					z-index: 1;
 				}
 
 				#sidebar .toggle:after {
-					background: rgba(222, 225, 226, 0.75);
-					border-radius: 0.375em;
+					background: rgb(21, 173, 196);
+					border-radius: -0.625em;
 					content: '';
 					height: 3.5em;
-					left: 1em;
+					left: -3em;
 					position: absolute;
 					top: 1em;
 					width: 5em;

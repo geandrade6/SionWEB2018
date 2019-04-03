@@ -27,7 +27,7 @@
 			?>
 
 			<div style="width: 100%; height: 300px;margin-bottom: 10%;" class="col-lg-12">
-    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/4.jpg" style="width: 100%; height: 400px;">
+    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/4.JPG" style="width: 100%; height: 400px;">
     			<br>
     		</div>
     		<div class="col-lg-12">
@@ -36,8 +36,8 @@
     		<h5 style=" color: red;">Opciones de Acción.</h5>
 			<h6>* Insertar: Nuevo usuario donde el operador o administrador tienen acceso.</h6>
 			<h6>* Modificar: aquí podemos realizar los cambios pertinentes o actualizaciones de usuarios.</h6>
-			<h6>* Eliminar: se aplica cuando un residente se va del conjunto y si es encargado se debe hacer el cambio en apartartamento.</h6>
-			<h6>* Apartamentos:	Se modifica unicamente la cedula del encargado del apartamento segun el propietario.</h6>
+			<h6>* Eliminar: se aplica cuando un residente se va del conjunto y si es encargado se debe hacer el cambio en apartar amento.</h6>
+			<h6>* Apartamentos: Se modifica únicamente la cedula del encargado del apartamento según el propietario.</h6>
     		<input type="submit" name="acciones" value="Insertar" class="insertados btn-primary" title="Ingreso nuevo Registro">
 			<input type="submit" name="acciones" value="Modificar" class="modificados btn-primary" title="Modificar Registro correspodiente a la identifiación.">
 			<input type="submit" name="acciones" value="Eliminar" class="eliminados btn-primary" title="Eliminar Registro correspodiente a la identifiación.">

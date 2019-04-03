@@ -40,8 +40,8 @@
 			        <div class="col-lg-12">
 						<h2>Vehículos</h2>
 			        	<h3>Digitar el número del Apartamento</h3>
-			        	<h6> <span class="required" style="color: red;">*</span>Aquí realizamos la busqueda por apartamento para verificar el punto de parqueo.</h6>
-			                <label style="color: orange;">Consulta por placa (Acción Busqueda).</label>
+			        	<h6> <span class="required" style="color: red;">*</span>Aquí realizamos la búsqueda por apartamento para verificar el punto de parqueo.</h6>
+			                <label style="color: orange;">Consulta por número apartamento (Acción Búsqueda).</label>
 			                <input type="text" name="apart" class="form-control caja" id="apart" style="width: 100%; float: left;"/> 
 	 		        </div>
 		 		    <div class="col-lg-12">

@@ -29,28 +29,34 @@
 				<!-- Inicio de Formulario con Wigdet-->
 				<h6>Los campos con <span class="required" style="color: red;">*</span> son requeridos.</h6>
 				 <?php
-				  $form=$this->beginWidget('CActiveForm',array('htmlOptions'=>array('enctype'=>'multipart/form-data'),
+							  $form=$this->beginWidget('CActiveForm',array('htmlOptions'=>array('enctype'=>'multipart/form-data'),
 					)); //activacion del comando para el form
 				  echo $form->errorSummary($modelpqrs); // se llama la variablre
 					?>	
 				<h4>Codigo PQRS</h4>
 				<?php
-					echo $form->textField($modelpqrs,'idpqrs',array('class'=>'form-control caja','placeholder'=>"Digita Título",'readonly'=>'readonly')); //
+				foreach ($mostrarpqrs as $key => $value) {
+					# code...
+					$ver =  $value['idpqrs'];
+				}
+				
+					echo $form->textField($modelpqrs,'idpqrs',array('class'=>'form-control caja','placeholder'=>"COD-$ver",'readonly'=>'readonly')); //
+				
 				?>
 				<br>
 				<h4><span class="required" style="color: red;">*</span>Asunto</h4>
 				<?php
-					echo $form->textField($modelpqrs,'asunto',array('class'=>'form-control  ','placeholder'=>"Digita Mensaje Principal")); //
+					echo $form->textField($modelpqrs,'asunto',array('class'=>'form-control  ','placeholder'=>"Digita el Asunto Principal")); //
 				?>
 				<br>
 				<h4><span class="required" style="color: red;">*</span>Mensaje</h4>
 				<?php
-					echo $form->textarea($modelpqrs,'mensaje',array('class'=>'form-control caja ','placeholder'=>"Digita Sub-Título")); //
+					echo $form->textarea($modelpqrs,'mensaje',array('class'=>'form-control caja ','placeholder'=>"Digita el Mensaje Principal")); //
 				?>
 				<br>
 				<h4><span class="required" style="color: red;">*</span>Correo</h4>
 				<?php
-					echo $form->emailField($modelpqrs,'correo',array('class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal")); //
+					echo $form->emailField($modelpqrs,'correo',array('class'=>'form-control  ','placeholder'=>"Digita tu Correo")); //
 				?>
 				<br>
 				<h4>Subir Archivo</h4>
@@ -60,12 +66,14 @@
 				<br>
 				<h4>Estados PQRS</h4>
 				<?php
-					echo $form->textField($modelpqrs,'idestadopqrs',array('value'=>'EN PROCESO','class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal",'readonly'=>'readonly')); //
+					echo $form->dropDownList/*SELECT EN PHP*/($modelpqrs,'idestadopqrs',//squi va el id de la tabla
+       				 CHtml::listData($consultestadopqrs, 'idestadopqrs', 'nombre_estado_pqr')//aqui va el id y de seguido lo que se va a mostrar.
+        			,array('class'=>'form-control columnas','style'=>'width:100%;')); 
 				?>
 				<br>
-				<h4><span class="required" style="color: red;">*</span>Identificacion usuario</h4>
+				<h4><span class="required" style="color: red;">*</span>Identificación usuario</h4>
 				<?php
-					echo $form->textField($modelpqrs,'idusuario',array('class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal")); //
+					echo $form->textField($modelpqrs,'idusuario',array('class'=>'form-control  ','placeholder'=>"Digita cedula de usuario")); //
 				?>			
 				<h4>Fecha Creacion PQRS</h4>
 				<?php
@@ -91,7 +99,7 @@
 			    <div class="col-lg-12">
 			        <div class="col-lg-8">
 			                <label style="color: orange;">Consulta Tú PQRS(Cedula de usuario).</label>
-			                <h6>><span class="required" style="color: red;">*</span>Aquí realizamos la busqueda de nuestros PQRS con nuestra identificación.</h6>
+			                <h6><span class="required" style="color: red;">*</span>Aquí realizamos la búsqueda de nuestros PQRS con nuestra identificación.</h6>
 			                <input type="text" name="cedulas" class="form-control" id="cedulas" style="width: 100%; float: left;"/> 
 	 		        </div>
 	 		        <div class="col-lg-12">

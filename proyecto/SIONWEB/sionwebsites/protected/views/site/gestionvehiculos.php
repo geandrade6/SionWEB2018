@@ -34,14 +34,14 @@
     		<h1 style="color:#2a7ab8">Funciones a Realizar</h1>
     		<h5 style=" color: red;">Opciones de Acción.</h5>
 			<h6>* Insertar: Nuevo vehículo donde el operador o administrador tienen acceso.</h6>
-			<h6>* Modificar: aquí podemos realizar los cambios pertienes o actualizaciones de vehículos.</h6>
-			<h6>* Eliminar: se aplica cunando un residente no esta habitando en el conjunto.</h6>
+			<h6>* Modificar: aquí podemos realizar los cambios pertinentes o actualizaciones de vehículos.</h6>
+			<h6>* Eliminar: se aplica cunando un residente no está habitando en el conjunto.</h6>
 			<input type="submit" name="acciones" value="Insertar" class="insertados btn-primary" title="Ingreso nuevo Registro">
 			<input type="submit" name="acciones" value="Modificar" class="modificados btn-primary" title="Modificacion de Parametros del Vehiculo">
 			<input type="submit" name="acciones" value="Eliminar" class="eliminados btn-primary" title="Eliminar Vehiculos del Sistema">
 			</div>
 	<div id="insertado" style="display: block;" class="col-lg-12">
-	<h1 style="color:#2a7ab8">Insertar Vehiculos</h1>
+	<h1 style="color:#2a7ab8">Insertar Vehículos</h1>
 	<h6>Los campos con <span class="required" style="color: red;">*</span> son requeridos.</h6>
 		<!-- Inicio de Formulario con Wigdet-->  
 			 <?php              
@@ -75,7 +75,7 @@
 				?>
 				</div>
 				<div class="col-lg-6">
-				<h4>Tipo de Vehículo</h4>
+				<h4>Categoría de Vehículo</h4>
 				<?php 
 				echo $form->dropDownList/*SELECT EN PHP*/($modelocrearvehiculo,'tipo_de_vehiculo',//squi va el id de la tabla
        				 CHtml::listData($consultatiposve, 'id', 'tipo')//aqui va el id y de seguido lo que se va a mostrar.
@@ -112,7 +112,7 @@
 			        <div class="col-lg-12">
 			            <div class="col-lg-6">
 			            	<br>
-			                <label>Buscar vehiculo por placa (Acción modificar ).</label>
+			                <label>Buscar vehículo por placa (Acción modificar ).</label>
 			                <h6><span class="required" style="color: red;">*</span>Digite la Placa y de Enter.</h6>
 			                <input type="text" name="placa" placeholder="Digita y Enter al terminar" class="form-control caja" id="placa" style="width: 100%; float: left;"/>  
 	 		            </div>
@@ -131,7 +131,7 @@
 			        <div class="col-lg-12">
 			            <div class="col-lg-6">
 			            	<br>
-			                <label>Buscar vehiculo por placa (Acción Eliminar).</label>
+			                <label>Buscar vehículo por placa (Acción Eliminar).</label>
 			                <h6><span class="required" style="color: red;">*</span>Digite la Placa y de Enter.</h6>
 			                <input type="text" name="plaquetas" placeholder="Digita y Enter al terminar" class="form-control caja" id="plaquetas" style="width: 100%; float: left;"/>  
 	 		            </div>
@@ -147,7 +147,7 @@
 				</div>				
 
 			<div class="col-lg-12">
-				<h2 style="color:#2a7ab8">Listado General de vehiculos</h2> 
+				<h2 style="color:#2a7ab8">Listado General de vehículos</h2> 
 			</div>
       		<div class="col-lg-12 table-responsive contenedor" id="div2" style="overflow: scroll; width: 100%; height: 50vh;"><!--se nombra la clase columna long tipo 9 bootrap tabla reponsive o adaptable con id2 para el llamdo en el script de ocultar secciones de pagina-->
                     <table class='table table-hover'>

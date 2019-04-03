@@ -15,6 +15,7 @@ class SiteController extends Controller{
         );
     }
 
+    
  // _______________________ permisos de usuarios __________________________________   
     public function accessRules() {
         return array(
@@ -22,36 +23,52 @@ class SiteController extends Controller{
          	array('allow', // allow authenticated user to perform 'create' action
                'actions' => array('index','logout','eventos','insertareventos','gestionusuarios','consultaclientes','consultaclientesdos','consultapartamento','gestionvehiculos','consultavehiculos','consultavehiculosdos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol','galeriapersonal','sorteo','pqrs','pqrsadmin','contact','about','consultaeventos','limpiarSorteo','generarSorteo','guardarSorteo','versorteos','consultapart'),'users' => array('Administrador'),
             ),
+
             array('allow', // allow authenticated user to perform 'create' action
                'actions' => array('index','logout','eventos','insertareventos','gestionusuarios','gestionvehiculos','consultavehiculos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol','galeriapersonal','contact','about','pqrsadmin','versorteos','consultapart'),'users' => array('Operador'),
             ),
              array('deny', // deny all users
-             	'actions' => array('consultaclientes','consultaclientesdos','consultapartamento','consultavehiculosdos','sorteo','pqrs','limpiarSorteo','generarSorteo','guardarSorteo'),
+             	'actions' => array('consultaclientes','consultaclientesdos','consultapartamento','consultavehiculosdos','sorteo','pqrs','limpiarSorteo','generarSorteo','guardarSorteo','login'),
                 'users' => array('Operador'),
                 
             ), 
+             array('deny', // deny all users
+                'actions' => array('login','consultaclientes','consultaclientesdos','consultapartamento','consultavehiculosdos','limpiarSorteo','generarSorteo','guardarSorteo','pqrsadmin','insertareventos','gestionusuarios','gestionvehiculos','consultavehiculos','informes','consultaporfecha','consultaplaca','consultacedulas','consultaporfechados','consultatipos','controldeacceso','consultacontrol'),
+                'users' => array('Residente'),
+                
+            ), 
+             array('deny', // deny all users
+                'actions' => array('login'),
+                'users' => array('Administrador'),
+                
+            ), 
+
              array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index','logout','eventos','contact','galeriapersonal','about','sorteo','pqrs','versorteos'),
+                'actions' => array('index','logout','eventos','contact','galeriapersonal','about','sorteo','pqrs','versorteos','consultapart'),
                 'users' => array('Residente'),
             ),
+
 
      		   array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index','login','contact','galeriapersonal','about','eventos'),
                 'users' => array('?'),
             ),
+
             
             array('allow', // allow only the owner to perform 'view' 'update' 'delete' actions 
                 'actions' => array('view','insert','update','delete'),
                 'expression' => array('ExampleController','allowOnlyOwner')
             ),
+
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete'),
                 'users' => array('admin', 'foo', 'bar'),
             ),
+            /*
             array('deny', // deny all users
                 'users' => array('*'),
                 
-            ), 
+            ), */
         );
     }
     
@@ -98,7 +115,7 @@ class SiteController extends Controller{
 			{
 				$headers="From: {$model->email}\r\nReply-To: {$model->email}";
 				mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+				Yii::app()->user->setFlash('contact','Gracias por ponerse en contacto con nosotros. Le responderemos lo antes posible.');
 				$this->refresh();
 			}
 		}
@@ -141,7 +158,7 @@ class SiteController extends Controller{
         $model = new LoginForm;
         $consultarl = $model->getRoles;
 
-        $this->render('login',array('model'=>$model,'consultarl'=>$consultarl));
+        $this->render('eventos',array('model'=>$model,'consultarl'=>$consultarl));
     }
 	public function actionLogin()
 	{
@@ -276,7 +293,7 @@ class SiteController extends Controller{
         foreach($data as $value=>$dt){}// creamos una for indicando que la data va a tener una alias para mostrar datos a la variable dt
          //llenamos la variable tablas con un formulario para la midifcacion en este foreach traemos lo que tenemos en la consulta y a cada dt le asignamos un campo de la DB
         $tablas.='
-        <div class="form-group">
+        <div class="form-group col-lg-12">
         <label>Titulo</label>
         <input type="text" class="form-control caja" id="titulo" value="'.$dt["titulo"].'">
         <label>Mensaje Principal</label>
@@ -696,13 +713,17 @@ class SiteController extends Controller{
         $consultacantidadveh = $modeloinformes->getInformesveh();
         $consultaRolDos = $modeloinformes->getEstadodos();
         $consultaingsal = $modeloinformes->getIngresosalida();
+        $consultalistacontrol = $modeloinformes->getEntradasalida();
+        $consultacantingresal = $modeloinformes->getCantIngresosalida();
 
 		 $this->render('informes', array(//se renderiza la pagina
 		 	'modeloinformes'=>$modeloinformes, // se renderiza el modelo
 		 	'consultacantidaduser'=>$consultacantidaduser,
 		 	'consultacantidadveh'=>$consultacantidadveh,
 		 	'consultaRolDos'=>$consultaRolDos,
-      'consultaingsal'=>$consultaingsal
+            'consultaingsal'=>$consultaingsal,
+            'consultalistacontrol'=>$consultalistacontrol,
+            'consultacantingresal'=>$consultacantingresal
 
             )
             ); // variable de asignacion modelo
@@ -1222,16 +1243,19 @@ class SiteController extends Controller{
 
             $limpiar="CALL limpiar();";
             $data = Yii::app()->db->createCommand($limpiar)->execute();
+         $this->redirect('sorteo',
+                array( 
            
-          $this->redirect(array('site/sorteo'));           
+                ));           
         }
          public function actionGenerarSorteo(){
 
             $sortear="CALL sortear();";
             $data=Yii::app()->db->createCommand($sortear)->queryAll();
+           $this->redirect('sorteo',
+                array( 
            
-                      
-          $this->redirect(array('site/sorteo'));           
+                ));                     
         }
          public function actionGuardarSorteo(){
 
@@ -1239,7 +1263,11 @@ class SiteController extends Controller{
             $data=Yii::app()->db->createCommand($guardar)->queryAll();
            
                       
-          $this->redirect(array('site/sorteo'));           
+         // $this->redirect(array('site/sorteo'));  
+          $this->redirect('sorteo',
+                array( 
+           
+                ));               
         }
         public function actionVersorteos(){
             $modelsorteo = new Sorteo();
@@ -1277,7 +1305,7 @@ class SiteController extends Controller{
         public function actionPqrs ()
         {
                 $modelpqrs = new PqrsModel();    
-                $idpqrs='';
+              
                 $asunto='';
                 $mensaje='';
                 $correo='';
@@ -1289,13 +1317,14 @@ class SiteController extends Controller{
     
                 $consultpqrs = $modelpqrs->getPqrs();//llamdado de las consulta y los datos en get
                 $consultestadopqrs = $modelpqrs->getPqrs();//llamdado de las consulta y los datos en get
+                $mostrarpqrs = $modelpqrs->getIDPQRS();//llamdado de las consulta y los datos en get
                
                 // aqui ingresamos insertar los eventos
                 if(isset($_POST['PqrsModel'])){ // Modelo Eventos
                     $modelpqrs->attributes=$_POST['PqrsModel'];
                   
                     if( $modelpqrs->validate()){ // valida el modelo y sus atributos
-                        $idpqrs=$modelpqrs->idpqrs;
+                      
                         $asunto=$modelpqrs->asunto;
                         $mensaje=$modelpqrs->mensaje;
                         $correo=$modelpqrs->correo;
@@ -1310,7 +1339,7 @@ class SiteController extends Controller{
                         $idestadopqrs=$modelpqrs->idestadopqrs;
                         $idusuario=$modelpqrs->idusuario;
                         $fecha_crea=$modelpqrs->fecha_crea;
-                        $setpqrs=$modelpqrs->setPqrs($idpqrs,$asunto,$mensaje,$correo, $adjunto,$idestadopqrs,$idusuario,$fecha_crea);
+                        $setpqrs=$modelpqrs->setPqrs($asunto,$mensaje,$correo, $adjunto,$idestadopqrs,$idusuario,$fecha_crea);
                         $modelpqrs->unsetAttributes();// limpia los campos
                     }
                 }
@@ -1318,7 +1347,8 @@ class SiteController extends Controller{
                 $this->render('pqrs', array(//se renderiza la pagina
                 "consultpqrs"=>$consultpqrs, // se renderiza la consula
                 "consultestadopqrs"=>$consultestadopqrs,
-                "modelpqrs"=>$modelpqrs // se renderiza el modelo
+                "modelpqrs"=>$modelpqrs,
+                "mostrarpqrs"=>$mostrarpqrs // se renderiza el modelo
                 )
                 ); // variable de asignacion modelo
         }
@@ -1362,6 +1392,7 @@ class SiteController extends Controller{
     
                 $consultapqrs = $modelpqrs->getPqrs();//llamdado de las consulta y los datos en get
                 $consultestadopqrs = $modelpqrs->getPqrsDos();//llamdado de las consulta y los datos en get
+                $mostrarpqrs = $modelpqrs->getIDPQRS();//llamdado de las consulta y los datos en get
                
                 // aqui ingresamos insertar los eventos
                 if(isset($_POST['PqrsModel'])){ // Modelo Eventos
@@ -1392,7 +1423,8 @@ class SiteController extends Controller{
                 $this->render('pqrsadmin', array(//se renderiza la pagina
                 "consultapqrs"=>$consultapqrs, // se renderiza la consula
                 "consultestadopqrs"=>$consultestadopqrs,
-                "modelpqrs"=>$modelpqrs // se renderiza el modelo
+                "modelpqrs"=>$modelpqrs, // se renderiza el modelo
+                "mostrarpqrs"=>$mostrarpqrs
                 )
                 ); // variable de asignacion modelo
         }

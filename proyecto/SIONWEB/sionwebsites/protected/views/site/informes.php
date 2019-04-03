@@ -103,30 +103,127 @@
 				    <div class="col-lg-12">
 					        <fieldset style="border: 1px solid white;border-radius: 5px 5px;">
 					        	<br>
-					    		<div class="registros" id="busquedaporfechasuno" placeholder="Buscar" style="overflow:auto; width:100%;height: 100vh;">
-							    	<div class="col-lg-6">
-						      			<h1 style="color:#2a7ab8;">Historia</h1>
-						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						      		</div>
-						      		<div class="col-lg-6">
-						      			<h1 style="color:#2a7ab8;">Ideas</h1>
-						      			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						      			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						      			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						      			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						      			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						      			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						      		</div>
-						      		<div style="width: 100%; height: 300px;" class="col-lg-12">
-						    			<img src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" style="width: 100%; height: 280px;">
-						    			<br>
-						    		</div>
+					    		<div class="registros" id="busquedaporfechasuno" placeholder="Buscar" style="overflow:auto; width:100%;height: 500px;">
+					    			<style type="text/css">
+									#container7 {
+										
+										width: 100%;
+										height: 400px;
+										margin: 0 auto
+									}
+									</style>
+									<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/highcharts.js"></script>
+									<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/modules/series-label.js"></script>
+									<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/modules/exporting.js"></script>
+									<script src="<?php echo Yii::app()->request->baseUrl; ?>/Highcharts/code/modules/export-data.js"></script>
+
+									<div id="container7"></div>
+
+
+
+											<script type="text/javascript">
+
+									Highcharts.chart('container7', {
+
+									    title: {
+									        text: 'Graica de entradas y salidas por vehículo'
+									    },
+
+									    subtitle: {
+									        text: 'SION: www.sionwebsites.com'
+									    },
+
+									    yAxis: {
+									        title: {
+									            text: 'Cantidad de Entradas y Salidas'
+									        }
+									    },
+									    legend: {
+									        layout: 'vertical',
+									        align: 'left',
+									        verticalAlign: 'middle'
+									    },
+									   
+									    plotOptions: {
+
+									        series:
+									         {
+									        	
+									            pointStart:  0
+									    
+									        }
+									        
+									    },
+									 
+									    series: [
+									    <?php 
+											foreach($consultacantingresal AS $key=>$mostrar){
+										?>
+									    {
+									    
+									        name: '<?php echo $mostrar['vehiculos_placa']; ?>',
+
+									        data: [
+											 <?php echo $mostrar['cantidad'] ?>,
+											]
+										 
+									    },
+									    <?php } ?>
+									   
+									    ],
+									    
+
+									    responsive: {
+									        rules: [{
+									            condition: {
+									                maxWidth: 500
+									            },
+									            chartOptions: {
+									                legend: {
+									                    layout: 'horizontal',
+									                    align: 'center',
+									                    verticalAlign: 'bottom'
+									                }
+									            }
+									        }]
+									    }
+
+									});
+									</script>
+							    	
 					    		</div>
+					    		<div class="registros" id="busquedaporfechasuno" placeholder="Buscar" style="overflow:auto; width:100%;height: 500px;">
+					    		<table class='table table-hover'>
+				                    <thead>
+				                    <tr>
+				                    <th class=columna>Fecha Ingreso</th>
+				                    <th class=columna>Fecha Salida</th>
+				                    <th class=columna>Punto de Parqueo</th>
+				                    <th class=columna>Placa</th>
+				                    </tr>
+				                   	</thead>
+				                   	<tbody>
+				                   	<tr>
+						 			<?php  //finalizacion del comando para la variable this
+					                    foreach($consultalistacontrol as $key=>$value) { 
+					                    $fechaingreso=$value["fecha_ingreso"]; // se asigna la variable que se quiere mostrar
+						                $fechasalida=$value["fecha_salida"];
+						                $puntoparqueo=$value["nombre_punto"];
+						                $placavehi=$value["vehiculos_placa"];
+
+						             ?>
+						               	<td class=columna style='font-weight:normal;'><?php echo $fechaingreso?></td>
+						                <td class=columna style='font-weight:normal;'><?php echo $fechasalida?></td>
+						                <td class=columna style='font-weight:normal;'><?php echo $puntoparqueo?></td>
+						                <td class=columna style='font-weight:normal;'><?php echo $placavehi?></td>
+						              
+						            </tr>
+				                    <?php
+					                    }
+						            ?>
+						             </tbody>
+						     	</table>
+						     	</div>
 					        </fieldset>
 				    </div>
 			    </div>
@@ -324,7 +421,7 @@
 									        type: 'pie'
 									    },
 									    title: {
-									        text: 'Grafica Informactiva de Personal: Menu exportación'
+									        text: 'Grafica Informativa de Personal: Menu exportación'
 									    },
 									    tooltip: {
 									        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -347,15 +444,7 @@
 									        colorByPoint: true,
 									        data: [
 									        <?php 
-												  $link=mysqli_connect('localhost','root','','camegovp_sionweb2');
-												  $sql="SELECT count(*) cantidad_usuarios, R.nombre_rol
-				    									FROM roles R
-				    									INNER JOIN usuarios U 
-				    									ON U.roles_id = R.id 
-				    									GROUP BY R.nombre_rol ASC";
-												  $result=mysqli_query($link,$sql);
-
-												  while($mostrar=mysqli_fetch_array($result)){
+												 foreach($consultacantidaduser as $key=>$mostrar) { 
 						 
 												  ?>
 									        {
@@ -413,7 +502,7 @@
 										        type: 'pie'
 										    },
 										    title: {
-										        text: 'Grafica Informactiva de vehiculos:Menu exportación'
+										        text: 'Grafica Informativa de vehiculos:Menu exportación'
 										    },
 										    tooltip: {
 										        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -436,15 +525,7 @@
 										        colorByPoint: true,
 										        data: [
 										        <?php 
-													  $link=mysqli_connect('localhost','root','','camegovp_sionweb2');
-													  $sql="SELECT COUNT(*) cantidad_vehiculos, T.tipo 
-   														FROM vehiculos V
-   														INNER JOIN tipos T 
-   														ON V.tipo_de_vehiculo = T.id 
-   														GROUP BY V.tipo_de_vehiculo";
-													  $result=mysqli_query($link,$sql);
-
-													  while($mostrar=mysqli_fetch_array($result)){
+													   foreach($consultacantidadveh as $key=>$mostrar) { 
 							 
 													  ?>
 										        {

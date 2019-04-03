@@ -42,20 +42,31 @@
 					)); //activacion del comando para el form
 				  echo $form->errorSummary($modelpqrs); // se llama la variablre
 					?>	
+				<h4>Codigo PQRS</h4>
+				<?php
+				foreach ($mostrarpqrs as $key => $value) {
+					# code...
+					$ver =  $value['idpqrs'];
+				}
+				
+					echo $form->textField($modelpqrs,'idpqrs',array('class'=>'form-control caja','placeholder'=>"COD-$ver",'readonly'=>'readonly')); //
+				
+				?>
+				<br>
 				
 				<h4><span class="required" style="color: red;">*</span>Asunto</h4>
 				<?php
-					echo $form->textField($modelpqrs,'asunto',array('class'=>'form-control  ','placeholder'=>"Digita Mensaje Principal")); //
+					echo $form->textField($modelpqrs,'asunto',array('class'=>'form-control  ','placeholder'=>"Digita el Asunto Principal")); //
 				?>
 				<br>
 				<h4><span class="required" style="color: red;">*</span>Mensaje</h4>
 				<?php
-					echo $form->textarea($modelpqrs,'mensaje',array('class'=>'form-control caja ','placeholder'=>"Digita Sub-Título")); //
+					echo $form->textarea($modelpqrs,'mensaje',array('class'=>'form-control caja ','placeholder'=>"Digita el Mensaje Principal")); //
 				?>
 				<br>
 				<h4><span class="required" style="color: red;">*</span>Correo</h4>
 				<?php
-					echo $form->emailField($modelpqrs,'correo',array('class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal")); //
+					echo $form->emailField($modelpqrs,'correo',array('class'=>'form-control  ','placeholder'=>"Digita tu correo")); //
 				?>
 				<br>
 				<h4>Subir Archivo</h4>
@@ -70,11 +81,11 @@
         			,array('class'=>'form-control columnas','style'=>'width:100%;')); 
 				?>
 				<br>
-				<h4><span class="required" style="color: red;">*</span>Identificacion usuario</h4>
+				<h4><span class="required" style="color: red;">*</span>Identificación usuario</h4>
 				<?php
-					echo $form->textField($modelpqrs,'idusuario',array('class'=>'form-control  ','placeholder'=>"Digita Sub-Mensaje Principal")); //
+					echo $form->textField($modelpqrs,'idusuario',array('class'=>'form-control  ','placeholder'=>"Digita Cedula de usuario")); //
 				?>			
-				<h4>Fecha Creacion PQRS</h4>
+				<h4>Fecha Creación PQRS</h4>
 				<?php
 					$fecha_registro = date('Y-m-d');
 					echo $form->textField($modelpqrs,'fecha_crea',array('value'=>$fecha_registro,'readonly'=>'readonly'));

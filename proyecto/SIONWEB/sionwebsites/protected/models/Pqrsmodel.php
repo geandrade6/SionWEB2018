@@ -6,6 +6,7 @@ class PqrsModel extends CActiveRecord{
   //getters
   public $getPqrs;
    public $getPqrsDos;
+   public $getIDPQRS;
  
   //setters
   public $setPqrs;
@@ -49,11 +50,11 @@ class PqrsModel extends CActiveRecord{
         //solo letras
         array('asunto','required','message'=>'Asunto campo es obligatorio'),
         array('asunto', 'match', 'pattern' => "/^.{10,30}$/", 'message' => 'Asunto: Mínimo 10 y máximo 30 caracteres'),
-        array('asunto', 'match', 'pattern' => "/^.[a-z]+$/i", 'message' => 'Asunto: Sólo se aceptan letras '),
+        array('asunto', 'match', 'pattern' => "/^.[a-z\s]+$/i", 'message' => 'Asunto: Sólo se aceptan letras '),
         //solo letras, numeros y tildes
         array('mensaje','required','message'=>'Mensaje campo es obligatorio'),
         array('mensaje', 'match', 'pattern' => "/^.{5,255}$/", 'message' => 'Mensaje: Mínimo 5 y máximo 255 caracteres'),
-        array('mensaje', 'match', 'pattern' => "/^.[0-9a-záéíóúñ]+$/i", 'message' => 'Mensaje: Sólo se aceptan letras y numeros no signos'),
+        array('mensaje', 'match', 'pattern' => "/^.[0-9a-záéíóúñ\s]+$/i", 'message' => 'Mensaje: Sólo se aceptan letras y numeros no signos'),
         //solo carreo
         array('correo','required','message'=>'Correo campo es obligatorio'),
         array('correo', 'match', 'pattern' => "/^.{5,80}$/", 'message' => 'Correo: Mínimo 5 y máximo 80 caracteres'),
@@ -93,7 +94,7 @@ class PqrsModel extends CActiveRecord{
   } 
   public function getPqrsDos(){ 
       
-      $consultestadopqrs ="SELECT * FROM estadopqrs";
+      $consultestadopqrs ="SELECT * FROM estadopqrs WHERE idestadopqrs=1 ORDER BY idestadopqrs ASC";
     $this->getPqrsDos=Yii::app()->db->createCommand($consultestadopqrs)->queryAll();// consulta base de datos Mysql            
  
      return $this->getPqrsDos;// devuelve el valor de la funcion get de el modelo
@@ -118,6 +119,11 @@ public function setPqrs($asunto,$mensaje,$correo,$adjunto,$idestadopqrs,$idusuar
      
       
   }
-  
+  public function getIDPQRS(){
+    $mostrarpqrs="SELECT COUNT(1)+1 idpqrs FROM pqrs ORDER BY idpqrs DESC;";
+    $this->getIDPQRS=Yii::app()->db->createCommand($mostrarpqrs)->queryAll();// consulta base de datos Mysql            
+    return $this->getIDPQRS;// devuelve el valor de la funcion get de el modelo
+  }
+
 }
 ?>

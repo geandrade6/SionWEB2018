@@ -17,10 +17,10 @@
 		<div class="inner">
 			<section>
 			<div class="col-lg-12"><h1 style="text-align:center;color:#2a7ab8;">SORTEAR</h1>
-				<h6>El sistema de sorteo simplemente cuenta con tres funciones las cules el usuario administrador podra hacer uso, este sistema consta de los siguiente.</h6>
-				<h6><span class="required" style="color: red;">*</span>Boton lmpiar: como su nombre lo indica hace una limpieza total de sorteo hasta el nuevo sorteo segun lo desee el administrador.</h6>
-				<h6><span class="required" style="color: red;">*</span>Boton: sortear: este se encargara de generar un sorteo el cual se reflejara en primera instancia en una tabla l cual sera quien asignara los puntos de parqueo a cada apartamento.</h6>
-				<h6><span class="required" style="color: red;">*</span>Boton Guardar: este guardará finalmete el sorteo deseado por el administrador en donde los residentes podran ver la tabla y ubicar su punto de parqueo.</h6>
+				<h6>El sistema de sorteo simplemente cuenta con tres funciones las cuales el usuario administrador podrá hacer uso, este sistema consta de los siguiente.</h6>
+				<h6><span class="required" style="color: red;">*</span>Botón limpiar: como su nombre lo indica hace una limpieza total de sorteo hasta el nuevo sorteo según lo desee el administrador.</h6>
+				<h6><span class="required" style="color: red;">*</span>Botón: sortear: este se encargará de generar un sorteo el cual se reflejará en primera instancia en una tabla l cual será quien asignará los puntos de parqueo a cada apartamento.</h6>
+				<h6><span class="required" style="color: red;">*</span>Botón Guardar: este guardará finalmente el sorteo deseado por el administrador en donde los residentes podrán ver la tabla y ubicar su punto de parqueo.</h6>
 			<hr style="color: black;width: 100%;">
 			<div class="col-lg-4">
 				<br>
@@ -29,7 +29,8 @@
 			
 			<div class="col-lg-4">
 				<br>
-				<?php echo CHtml::link("SORTEAR",array("GenerarSorteo"),array("style"=>"background-color: #11acc2; color: white; width:150px;","class"=>"btn",'title'=>'Sortear los puntos de parqueo vs apartamentos.')); ?>
+				<?php echo CHtml::link("SORTEAR",array("GenerarSorteo"),array("style"=>"background-color: #11acc2; color: white; width:150px;","class"=>"btn",'title'=>'Sortear los puntos de parqueo vs apartamentos.'));
+				 ?>
 			</div>
 			
 			<div class="col-lg-4">

@@ -32,7 +32,7 @@
 						<div class="col-lg-12">
 			    		<h5 style=" color: red;">Al dar click tendrá dos Opciones.</h5>
 			    		<h6>* Consultar Vehículo que ingresa al Conjunto por Placa y Modificar la Fecha de ingreso.</h6>
-			    		<h6>* Registrar Salida de Vehiculos del Conjunto.</h6>
+			    		<h6>* Registrar Salida de Vehículos del Conjunto.</h6>
 			    		<input type="submit" name="acciones" style="display: none;" id="salida" value="Salida Vehiculos" class="insertado btn-primary" title="Aqui ingresamos la salida de un vehiculo">
 			    		<div class="col-lg-3">
 						<input type="submit" name="acciones" value="Ingreso Vehiculos" style="display: block;" id="entrada" class="modificado btn-primary" title="Aqui ingresamos la entrada de un vehiculo">
@@ -106,7 +106,7 @@
 					    <div class="col-lg-12">
 					    	<h1 style="color:#2a7ab8;">Registro Entrada de Vehículos</h1>
 					        <label>Buscar Placa (Acción modificar ).</label>
-					        <h6><span class="required" style="color: red;">*</span>Digita la Placa y Luego presiona Enter, si no se refleja información la placa de busqueda no existe.</h6>
+					        <h6><span class="required" style="color: red;">*</span>Digita la Placa y Luego presiona Enter, si no se refleja información la placa de búsqueda no existe.</h6>
 					        <input type="text" name="placa" placeholder="Digita y Enter al terminar" class="form-control" id="placa" style="width: 100%; float: left;"/>  
 				 	    </div>
 					    <br>

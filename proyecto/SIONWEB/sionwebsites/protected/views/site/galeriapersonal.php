@@ -321,35 +321,35 @@ function n(c,e,l,m,o,r,t,u,w,z,A,C,E,b,f,k,a,g,i,n,p,q,s,v,x,y,B,D,F,d,h,j){retu
 				<div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 800px; height: 400px; overflow: hidden;">
 				<div data-p="144.50" style="display: none;">
 				<a href="img1.html">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/8.jpg" title="Entrada Usuarios"/></a>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/8.jpg"/></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/8.JPG" title="Entrada Usuarios"/></a>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/8.JPG"/></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/4.jpg" title="Apartamentos"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/4.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/4.JPG" title="Apartamentos"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/4.JPG" /></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" title="Salida Vehicular"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.JPG" title="Salida Vehicular"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/5.JPG" /></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/7.jpg" title="Entrada Vehicular"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/7.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/7.JPG" title="Entrada Vehicular"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/7.JPG" /></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/1.jpg" title="Exterior"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/1.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/1.JPG" title="Exterior"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/1.JPG" /></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/9.jpg" title="Personal"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/9.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/9.JPG" title="Personal"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/9.JPG" /></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/10.jpg" title="Puntos de parqueo"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/10.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/10.JPG" title="Puntos de parqueo"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/10.JPG" /></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/16.jpg" title="Sotano 1"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/16.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/16.JPG" title="Sotano 1"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/16.JPG" /></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/17.jpg" title="Sotano 2"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/17.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/17.JPG" title="Sotano 2"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/17.JPG" /></div>
 					<div data-p="144.50" style="display: none;">
-					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg" title="Sotano 3"/>
-					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg" /></div>
+					<img data-u="image" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG" title="Sotano 3"/>
+					<img data-u="thumb" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG" /></div>
 	</div>
 <div data-u="thumbnavigator" class="jssort01" style="position:absolute;left:0px;bottom:0px;width:800px;height:100px;" data-autocenter="1">
 <div data-u="slides" style="cursor: default;">
@@ -375,72 +375,72 @@ function n(c,e,l,m,o,r,t,u,w,z,A,C,E,b,f,k,a,g,i,n,p,q,s,v,x,y,B,D,F,d,h,j){retu
 				
 					<br>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>					
 			
 				
 					<br>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>					
 				
 					<br>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>					
 				
 					<br>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px; " src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px; " src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>					
 				
 					<br>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>
 					<div class="col-lg-4">
-						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.jpg">
+						<img style="width: 100%; height: 200px;" src="<?php echo Yii::app()->request->baseUrl; ?>/img/imagen/18.JPG">
 						<label>parqueos</label>
 					</div>					
 				
